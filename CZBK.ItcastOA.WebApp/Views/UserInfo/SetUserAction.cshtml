@@ -1,0 +1,148 @@
+﻿@{
+    Layout = null;
+}
+@using CZBK.ItcastOA.Model
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户分配权限</title>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <link href="~/Content/tableStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <style>
+        html.body, div {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div style="background-color:aqua">
+        为用户@{ 
+            UserInfo userinfo = ViewBag.userinfo;
+            @userinfo.UName;
+        }分配权限
+        <table>
+            <tr><td>权限编号</td><td>权限名称</td>
+                <td>地址</td><td>权限方式</td>
+                <td>操作</td></tr>
+            @{ 
+                List<ActionInfo> allActionList = ViewBag.allActionList;
+                List<R_UserInfo_ActionInfo> allUserActionIDlist = ViewBag.allUserActionIDlist;
+                foreach (ActionInfo acif in allActionList)
+                {
+                    
+                    var rb_name = "cba_" + acif.ID;
+                    var norb_name = "rocha_" + acif.ID;
+                    <tr>
+                        <td>@acif.ID</td>
+                        <td>@acif.ActionInfoName</td>
+                        <td>@acif.Url</td>
+                        <td>@acif.HttpMethod</td>
+                        <td>
+                            @{ 
+                                var isExt = (from a in allUserActionIDlist
+                                             where a.ActionInfoID == acif.ID
+                                             select a).FirstOrDefault();
+                                if (isExt != null)
+                                {
+                                    if (isExt.IsPass == true)
+                                    {
+                                        <label for="@rb_name">允许</label>
+                                        <input type="radio" value="true" name="@rb_name" id="@rb_name" class="selectAction" checked="checked" ids="@acif.ID" />
+                                        <label for="@norb_name">禁止</label>
+                                        <input type="radio" value="false" name="@rb_name" id="@norb_name" class="selectAction"  ids="@acif.ID" />
+                                    }
+                                    else
+                                    { 
+                                         <label for="@rb_name">允许</label>
+                                    <input type="radio" value="true" name="@rb_name" id="@rb_name" class="selectAction" ids="@acif.ID" />
+                                        <label for="@norb_name">禁止</label>
+                                        <input type="radio" value="false" name="@rb_name" id="@norb_name" class="selectAction"  checked="checked" ids="@acif.ID" />
+                                    }
+                                }
+                                else
+                                {   <label for="@rb_name">允许</label>
+                                <input type="radio" value="true" name="@rb_name" id="@rb_name" class="selectAction" ids="@acif.ID" />
+                                    <label for="@norb_name">禁止</label>
+                                        <input type="radio" value="false" name="@rb_name" id="@norb_name" class="selectAction" ids="@acif.ID" />
+                                }
+                                <input type="button" value="清除" class="btnClear" ids="@acif.ID" />
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+        
+    </div>
+</body>
+<script type="text/javascript">
+  
+    $(function () {
+        $(".btnClear").click(function () {
+            var $cler = $(this);
+            $.post("/UserInfo/deleteActionUser", {
+                'userId': '@userinfo.ID',
+                'action': $cler.attr("ids"),
+            }, function (data) {
+                
+                var serverData = data.split(":");
+                if (serverData[0] == "ok") {
+                    //清除选中方法
+                    //$cler.parent().find(".selectActions").removeAttr("checked");
+                    $.messager.show({
+                        title: '提示',
+                        msg: '删除成功！',
+                        showType: 'show'
+                    });
+                    $('input:radio[ids='+serverData[1]+']').attr('checked', false);
+                }
+                else {
+                    $.messager.show({
+                        title: '提示',
+                        msg: '删除错误，系统没有指向数据！',
+                        showType: 'show'
+                    });
+                }
+            })
+        });
+        $(".selectAction").click(function () {
+            var $control = $(this)
+            $.post("/UserInfo/SetActionUser", {
+                'userId': '@userinfo.ID',
+                'actionId': $control.attr("ids"),
+                'value': $control.val()
+            }, function (data) {
+                if (data == "ok")
+                {
+                    $.messager.show({
+                        title: '提示',
+                        msg: '权限分配成功！',
+                        showType: 'show'
+                    });
+
+                }
+                else
+                {
+                    $.messager.show({
+                        title: '提示',
+                        msg: '权限分配失败',
+                        showType: 'show'
+                    });
+                }
+            });
+        });
+    });
+</script>
+</html>

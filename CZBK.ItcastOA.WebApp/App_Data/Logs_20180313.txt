@@ -1,0 +1,143 @@
+
+----------------------header--------------------------
+2018-03-13 11:28:19,468 [41] ERROR Memcached.ClientLibrary.MemcachedClient - Exception thrown while trying to get object from cache for key: 461606e1-389a-41ce-af5f-a12c0bad70bc
+System.IO.IOException: Unable to read data from the transport connection: 远程主机强迫关闭了一个现有的连接。. ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   at System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.IO.BufferedStream.Read(Byte[] array, Int32 offset, Int32 count)
+   at Memcached.ClientLibrary.SockIO.ReadLine() in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 276
+   at Memcached.ClientLibrary.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\MemCachedClient.cs:line 1376
+   at Memcached.ClientLibrary.MemcachedClient.Get(String key, Object hashCode, Boolean asString) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\MemCachedClient.cs:line 1126
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2018-03-13 13:42:48,765 [6] ERROR errorMsg - System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at CZBK.ItcastOA.WebApp.Controllers.HrefInfoController.SeePhoto() in L:\fgj\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.WebApp\Controllers\HrefInfoController.cs:line 302
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+2018-03-13 14:07:35,953 [14] ERROR Memcached.ClientLibrary.MemcachedClient - Exception thrown while trying to get object from cache for key: 607
+System.IO.IOException: Unable to write data to the transport connection: 远程主机强迫关闭了一个现有的连接。. ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   at System.Net.Sockets.Socket.Send(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 size)
+   at System.IO.BufferedStream.Flush()
+   at Memcached.ClientLibrary.MemcachedClient.Get(String key, Object hashCode, Boolean asString) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\MemCachedClient.cs:line 1123
+2018-03-13 14:07:36,000 [14] ERROR Memcached.ClientLibrary.MemcachedClient - exception thrown while writing bytes to server on set()
+System.IO.IOException: Unable to read data from the transport connection: 远程主机强迫关闭了一个现有的连接。. ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   at System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.IO.BufferedStream.Read(Byte[] array, Int32 offset, Int32 count)
+   at Memcached.ClientLibrary.SockIO.ReadLine() in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 276
+   at Memcached.ClientLibrary.MemcachedClient.Set(String cmdname, String key, Object obj, DateTime expiry, Object hashCode, Boolean asString) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\MemCachedClient.cs:line 772
+2018-03-13 14:07:48,968 [33] ERROR Memcached.ClientLibrary.MemcachedClient - Exception thrown while trying to get object from cache for key: 607
+System.IO.IOException: Unable to read data from the transport connection: 远程主机强迫关闭了一个现有的连接。. ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   at System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.IO.BufferedStream.Read(Byte[] array, Int32 offset, Int32 count)
+   at Memcached.ClientLibrary.SockIO.ReadLine() in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 276
+   at Memcached.ClientLibrary.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\MemCachedClient.cs:line 1376
+   at Memcached.ClientLibrary.MemcachedClient.Get(String key, Object hashCode, Boolean asString) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\MemCachedClient.cs:line 1126
+2018-03-13 14:07:50,125 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:07:51,421 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:07:52,781 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:07:54,375 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:07:56,328 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:07:59,109 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:08:03,484 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:08:11,046 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:08:24,968 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:08:51,750 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:09:44,109 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:11:27,640 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:14:53,609 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:21:44,390 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 14:35:24,765 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: I/O error occurred.
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+2018-03-13 15:02:44,421 [18] ERROR Memcached.ClientLibrary.SockIOPool - Failed to get SockIO obj for: 60.18.162.202:11211 -- new socket is not connected
+System.IO.IOException: Could not connect for 1000 milliseconds
+   at Memcached.ClientLibrary.SockIO.GetSocket(String host, Int32 port, Int32 timeout) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 148
+   at Memcached.ClientLibrary.SockIO..ctor(SockIOPool pool, String host, Int32 timeout, Int32 connectTimeout, Boolean noDelay) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 105
+   at Memcached.ClientLibrary.SockIOPool.CreateSocket(String host) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIOPool.cs:line 562
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------

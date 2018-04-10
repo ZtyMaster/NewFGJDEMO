@@ -1,0 +1,303 @@
+﻿@{
+    ViewBag.Title = "FGJ";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="~/Content/Images/login/hft.ico" type="image/x-icon" />  
+    <title>@ViewData["LogoName"] </title>
+    <link href="~/Content/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
+    <link href="~/Content/lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
+
+
+    <style type="text/css">
+     
+        .l-case-title {
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #winlinks {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            width: 100%;
+        }
+
+            #winlinks ul {
+                position: relative;
+            }
+
+            #winlinks li {
+                width: 70px;
+                cursor: pointer;
+                height: 80px;
+                position: absolute;
+                z-index: 101;
+                list-style: none;
+                text-align: center;
+            }
+
+                #winlinks li img {
+                    width: 36px;
+                    height: 36px;
+                }
+
+                #winlinks li span {
+                    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+                    border-radius: 10px 10px 10px 10px;
+                    display: block;
+                    font-size: 12px;
+                    margin-top: 1px;
+                    color: White;
+                    line-height: 18px;
+                    text-align: center;
+                }
+
+                #winlinks li.l-over div.bg {
+                    display: block;
+                }
+
+                #winlinks li div.bg {
+                    display: none;
+                    position: absolute;
+                    top: -2px;
+                    left: -2px;
+                    z-index: 0;
+                    width: 75px;
+                    height: 64px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    background: #000;
+                    opacity: 0.1;
+                    filter: alpha(opacity=10);
+                }
+
+        .l-taskbar-task-icon {
+            top: 3px;
+            left: 6px;
+            background-image: none;
+        }
+
+        .l-taskbar-task-content {
+            margin-left: 30px;
+        }
+
+        .l-taskbar-task-icon img {
+            width: 22px;
+            height: 22px;
+        }
+        .txt {
+        font-size:20px;
+        color:blue;
+        font-weight:bolder;
+        float:left;
+        margin-top:15px;
+        margin-left:30px;
+        }
+        .body{  
+    background:url(/Content/lib/images/BakguImage/bagimg.jpg)no-repeat;  
+    width:100%;  
+    height:100%;  
+    background-size:100% 100%;  
+    position:absolute;  
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/Content/lib/images/BakguImage/bagimg.jpg',sizingMethod='scale');
+}  
+        .l-dialog-content{overflow-y:hidden}
+    </style>
+</head>
+<body style="overflow: hidden; ">
+    <div id="layout1">
+
+        <div position="center" title="标题" class="body" >
+            <div id="winlinks">
+                <ul>                </ul>
+            </div>
+        </div>
+
+        <div position="top" style="background-image:url('/Content/images/bg3.png')">
+            <img src="/Content/Images/login/hft.ico" style="float:left; height:45px;"  />
+            <span class="txt">@ViewData["LogoName"] 信息系统</span>
+            <span style="float:right;font-size:14px;margin-top:15px;margin-right:20px">欢迎 @ViewData["userName"] 登录 &nbsp;&nbsp;
+            <a href="/Login/Logout">退出</a>              
+</span>
+        </div>
+
+    </div>
+</body>
+
+</html>
+@section scripts{
+   <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+   <script src="~/Content/lib/ligerUI/js/ligerui.min.js"></script>
+   <script src="~/Scripts/MyNewJS.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!--参考signalr  脚本自动生成 -->
+    <script src="~/signalr/hubs"></script>
+
+<script type="text/javascript">
+    //建立Server端的Hub的物件，注意Hub的首字母一定要为小写
+    var chat = $.connection.signalRHub;
+        $(function () {
+            $("#layout1").ligerLayout({
+                allowTopResize: false,
+                topHeight:45
+            });
+            //打开
+            $.connection.hub.start().done(function () {
+                //呼叫Server端的userConnected方法，并传送使用者姓名给Server
+                var Mid = "@ViewBag.Uid";
+                var strip="@ViewBag.Uip"
+                chat.server.homeCted(Mid, strip);
+            });
+        });
+
+</script>
+<script type="text/javascript">
+
+    var LINKWIDTH = 90, LINKHEIGHT = 90, TASKBARHEIGHT = 43;
+    var winlinksul = $("#winlinks ul");
+
+    function f_open(url, title, icon) {
+        var win = $.ligerDialog.open(
+        {
+            height: $(window).height() / 1.5, width: $(window).width() / 1.2, url: url, showMax: true, showToggle: false, showMin: true, isResize: true, modal: true, title: title, slide: true, buttons: [
+              {
+                  text: '关闭', onclick: function (item, Dialog, index) {
+                      win.hide();
+                  }
+              }
+            ]
+        });
+        win.max();
+        var task = jQuery.ligerui.win.tasks[win.id];
+        if (task) {
+            $(".l-taskbar-task-icon:first", task).html('<img src="' + icon + '" />');
+        }
+        return win;
+    }
+    var links = [
+
+    ];
+
+    function onResize() {
+        var linksHeight = $(window).height() - TASKBARHEIGHT-70;
+        var winlinks = $("#winlinks");
+        winlinks.height(linksHeight);
+        var colMaxNumber = parseInt(linksHeight / LINKHEIGHT);//一列最多显示几个快捷方式
+        for (var i = 0, l = links.length; i < l; i++) {
+            var link = links[i];
+            var jlink = $("li[linkindex=" + i + "]", winlinks);
+            var top = (i % colMaxNumber) * LINKHEIGHT, left = parseInt(i / colMaxNumber) * LINKWIDTH;
+            if (isNaN(top) || isNaN(left)) continue;
+            jlink.css({ top: top, left: left });
+        }
+
+    }
+    function linksInit() {
+        for (var i = 0, l = links.length; i < l; i++) {
+            var link = links[i];
+            var jlink;
+            var jlink = $("<li></li>");
+            jlink.attr("linkindex", i);
+            jlink.attr("id", "L"+i);
+            jlink.append("<img src='" + link.icon + "' />");
+            jlink.append("<span>" + link.title + "</span>");
+            jlink.append("<div class='bg'></div>");
+            jlink.hover(function () {
+                $(this).addClass("l-over");
+            }, function () {
+                $(this).removeClass("l-over");
+            }).click(function () {
+                var linkindex = $(this).attr("linkindex");
+                var link = links[linkindex];
+                f_open(link.url, link.title, link.icon);
+            });
+            jlink.appendTo(winlinksul);
+        }
+
+    }
+
+    $(window).resize(onResize);
+    $.ligerui.win.removeTaskbar = function () { }; //不允许移除
+    $.ligerui.win.createTaskbar(); //页面加载时创建任务栏
+    //校验用户的权限
+    $.getJSON("/Home/GetMenus", {}, function (data) {
+        links = data;
+        linksInit();
+        onResize();
+    })
+    var tip_height = $(window).height() - TASKBARHEIGHT - 70;
+    var all_height = $(window).height();
+    var haa = all_height - 300;
+
+    var tip;
+    $.post("/Home/GetBiaoJiDaoQiTime", {}, function (serverData) {
+
+        function f_tip() {
+            $.ligerDialog.tip({ title: '提示信息', content: '您有{'+ serverData.rows + "}条信息没有进行房源跟踪，如信息过期即进入公司公共数据中！", width: 200, height: 300,size:21 });
+        }
+        if (serverData.rows != 0)
+        {
+            f_tip();
+        }
+
+    });
+
+    var wincount = 0;
+    function title() {
+        return '系统提醒';
+    }
+    function f_open1() {
+        $.ligerDialog.open({
+            height: 200, url: '/HomeTip/index', height: $(window).height() / 1.8, width: $(window).width() / 1.5, showMax: true, showToggle: true, showMin: true, isResize: true, modal: false, title: title(), buttons: [
+                { text: '关闭', onclick: function (item, dialog) { dialog.close(); } }
+            ]
+        });
+    }
+    $(function () {
+        f_open1();
+    })
+    //$.ligerTip({
+    //    content: "倒计时:10",
+    //    width: 200,
+    //    height:100,
+    //    x:$(window).width()- $(window).width()/10,
+    //    y:100,
+    //    callback: function (t) {
+    //        var i = 10; //10秒倒计时
+    //        calctime(t, i);
+    //    }
+    //});
+
+    //function calctime(t, i) //这个函数用了递归来实现倒计时
+    //{
+    //    i--;
+    //    (i >= 0)
+    //? setTimeout(function () {
+    //    $(".l-verify-tip-content", t).text("倒计时:" + i.toString());
+    //    calctime(t, i);
+    //}, 1000)
+    //: $(t).remove();
+    //}
+
+
+
+
+
+</script>
+}

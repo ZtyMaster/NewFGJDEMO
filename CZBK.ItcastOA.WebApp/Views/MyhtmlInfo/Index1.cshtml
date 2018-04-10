@@ -1,0 +1,382 @@
+﻿@{
+    Layout = null;
+}
+@using CZBK.ItcastOA.Model
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>网站信息</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    <script src="~/Scripts/MyNewJS.js"></script>
+
+
+
+    <style>
+        .toolbar {
+            height: 30px;
+            padding: 5px;
+        }
+
+        html, body, .f1_div {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .f1_div_t {
+            padding: 2px;
+            background: #efefef;
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        function enable() {
+            $('a.easyui-linkbutton').linkbutton('enable');
+        }
+        function disable() {
+            $('a.easyui-linkbutton').linkbutton('disable');
+        }
+        function changetext() {
+            $('#add').linkbutton({ text: 'new add' });
+        }
+        $.fn.extend({
+            resizeDataGrid: function (heightMargin, widthMargin, minHeight, minWidth) {
+                var height = $(document).height() - heightMargin;
+                var width = $(document.body).width() - widthMargin;
+
+                height = height < minHeight ? minHeight : height;
+
+                width = width < minWidth ? minWidth : width;
+
+                $(this).datagrid('resize', {
+                    height: height,
+                    width: width
+                });
+            }
+        });
+        var thiswidth = 0, thisheight = 0;
+        $(function () {
+            thiswidth = $(document.body).width();
+            thisheight = $(document).height();
+            //datagrid数据表格ID
+            var datagridId = 'tt';
+            // 当窗口大小发生变化时，调整DataGrid的大小
+            $(window).resize(function () {
+
+                $('#' + datagridId).resizeDataGrid(60, 10, 200, 500);
+            });
+            loadData();
+            $('#cc').combo({
+                required: true,
+                editable: false
+            });
+
+            $('#sp').appendTo($('#cc').combo('panel'));
+            $('#sp input').click(function () {
+                var v = $(this).val();
+                var s = $(this).next('span').text();
+                $('#cc').combo('setValue', v).combo('setText', s).combo('hidePanel');
+            });
+            
+            $("#DnPage").click(function () {
+                $.messager.show({
+                    title: '提示',
+                    msg: '删除成功！',
+                    showType: 'show'
+                });
+                //$.post("/HrefInfo/GetHref", { "Page": 1 }, function (data) {
+
+                //})
+
+            });
+            $("#addDiv").css("display", "none");
+            $("#editDiv").css("display", "none");
+            $("#setRoleDiv").css("display", "none");
+            $(".BJ_class").click(function () {
+                var BiaojiInfoID = $(this).attr("id");
+
+                var rows = $('#tt').datagrid('getSelections');
+                if (!rows || rows.length == 0) {
+                    //alert("请选择要修改的商品！");
+                    $.messager.alert("提醒", "请选择要标记的记录!", "error");
+                    return;
+                }
+              
+                $.messager.confirm("提示", "确定要标记记录?", function (r) {
+                    if (r) {
+                        var strId = "";
+                        for (var i = 0; i < rows.length; i++) {
+                            strId = strId + rows[i].FwBiaoJiID + ",";//1,2,3,
+                        }
+                        
+                        strId = strId.substr(0, strId.length - 1);
+                      
+                        $.post("/MyhtmlInfo/EditBiaoJi", { "strId": strId, "BiaojiInfoID": BiaojiInfoID }, function (data) {
+                            if (data == "ok") {
+                                $('#tt').datagrid('reload');
+                                $.messager.alert("提醒", 保存成功, "ok");
+                                //loadData();
+                            } else {
+                                $.messager.alert("提醒", data, "error");
+                            }
+                        });
+                    }
+                });
+               
+             
+            })
+            //Menu标记菜单显示位置
+            $(document).bind('contextmenu', function (e) {
+                $('#mm').menu('show', {
+                    left: e.pageX,
+                    top: e.pageY
+                });
+
+                return false;
+            });
+        });
+        function loadData(pars) {
+            $('#tt').datagrid({
+                url: '/MyhtmlInfo/GetHref',
+                title: '网站查询表格',
+                width: thiswidth - 10,
+                height: thisheight - 60,
+                fitColumns: true, //列自适应
+                nowrap: false,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载权限的信息...',
+                pagination: true,//是否有分页
+                singleSelect: false,//是否单行选择
+                pageSize: 10,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [15, 25, 35],
+
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '编号', width: 20, align: 'center' },
+                    { field: 'Image_str', title: '图片', align: 'center' },
+                     { field: 'FwBiaoJi', title: '标记', width: 20, align: 'center', hidden: true },
+                     { field: 'FwBiaoJiID', title: '标记ID', width: 20, align: 'center', hidden: true },
+                    {
+                        field: 'FbTime', title: '发布时间', align: 'center', width: 80,
+                        formatter: function (value, row, index) {
+                            return Fromart_24(value);
+                        }
+
+                    },
+                     { field: 'HLName', title: '信息名称', width: 220, align: 'center' },
+                    { field: 'PersonName', title: '联系人', align: 'center' },
+                    {
+                        field: 'Address', title: '地址', width: 60,
+                    },
+                    {
+                        field: 'photo', title: '联系电话',
+                    },
+
+                    { field: 'FwSumMoney', title: '金额', width: 80, align: 'center' },
+                      { field: 'FwMianji', title: '面积', width: 60, align: 'center' },
+                    { field: 'FwHuXing', title: '户型', width: 60, align: 'center' },
+                    { field: 'FwLoucheng', title: '楼层', width: 40, align: 'center' },
+                    { field: 'FwZhuangxiu', title: '装修', width: 40, align: 'center' },
+                    { field: 'FwChaoxiang', title: '朝向', width: 30, align: 'center' },
+                    {
+                        field: 'FwNianxian', title: '产权', width: 30, align: 'center'
+                        //styler: function (value, row, index) {
+
+                        //        return 'background-color:#FF0000;';
+
+                        //}
+                    }
+                ]],
+                toolbar: ['-', {
+                        id: 'btnAdd',
+                        text: '标记',
+                        iconCls: 'icon-add',
+                        handler: function () {
+                            AddThis();
+                        }
+                    }, '-', {
+                        id: 'btnEdit',
+                        text: '待定',
+                        iconCls: 'icon-edit',
+                        handler: function () {
+
+                            eidtInfo();
+                        }
+                    }, '-'
+                ],
+                onLoadSuccess: function () {
+                }
+            });
+            $('#tt').datagrid({
+                rowStyler: function (index, row) {
+                    if (row.FwBiaoJi == 1) {
+                        return 'background-color:orangered;font-weight:bold;';
+                    }
+                    else if (row.FwBiaoJi == 2) {
+                        return 'background-color:yellow;font-weight:bold;';
+                    }
+                    else if (row.FwBiaoJi == 3) {
+                        return 'background-color:cornflowerblue;font-weight:bold;';
+                    }
+                    else if (row.FwBiaoJi == 4) {
+                        return 'background-color:darkcyan;font-weight:bold;';
+                    }
+                    else if (row.FwBiaoJi == 5) {
+                        return 'background-color:darkorchid;font-weight:bold;';
+                    }
+                }
+            });
+        }
+        //标记用户
+        function AddThis() {
+            $('#btnAdd').click(function (e) {
+                xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+                yy = e.originalEvent.y || e.originalEvent.layerY || 0;
+                $('#mm').menu('show', {
+                    left: xx,
+                    top: yy
+                });
+            });
+        }
+        //保存用户数据
+        function saveInfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要保存的记录!", "error");
+                return;
+            }
+            $.messager.confirm("提示", "确定要保存记录?", function (r) {
+                if (r) {
+                    var strId = "";
+                    for (var i = 0; i < rows.length; i++) {
+                        strId = strId + rows[i].ID + ",";//1,2,3,
+                    }
+                    strId = strId.substr(0, strId.length - 1);
+                    $.post("/HrefInfo/SaveHref", { "strId": strId }, function (data) {
+                        if (data == "ok") {
+                            $('#tt').datagrid('reload');
+                            $.messager.alert("提醒", 保存成功, "ok");
+                            //loadData();
+                        } else {
+                            $.messager.alert("提醒", data, "error");
+                        }
+                    });
+                }
+            });
+        }
+        //将序列化成json格式后日期(毫秒数)转成日期格式
+        function ChangeDateFormat(cellval) {
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate;
+        }
+        $('#f1_div_t').class.width = thiswidth - 40;
+
+        function qq(value, name) {
+            alert(value + ":" + name)
+        }
+
+    </script>
+
+</head>
+<body>
+    <div class="f1_div" id="ALLbaody" >
+        <div class="f1_div_t" id="f1_div_t">
+            <select id="cc" style="width:80px;"></select>
+                @*<div id="sp">
+                    @{
+                        List<T_Quyu> quyu = ViewBag.City;
+                        foreach (T_Quyu ttq in quyu)
+                        {
+                            <input type="radio" name="lang" value="@ttq.ID"><span>@ttq.QY_connet</span> <br />
+                        }
+                    }
+                </div>*@
+            @*<input id="ss" class="easyui-searchbox"
+                       searcher="qq"
+                       prompt="Please Input Value" menu="#mm" style="width:0px"></input>
+                <div id="mm" style="width:120px">
+                    <div name="all" iconCls="icon-ok">All News</div>
+                    <div name="sports">Sports News</div>
+                </div>*@
+            <select id="cc" class="easyui-combobox" name="dept" style="width:100px;">
+                <option value="999">所有</option>
+                @{
+                    List<T_Quyu> quyu = ViewBag.City;
+                    foreach (T_Quyu ttq in quyu)
+                    {
+                        <option value="@ttq.ID">@ttq.QY_connet</option>
+                    }
+                }
+
+            </select>
+
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+            <a href="#" class="easyui-linkbutton" style="width:150px" id="FristPage" iconCls="icon-search">查询</a>
+        </div>
+
+
+
+        <table id="tt" style="overflow:hidden; overflow-y:hidden; " title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit"></table>
+    </div>
+    <!---------------添加权限信息--------------------->
+    <div id="addDiv">
+
+    </div>
+    <!---------------添加权限信息结束--------------------->
+    <!---------------修改用户信息--------------------->
+        <div id="editDiv">
+        @using (Ajax.BeginForm("EditUserInfo", "T_BiaoJiInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new { id = "editForm" }))
+        {
+            <div id="Rdlist" style="height:50px; width:80px"></div>
+            <input type="text" name="SubTime" id="txtSubTime" />
+            <input type="text" name="DelFlag" id="txtDelFlag" />
+            <input type="text" name="txtColor" id="txtColor" />
+            <input type="text" name="ID" id="txtId" />
+            <table>
+             <tr><td>颜色</td><td><input type="text" name="2" id="1" /></td></tr>
+               
+
+            </table>
+        }
+    </div>
+    <!---------------修改用户信息结束--------------------->
+
+    <div id="setRoleDiv">
+        <iframe id="setRoleFrame" scrolling="no" frameborder="0"></iframe>
+    </div>
+    <div id="mm" class="easyui-menu" style="width:120px;">        
+        <div>
+            <span>标记</span>
+            <div style="width:150px;">
+                @{
+                   List<T_BiaoJiInfo> bj = ViewBag.Bj;
+                    foreach (T_BiaoJiInfo Tbj in bj)
+                    {
+                        <div id="@Tbj.ID" class="BJ_class" style="background-color:@Tbj.Colors;font-weight:bold;">@Tbj.BiaojiStr</div>                        
+                    }
+                }
+               
+            </div>
+        </div>
+        
+        <div class="menu-sep"></div>
+        <div>Exit</div>
+    </div>
+</body>
+</html>

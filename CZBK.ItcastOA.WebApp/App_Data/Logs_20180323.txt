@@ -1,0 +1,62 @@
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2018-03-23 08:55:51,218 [6] ERROR Memcached.ClientLibrary.MemcachedClient - Exception thrown while trying to get object from cache for key: 5e606269-79f9-4b2e-b813-e708eeb13994
+System.IO.IOException: Unable to read data from the transport connection: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。. ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   at System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   at System.IO.BufferedStream.Read(Byte[] array, Int32 offset, Int32 count)
+   at Memcached.ClientLibrary.SockIO.ReadLine() in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\SockIO.cs:line 276
+   at Memcached.ClientLibrary.MemcachedClient.LoadItems(SockIO sock, Hashtable hm, Boolean asString) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\MemCachedClient.cs:line 1376
+   at Memcached.ClientLibrary.MemcachedClient.Get(String key, Object hashCode, Boolean asString) in C:\devroot\memcacheddotnet\trunk\clientlib\src\clientlib\MemCachedClient.cs:line 1126
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------

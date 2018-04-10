@@ -1,0 +1,489 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>权限管理</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    <script src="~/Scripts/MyNewJS.js"></script>
+    <script type="text/javascript">
+        $.fn.extend({
+           
+            resizeDataGrid: function (heightMargin, widthMargin, minHeight, minWidth) {
+              
+                var height = $(document).height() - heightMargin;
+                var width = $(document.body).width() - widthMargin;
+
+                height = height < minHeight ? minHeight : height;
+
+                width = width < minWidth ? minWidth : width;
+
+                $(this).datagrid('resize', {
+                    height: height,
+                    width: width
+                });
+            }
+        });
+        $(function () {
+
+            //datagrid数据表格ID
+            var datagridId = 'tt';
+            loadData();
+            // 当窗口大小发生变化时，调整DataGrid的大小
+            $(window).resize(function () {
+
+                $('#' + datagridId).resizeDataGrid(60, 10, 200, 500);
+            });
+           
+            $("#addDiv").css("display", "none");
+            $("#editDiv").css("display", "none");
+            $("#setRoleDiv").css("display", "none");
+            $("#setBool").css("display", "none");
+            bindActionTypeEnumChange();
+            bindFileUpclick();
+        });
+        //给权限类别绑定Change事件
+        function bindActionTypeEnumChange() {
+            $("#ActionTypeEnumChange").change(function () {
+                if ($(this).val() == "1") {
+                    $("#actionIcontr").fadeIn("show");
+                } else {
+                    $("#actionIcontr").fadeOut("show");
+                }
+            });
+        }
+        //文件上传
+        function bindFileUpclick() {
+            $("#btnFileUp").click(function () {
+                if ($("#fileUp").val() == ""){
+                    $.messager.alert("提示", "请选择上传文件", "errer");
+                    return;
+                }
+                //开始进行异步上传图片文件
+                $("#addForm").ajaxSubmit({
+                    success: function (data) {
+                        var serverData = data.split(":");
+                        if (serverData[0] == "yes") {
+                            $("#showImage").append("<img src='" + serverData[1] + "' width='40px' height='40px'/>");
+                            $("#hiddenMenuIcon").val(serverData[1]);//将上传成功的图片地址放在隐藏input中
+                        }
+                        else {
+                            $.messager.alert("提示", serverData[1], "errer");
+                        }
+                    },
+                    url: "/ActionInfo/FileUpload",
+                    type:"post"
+                })
+            });
+        }
+        function loadData(pars) {
+            $('#tt').datagrid({
+                url: '/ActionInfo/GetActionInfo',
+                title: '权限数据表格',
+                fitColumns: true, //列自适应
+                nowrap: false,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载权限的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: 25,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [15, 25, 35],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '编号', width: 80 },
+                    { field: 'ActionInfoName', title: '权限名称', width: 120 },
+                     { field: 'Url', title: '请求地址', width: 120 },
+                      { field: 'HttpMethod', title: '请求方式', width: 120 },
+                      {
+                          field: 'ActionTypeEnum', title: '权限类型', width: 120,
+                          formatter: function (value, row, index) {
+                              return value == "1" ? "菜单权限" : "普通权限";
+                          }
+                      },
+                     { field: 'Sort', title: '排序', width: 80 },
+                      { field: 'Remark', title: '备注', width: 120 },
+                    {
+                        field: 'SubTime', title: '时间', width: 120, align: 'right',
+                        formatter: function (value, row, index) {
+                            return Fromart_24(value);
+                        }
+                    },
+                     {
+                         field: 'Operator', title: '操作', width: 120,
+                         formatter: function (value, row, index) {
+                            
+                             return "";
+                         }
+                     },
+
+                ]],
+                toolbar: [{
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+
+                        deleteInfo();
+                    }
+                }, {
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+
+                        addInfo();
+                    }
+                }, {
+                    id: 'btnEdit',
+                    text: '编辑',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+
+                        eidtInfo();
+                    }
+                },{
+                    id: 'btnSetActionRole',
+                    text: '为权限分配角色',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        SetActioninfo();
+                    }
+                }, {
+                    id: 'btnFUorZhi',
+                    text: '主次冲突权限',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        Setbool();
+                    }
+                },
+                 {
+                     id: 'btnFUorZhi',
+                     text: '仅看桌面权限',
+                     iconCls: 'icon-edit',
+                     handler: function () {
+                         SeeDiskqx();
+                     }
+                 }],
+                onLoadSuccess: function () {
+                    $(".deletes").click(function () {
+                        alert($(this).attr("ids"));
+                    });
+                }
+            });
+        }
+        function SeeDiskqx() {
+            var pars = {"Qx":true};
+            loadData(pars);
+               
+        }
+        //编辑用户信息
+        function eidtInfo() {
+           
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要编辑的1条记录!", "error");
+                return;
+            }          
+            $.post("/ActionInfo/ShowEditInfo", { "id": rows[0].ID }, function (serverData) {
+                var data = $.parseJSON(serverData);
+                if (data.msg == "ok") {
+                   
+                    $("#EditID").val(data.serverData.ID);
+                    $("#ActionInfoName").val(data.serverData.ActionInfoName);
+                    $("#Url").val(data.serverData.Url);
+                    $("#HttpMethod").val(data.serverData.HttpMethod);
+                    $("#MenuIcon").val(data.serverData.MenuIcon)
+                    $("#editDiv").css("display", "block");
+                    $('#editDiv').dialog({
+                        title: "编辑用户信息",
+                        width: 450,
+                        height: 400,
+                        collapsible: true,
+                        resizable: true,
+                        modal: true,
+                        buttons: [{
+                            text: '确定',
+                            iconCls: 'icon-ok',
+                            handler: function () {
+                                $("#editForm").submit();//提交表单
+                            }
+                        }, {
+                            text: '取消',
+                            handler: function () {
+                                $('#editDiv').dialog('close');
+                            }
+                        }]
+                    });
+                } else {
+                    $.messager.alert("提醒", "展示数据错误!!", "error");
+                }
+            });
+        }
+        //修改完成以后调用该方法
+        function afterEdit(data) {
+            if (data == "ok") {
+              
+                $('#editDiv').dialog('close');
+                $('#tt').datagrid('reload');
+            } else {
+                $.messager.alert("提醒", "修改数据错误!!", "error");
+            }
+        }
+        //为权限分配角色
+        function SetActioninfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要分配角色权限的一条记录!", "error");
+                return;
+            }
+            $("#setRoleFrame").attr("src", "/ActionInfo/SetActionRole/?id=" + rows[0].ID);
+            $("#setRoleDiv").css("display", "block");
+            $('#setRoleDiv').dialog({
+                title: "为权限分配角色信息",
+                width: 340,
+                height:460,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        
+                        var childWindow = $("#setRoleFrame")[0].contentWindow;//获取子窗体的window对象.
+                        childWindow.subForm();
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $('#setRoleDiv').dialog('close');
+                    }
+                }]
+            });
+        }
+        //主此点击冲突权限
+        function Setbool() {
+            $.post("/ActionInfo/Setbool", { "id": "" }, function (serverData) {               
+                if (serverData == "True") {
+                    $("#ZTtext").val("开启");
+                    $("#btnbool").val("关闭");
+                }
+                else {
+                    $("#ZTtext").val("关闭");
+                    $("#btnbool").val("开启");
+                }
+                $("#setBool").css("display", "block");
+                $('#setBool').dialog({
+                    title: "为权限分配角色信息",
+                    width: 300,
+                    height: 200,
+                    collapsible: true,
+                    resizable: true,
+                    modal: true,
+                    buttons: [{
+                        text: '取消',
+                        handler: function () {
+                            $('#setBool').dialog('close');
+                        }
+                    }]
+                });
+            });
+       
+        }
+        //添加信息
+        function addInfo() {
+            $("#addDiv").css("display", "block");
+            $('#addDiv').dialog({
+                title: "添加权限信息",
+                width: 450,
+                height: 400,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        $("#addForm").submit();//提交表单
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $('#addDiv').dialog('close');
+                    }
+                }]
+            });
+
+        }
+        //添加完成以后调用该方法
+        function afterAdd(data) {
+            if (data == "ok") {
+                $("#addForm input").val("");
+                $('#addDiv').dialog('close');
+                $('#tt').datagrid('reload');
+            } else {
+                $.messager.alert("提示", "添加失败", "error");
+            }
+        }
+        //删除用户数据
+        function deleteInfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要删除的记录!", "error");
+                return;
+            }
+            $.messager.confirm("提示", "确定要删除该记录?", function (r) {
+                if (r) {
+                    var strId = "";
+                    for (var i = 0; i < rows.length; i++) {
+                        strId = strId + rows[i].ID + ",";//1,2,3,
+                    }
+                    strId = strId.substr(0, strId.length - 1);
+                    $.post("/RoleInfo/DeleteRoleInfo", { "strId": strId }, function (data) {
+                        if (data == "ok") {
+                            $('#tt').datagrid('clearSelections');
+                            $('#tt').datagrid('reload');
+                            //loadData();
+                        } else {
+                            $.messager.alert("提醒", "删除的记录失败!", "error");
+                        }
+                    });
+                }
+            });
+        }
+
+        //将序列化成json格式后日期(毫秒数)转成日期格式
+        function ChangeDateFormat(cellval) {
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate;
+        }
+        //为权限分配完成角色调用该方法
+        function setActionAfter(data) {
+            //alert("回调成功");
+            //alert(data);
+            if (data == "ok"){
+                $("#setRoleDiv").dialog('close');
+            } else {
+                $.messager.alert("提示", "分配权限异常","errer");
+            }
+        }
+        function bool_click()
+        {
+            $.post("/ActionInfo/btnbool", { "id": "" }, function (serverData) {
+                if (serverData == "True") {
+                    $("#ZTtext").val("开启");
+                    $("#btnbool").val("关闭");
+                }
+                else {
+                    $("#ZTtext").val("关闭");
+                    $("#btnbool").val("开启");
+                }
+            });
+        }
+    </script>
+    <style>
+        html, body {
+        height:100%; width:100%;margin:0px; padding:0px;
+         margin-left:auto; margin-right:auto
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table id="tt"  title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit"></table>
+    </div>
+    <!---------------添加权限信息--------------------->
+    <div id="addDiv">
+        @using (Ajax.BeginForm("AddActionInfo", "ActionInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAdd" }, new { id = "addForm" }))
+        {
+        <table>
+            <tr><td>权限名称</td><td><input type="text" name="ActionInfoName" /></td></tr>
+            <tr><td>URL</td><td><input type="text" name="Url" /></td></tr>
+            <tr>
+                <td>HTTPMETHOD</td>
+                <td>
+                    <select name="HttpMethod">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>权限类型</td>
+                <td>
+                    <select name="ActionTypeEnum" id="ActionTypeEnumChange">
+                        <option value="0">普通权限</option>
+                        <option value="1">菜单权限</option>
+                    </select>
+                </td>
+            </tr>
+            <tr style="display:none" id="actionIcontr">
+                <td>菜单图标</td>
+                <td>
+                    <input type="file" name="fileIconUp" id="fileUp" />
+                    <input type="button" value="上传图片" id="btnFileUp" />
+                    <input type="hidden" name="MenuIcon" id="hiddenMenuIcon"/>
+                    <div id="showImage"></div>
+                </td>
+
+            </tr>
+            <tr><td>排序</td><td><input type="text" name="Sort" /></td></tr>
+            <tr><td>备注</td><td><input type="text" name="Remark" /></td></tr>
+
+
+        </table>
+        }
+    </div>
+    <!---------------添加权限信息结束--------------------->
+    <!---------------修改用户信息--------------------->
+    <div id="editDiv" style="height:100%; width:100%;">
+        @using (Ajax.BeginForm("EditRoleInfo", "ActionInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new { id = "editForm" }))
+        {
+           
+            <table>
+                <input type="text" readonly="readonly" name="ID" id="EditID" />
+                <tr><td>权限名称</td><td><input type="text" name="ActionInfoName" id="ActionInfoName" /></td></tr>
+                <tr><td>请求地址</td><td><input type="text" name="Url" id="Url" /></td></tr>
+                <tr><td>请求方式</td><td><input type="text" name="HttpMethod" id="HttpMethod" /></td></tr>
+                <tr><td>图片地址</td><td><input type="text" name="MenuIcon" id="MenuIcon" /></td></tr>
+            </table>
+        }
+    </div>
+
+    <!---------------修改用户信息结束--------------------->
+
+    <div id="setRoleDiv" style="background-color:rebeccapurple">
+        <iframe id="setRoleFrame"  height="360" frameborder="0"   ></iframe>
+    </div>
+    <div id="setBool" style="background-color:aqua;">
+            <input type="hidden" name="ID" id="ID" />
+            <table>
+                <tr><td>当前状态</td><td ><input id="ZTtext" readonly="readonly" /></td></tr>
+                <tr>
+
+                    <td colspan="2">                       
+                        <input id="btnbool" type="button" name="" onclick="bool_click()" value="开启" />
+                    </td>
+                </tr>
+            </table>
+    </div>
+</body>
+</html>

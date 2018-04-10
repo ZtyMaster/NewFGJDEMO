@@ -1,0 +1,453 @@
+﻿@{
+    Layout = null;
+}
+@using CZBK.ItcastOA.Model
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>个人保存信息</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    <script src="~/Scripts/MyNewJS.js"></script>
+    <style>
+        .toolbar {
+            height: 30px;
+            padding: 5px;
+        }
+
+        html, body, .f1_div {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+
+        .f1_div {
+        }
+
+        .f1_div_t {
+            padding: 2px;
+            background: #efefef;
+        }
+
+        span {
+            font-size: 12px;
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        var strval;
+        var PageVal = 1, SazeVla = 15;
+        function enable() {
+            $('a.easyui-linkbutton').linkbutton('enable');
+        }
+        function disable() {
+            $('a.easyui-linkbutton').linkbutton('disable');
+        }
+        function changetext() {
+            $('#add').linkbutton({ text: 'new add' });
+        }
+        $.fn.extend({
+            resizeDataGrid: function (heightMargin, widthMargin, minHeight, minWidth) {
+
+                var height = $(document.body).height() - heightMargin;
+                var width = $(document.body).width() - widthMargin;
+                height = height < minHeight ? minHeight : height;
+                width = width < minWidth ? minWidth : width;
+                $(this).datagrid('resize', {
+                    height: height,
+                    width: width
+                });
+            }
+        });
+
+        var thiswidth = 0, thisheight = 0;
+        $(function () {
+            //datagrid数据表格ID
+            var datagridId = 'tt';
+            // 当窗口大小发生变化时，调整DataGrid的大小
+            $(window).resize(function () {
+                $('#tt').resizeDataGrid(0, 0, 200, 500);
+            });
+
+            FloadData()
+
+            $('#cc').combo({
+                required: true,
+                editable: false
+            });
+            $("#AddDataDIV").css("display", "none");
+            $("#SeeImageDIV").css("discplay", "none");
+
+            $("#CSbtn").click(function () {
+                var page = $("#tt").datagrid("getPager");
+                var number = page.data("pagination").options.pageNumber;
+                var size = page.data("pagination").options.pageSize;
+                page.pagination('refresh', {
+                    pageNumber: 4,
+                    pageSize: size
+                });
+
+            });
+            $('#dlg').dialog('close');
+        });
+
+        //添加数据
+        function adddata() {
+            $("#AddDataDIV").css("display", "block");
+            $('#AddDataDIV').dialog({
+                title: "添加角色信息",
+                width: 500,
+                height: 400,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        alert(123);
+                        $("#adddata").submit();//提交表单
+                        alert(4);
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $('#AddDataDIV').dialog('close');
+                    }
+                }]
+            });
+        }
+        //保存用户数据
+        function saveInfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要保存的记录!", "error");
+                return;
+            }
+            $.messager.confirm("提示", "确定要保存记录?", function (r) {
+                if (r) {
+                    var strId = "";
+                    var pd = 0;
+                    for (var i = 0; i < rows.length; i++) {
+                        if (rows[i].photo.length <= 0) {
+                            pd++;
+                        }
+                        strId = strId + rows[i].ID + ",";//1,2,3,
+                    }
+
+                    if (pd > 0) {
+                        $.messager.alert("提醒", "保存信息中有未查看电话信息，请查看电话后保存", "error");
+                        return;
+                    }
+                    strId = strId.substr(0, strId.length - 1);
+                    $.post("/HrefInfo/SaveHref", { "strId": strId }, function (data) {
+
+                        if (data == "ok") {
+                            $.messager.alert("提醒", "保存成功", "ok");
+                            $('#tt').datagrid('reload');
+
+                            //loadData();
+                        } else {
+                            $.messager.alert("提醒", data, "error");
+                        }
+                    });
+                }
+            });
+        }
+        //将序列化成json格式后日期(毫秒数)转成日期格式
+        function ChangeDateFormat(cellval) {
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate;
+        }
+
+        //搜索数据
+        function qq(value, name) {
+
+            var Tval = "";
+            var dssval = document.getElementById("XUANX").getElementsByTagName("select");
+            for (var v = 0; v < dssval.length; v++) {
+                var val = $("#str_" + v).combobox('getValue') + ">" + $("#str_" + v).combobox('getText');
+                Tval = v == 0 ? val : Tval + "," + val;
+            }
+            var pars = {
+                Tval: Tval,
+                Str: value,
+                Item: name
+            };
+            FloadData(pars)
+        }
+        function FloadData(pars) {
+            loadData(pars);
+            var pager = $('#tt').datagrid().datagrid('getPager');	// get the pager of datagrid
+            pager.pagination({
+                buttons: [{
+                    text: '清空选中',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        $('#tt').datagrid('clearChecked');
+                    }
+                }, '-']
+            });
+            $('#tt').resizeDataGrid(0, 0, 200, 500);
+        }
+        function loadData(pars) {
+            $('#tt').datagrid({
+                url: '/psave/GetHref',
+                title: '个人信息',
+                width: $(document.body).width(),
+                height: $(document).height(),
+                fitColumns: true, //列自适应
+                nowrap: true,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载权限的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: SazeVla,//页大小，一页多少条数据
+                pageNumber: PageVal,//当前页，默认的
+                pageList: [15, 25, 35],
+
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '编号', width: 20, align: 'center', hidden: true },
+                    {
+                        field: 'AddTime', title: '创建时间', align: 'center', width:110,
+                        formatter: function (value, row, index) {
+                            return Fromart_24(value);
+                        }
+
+                    },
+                     { field: 'TextName', title: '信息名称', align: 'center', width: 200 },
+                    { field: 'PresonName', title: '联系人', align: 'center' },
+                    { field: 'PresonPhoto', title: '联系电话', align: 'center' },
+                    {
+                        field: 'Address', title: '地址', width: 120,
+                    },
+                    { field: 'Money', title: '价格', align: 'center', width: 80 },
+                   { field: 'Mianji', title: '面积', align: 'center', width: 80 },
+                   { field: 'HuxingStrID', title: '户型', align: 'center', width: 80 },
+                   { field: 'LouCheng', title: '楼层', align: 'center', width: 80 },
+                   { field: 'Chaoxiang', title: '朝向', align: 'center', width: 80 },
+                   {
+                       field: 'ZhuanxiuStrID', title: '装修', align: 'center', width: 80
+                   },
+                   {
+                       field: 'Items', title: '分类', align: 'center', width: 80,
+                       formatter: function (value, row, index) {
+                           return (value == 0 ? "售房" : "租房");
+                       }
+                   },
+                   {
+                       field: 'Guishu', title: '归属', align: 'center', width: 60
+                   },
+                   {
+                       field: 'Image', title: '图片', halign: 'center',
+                       formatter: function (value, row, index) {
+                           var str = value > 0 ? "<a href='javascript:SeeThisImage()' ids='" + row.id +
+                       "'   class='l-btn' style='padding:2px 8px'>擦看图片</a>" : "";                          
+                           return str;
+                       }
+                   },
+                   {
+                       field: 'Fenpe', title: '操作', halign: 'center',
+                       formatter: function (value, row, index) {
+                           var  str = "<a href='javascript:DataFenpei()'  class='l-btn' style='padding:2px 8px'>信息分配</a>";
+                           return str;
+                       }
+                   }
+                ]],
+                toolbar: '#tb',
+                onLoadSuccess: function () {
+                }
+            });
+        }
+
+        //添加完成以后调用该方法
+        function afterAdd(data) {
+            alert(data);
+            if (data == "ok") {
+                $('#AddDataDIV').dialog('close');
+                $('#tt').datagrid('reload');
+            } else {
+                $.messager.alert("提示", "添加失败", "error");
+            }
+        }
+        function DataFenpei() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要编辑的1条记录!", "error");
+                return;
+            }
+            $("#FenpaiID").val(rows[0].ID);
+            $('#dlg').dialog('open')
+
+        }
+        function FenPADpOST() {
+
+            $.messager.confirm('分配提示', '是否分配数据?', function (r) {
+                if (r) {
+                    var Eid = $("#FenpaiID").val();
+                    var Uid = $("#YxPersonID").combobox("getValue");
+                    $.post("/psave/FenPeiUserSave", { "UserID": Uid, "Eid": Eid }, function (data) {
+                        if (data.ret == "ok") {
+                            $('#dlg').dialog('close');
+                            $("#tt").datagrid("reload");
+                        } else {
+                            $.messager.alert("提示", data.msg);
+                        }
+
+                    })
+                }
+            });
+           
+
+        }
+    </script>
+
+</head>
+<body>
+    <div id="dlg" class="easyui-dialog" title="信息分配" style="width:200;height:150px;padding:10px" 
+         data-options="buttons: [{text:'确定',
+					             iconCls:'icon-ok',
+					             handler:function(){
+                                      FenPADpOST();
+						         }
+				                 },{
+				                 	text:'取消',
+				                 	handler:function(){
+				                 		 $('#dlg').dialog('close');
+				                 	}
+				                 }]" >         
+        <input type="hidden" name="FenpaiID" id="FenpaiID" />
+        <table>
+            <tr>
+                <td>分配信息</td>
+                <td>
+                    <select name="YxPersonID" id="YxPersonID" class="easyui-combobox">
+                        @{
+                            foreach (UserInfo Item in ViewBag.Ftep)
+                            {
+                                <option value="@Item.ID">@Item.UName</option>
+                            }
+
+                        }
+                        </select></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="f1_div" id="ALLbaody">
+        <table id="tt" style="overflow-x:hidden; overflow-y:hidden; margin:0px; padding:0px;"
+               title="个人保存信息" iconcls="icon-edit"></table>
+        <div id="tb" style="padding:5px;height:auto">
+            <div style="margin-bottom:5px" id="XUANX">
+                <span>搜索项: </span>
+                @{
+
+                    for (int i = 0; i < ViewBag.ItemsCount; i++)
+                    {
+                        <select id="str_@i" class="easyui-combobox" name="dept" style="width:100px;">
+                            @{foreach (T_Items Item in ViewBag.Items)
+                                {
+                                    if (Item.Icons == i)
+                                    {
+                                        <option value="@Item.ID">@Item.Str</option>
+                                    }
+                                }
+                            }
+                        </select>
+                                }
+                }
+                <input id="ss" class="easyui-searchbox" searcher="qq" prompt="输入你要查询的信息" menu="#mm" style="width:0px" />
+                <div id="mm" style="width:120px">
+                    <div name="all" iconCls="icon-ok">所有房源</div>
+                    <div name="0">售房</div>
+                    <div name="1">租房</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="AddDataDIV">
+            @using (Ajax.BeginForm("AddUser", "UserSaveInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAdd" }, new { id = "adddata" }))
+            {
+                <table>
+                    <tr><td>信息名称</td><td><input type="text" name="TextName" /></td></tr>
+                    <tr><td>联系人</td><td><input type="text" name="PresonName" /></td></tr>
+                    <tr><td>联系电话</td><td><input type="text" name="PresonPhoto" /></td></tr>
+                    <tr><td>地址</td><td><input type="text" name="Address" /></td></tr>
+                    <tr><td>金额</td><td><input type="text" name="Money" />元</td></tr>
+                    <tr><td>面积</td><td><input type="text" name="Mianji" />㎡</td></tr>
+
+                    <tr>
+                        <td>户型</td>
+                        <td>
+                            @{
+                                <select id="str_" class="easyui-combobox" name="HuxingStrID" style="width:100px;">
+                                    @{foreach (T_Items Item in ViewBag.Items)
+                                        {
+                                            if (Item.Icons == 2)
+                                            {
+                                                <option value="@Item.ID">@Item.Str</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            }
+                        </td>
+                    </tr>
+
+                    <tr><td>楼层</td><td><input type="text" name="LouCheng" /></td></tr>
+                    <tr>
+                        <td>装修</td>
+                        <td>
+                            @{
+                                <select id="str_" class="easyui-combobox" name="ZhuanxiuStrID" style="width:100px;">
+                                    @{foreach (T_Items Item in ViewBag.Items)
+                                        {
+                                            if (Item.Icons == 3)
+                                            {
+                                                <option value="@Item.ID">@Item.Str</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            }
+                        </td>
+                    </tr>
+                    <tr><td>朝向</td><td><input type="text" name="Chaoxiang" /></td></tr>
+
+                    <tr>
+                        <td>分类</td>
+                        <td>
+                            <select name="Items">
+                                <option value="0">售房</option>
+                                <option value="1">租房</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                                        }
+        </div>
+    </div>
+
+    <div id="SeeImageDIV">
+        <img id="Timage" style="margin:2px;" />
+    </div>
+
+
+</body>
+</html>

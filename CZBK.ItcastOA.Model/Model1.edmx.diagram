@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="38639b506e3a4aa591ee5f325d6e102d" Name="关系图1" ZoomLevel="64" ShowGrid="false" SnapToGrid="false">
+        <EntityTypeShape EntityType="OAModel.UserInfo" Width="2" PointX="1.212837833483956" PointY="4.5259008490171411" IsExpanded="true" />
+        <EntityTypeShape EntityType="OAModel.ActionInfo" Width="1.5" PointX="14.553490885590767" PointY="0.5" />
+        <EntityTypeShape EntityType="OAModel.Department" Width="1.5" PointX="8.8244134500518765" PointY="1.6001955873044778" />
+        <EntityTypeShape EntityType="OAModel.R_UserInfo_ActionInfo" Width="2.625" PointX="1.1683558810720887" PointY="0.5" />
+        <EntityTypeShape EntityType="OAModel.RoleInfo" Width="1.5" PointX="3.5872748380874784" PointY="13.447071908438675" />
+        <EntityTypeShape EntityType="OAModel.BumenInfoSet" Width="1.5" PointX="17.729729507681753" PointY="7.8727477365002194" />
+        <EntityTypeShape EntityType="OAModel.T_FGJHtmlData" Width="1.5" PointX="11.304617077750768" PointY="3.6109233833314276" />
+        <AssociationConnector Association="OAModel.FK_ActionInfoR_UserInfo_ActionInfo" />
+        <AssociationConnector Association="OAModel.FK_UserInfoR_UserInfo_ActionInfo" />
+        <AssociationConnector Association="OAModel.DepartmentActionInfo" />
+        <AssociationConnector Association="OAModel.RoleInfoActionInfo" />
+        <AssociationConnector Association="OAModel.UserInfoDepartment" />
+        <AssociationConnector Association="OAModel.UserInfoRoleInfo" />
+        <EntityTypeShape EntityType="OAModel.T_City" Width="1.5" PointX="13.564752122542851" PointY="17.2668917144712" />
+        <EntityTypeShape EntityType="OAModel.T_Quyu" Width="1.5" PointX="15.790540380535379" PointY="12.215090016436921" />
+        <AssociationConnector Association="OAModel.FK_T_FGJHtmlData_T_City" />
+        <AssociationConnector Association="OAModel.FK_T_Quyu_T_City" />
+        <EntityTypeShape EntityType="OAModel.T_SaveHtmlData" Width="1.5" PointX="4.9228603677982417" PointY="5.2595720896690112" />
+        <AssociationConnector Association="OAModel.FK_T_SaveHtmlData_HtmlID" />
+        <AssociationConnector Association="OAModel.FK_T_SaveHtmlData_UserID" />
+        <EntityTypeShape EntityType="OAModel.UserInfo_City" Width="1.5" PointX="6.7286035974356047" PointY="10.158220715459782" />
+        <AssociationConnector Association="OAModel.FK_UserInfoT_City_CityID" />
+        <AssociationConnector Association="OAModel.FK_UserInfoT_City_UserInfo" />
+        <EntityTypeShape EntityType="OAModel.T_BiaoJiInfo" Width="1.5" PointX="23.929824679732217" PointY="4.907163760347637" />
+        <EntityTypeShape EntityType="OAModel.T_Items" Width="1.5" PointX="17.912725000818892" PointY="12.371621584613624" />
+        <AssociationConnector Association="OAModel.FK_T_SaveBiaoJi_BiaoJi" />
+        <EntityTypeShape EntityType="OAModel.T_UserClick" Width="1.5" PointX="4.1418918755648351" PointY="10.490990986274284" />
+        <EntityTypeShape EntityType="OAModel.T_SeeClickPhoto" Width="1.5" PointX="6.8879209760198847" PointY="3.2434012318425967" />
+        <AssociationConnector Association="OAModel.FK_T_SeeClickPhoto_T_FGJHtmlData" />
+        <AssociationConnector Association="OAModel.FK_T_SeeClickPhoto_UserInfo" />
+        <AssociationConnector Association="OAModel.FK_T_UserClick_UserInfo" />
+        <EntityTypeShape EntityType="OAModel.T_UserSave" Width="1.5" PointX="21.774853834420874" PointY="0.5" />
+        <AssociationConnector Association="OAModel.FK_T_UserSave_T_UserSave" />
+        <EntityTypeShape EntityType="OAModel.T_UserSave_Items" Width="1.5" PointX="17.482544927671643" PointY="5.65259015739385" />
+        <AssociationConnector Association="OAModel.FK_T_UserSave_T_UserSave1" />
+        <AssociationConnector Association="OAModel.FK_T_UserSave_T_UserSave2" />
+        <AssociationConnector Association="OAModel.FK_UserInfo_T_City" />
+        <EntityTypeShape EntityType="OAModel.T_BoolItem" Width="1.5" PointX="15.565058544658815" PointY="8.3384502919390222" />
+        <EntityTypeShape EntityType="OAModel.T_province" Width="1.5" PointX="16.917229527818453" PointY="17.563063015533185" />
+        <AssociationConnector Association="OAModel.FK_T_City_province" />
+        <AssociationConnector Association="OAModel.FK_T_SaveHtmlData_HtmlID1" />
+        <AssociationConnector Association="OAModel.FK_T_SaveMasterID" />
+        <EntityTypeShape EntityType="OAModel.T_QiuZhuQiuGou" Width="1.5" PointX="8.6717342561850579" PointY="9.580518047588134" />
+        <EntityTypeShape EntityType="OAModel.UserSaveImage" Width="1.5" PointX="23.769005877994029" PointY="2.591374270152444" />
+        <AssociationConnector Association="OAModel.FK_T_QiuZhuQiuGou_T_City" />
+        <AssociationConnector Association="OAModel.FK_UserSaveImage_T_UserSave" />
+        <EntityTypeShape EntityType="OAModel.T_YxPerson" Width="1.5" PointX="1.3023648947978028" PointY="13.72691440987912" />
+        <AssociationConnector Association="OAModel.FK_T_YxPerson_UserInfo" />
+        <AssociationConnector Association="OAModel.FK_UserInfo_YxPerson" />
+        <EntityTypeShape EntityType="OAModel.T_ChuZhuInfo" Width="1.5" PointX="5.6796171180241766" PointY="17.910472978959561" />
+        <EntityTypeShape EntityType="OAModel.T_ZhuaiJiaBak" Width="1.5" PointX="20.480994239646716" PointY="8.1308479564268445" />
+        <AssociationConnector Association="OAModel.FK_T_CitiID" />
+        <AssociationConnector Association="OAModel.FK_fgjhID" />
+        <AssociationConnector Association="OAModel.FK_T_FGJHtmlData_Userinfo" />
+        <AssociationConnector Association="OAModel.FK_adduserid" />
+        <EntityTypeShape EntityType="OAModel.T_UpHerfCity" Width="1.5" PointX="12.928807667675791" PointY="8.886261341874917" />
+        <AssociationConnector Association="OAModel.FK_T_ChuZhuInfo_UserInfo" />
+        <AssociationConnector Association="OAModel.FK_T_UpHerfCity_T_City" />
+        <AssociationConnector Association="OAModel.FK_T_QiuZhuQiuGou_UserInfo" />
+        <AssociationConnector Association="OAModel.FK_T_UpHerfCity_UserInfo" />
+        <EntityTypeShape EntityType="OAModel.SeeQzCz" Width="1.5" PointX="10.8750005" PointY="12.524637858072918" />
+        <AssociationConnector Association="OAModel.FK_ChuzhuID" />
+        <AssociationConnector Association="OAModel.FK_QiuzhuID" />
+        <AssociationConnector Association="OAModel.FK_UserInfo" />
+        <EntityTypeShape EntityType="OAModel.GongGao" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="OAModel.TLoginbak" Width="1.5" PointX="8.50846364243868" PointY="24.404296777865962" />
+        <AssociationConnector Association="OAModel.FK_TLoginbak_UserInfo" />
+        <EntityTypeShape EntityType="OAModel.ScrherSAVE" Width="1.5" PointX="4" PointY="24.887746175130207" />
+        <AssociationConnector Association="OAModel.FK_ScrherSAVE_UserInfo" />
+        <EntityTypeShape EntityType="OAModel.T_ScehMiShu" Width="1.5" PointX="4" PointY="29.842844645182289" />
+        <AssociationConnector Association="OAModel.FK_T_ScehMiShu_UserInfo" />
+        <EntityTypeShape EntityType="OAModel.T_AppOpen" Width="1.5" PointX="4" PointY="33.747334798177079" />
+        <AssociationConnector Association="OAModel.FK_T_AppOpen_UserInfo" />
+        <EntityTypeShape EntityType="OAModel.WxUser" Width="1.5" PointX="4" PointY="37.460805257161454" />
+        <AssociationConnector Association="OAModel.FK_WxUser_UserInfo" />
+        
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

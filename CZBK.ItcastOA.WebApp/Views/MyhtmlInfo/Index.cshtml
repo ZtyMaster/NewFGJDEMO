@@ -1,0 +1,443 @@
+﻿@{
+    Layout = null;
+}
+@using CZBK.ItcastOA.Model
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>个人保存数据</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    <script src="~/Scripts/MyNewJS.js"></script>
+    <style>
+        .toolbar {
+            height: 30px;
+            padding: 5px;
+        }
+
+        html, body, .f1_div {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+
+        .f1_div {
+        }
+
+        .f1_div_t {
+            padding: 2px;
+            background: #efefef;
+        }
+        .EditMoneycss {
+            margin-left:auto; margin-right:auto;margin-top:25px
+        }
+    
+        span {
+            font-size: 12px;
+        }
+    </style>
+    <script type="text/javascript">
+        var strval;
+        var PageVal = 1, SazeVla = 35;
+        var Lstr;
+       
+        function enable() {
+            $('a.easyui-linkbutton').linkbutton('enable');
+        }
+        function disable() {
+            $('a.easyui-linkbutton').linkbutton('disable');
+        }
+        function changetext() {
+            $('#add').linkbutton({ text: 'new add' });
+        }
+        $.fn.extend({
+            resizeDataGrid: function (heightMargin, widthMargin, minHeight, minWidth) {
+
+                var height = $(document.body).height() - heightMargin;
+                var width = $(document.body).width() - widthMargin;
+                height = height < minHeight ? minHeight : height;
+                width = width < minWidth ? minWidth : width;
+                $(this).datagrid('resize', {
+                    height: height,
+                    width: width
+                });
+            }
+        });
+
+        var thiswidth = 0,thisheight=0;
+        $(function () {
+            //datagrid数据表格ID
+            var datagridId = 'tt';
+           
+            // 当窗口大小发生变化时，调整DataGrid的大小
+            $(window).resize(function () {
+                $('#' + datagridId).resizeDataGrid(60, 0, 200, 500);
+            });           
+            
+            $('#cc').combo({
+                required: true,
+                editable: false
+            });  
+            $('#mm').menu({
+                onClick: function (item) {
+                   
+                    var rows = $('#tt').datagrid('getSelections');
+                    if (!rows || rows.length == 0) {
+                        //alert("请选择要修改的商品！");
+                        $.messager.alert("提醒", "请选择要保存的记录!", "error");
+                        return;
+                    }
+                    var str = "";
+                    for (var i = 0; i < rows.length; i++) {
+                        str = str + rows[i].FwBiaoJiID + ",";//1,2,3,
+                    }
+                    str = str.substr(0, str.length - 1);
+                    $.post("/MyhtmlInfo/EditBiaoJi", { "strId": str, "BiaojiInfoID": item.name }, function (data) {
+                        if (data == "ok") {                          
+                            $('#tt').datagrid('reload');
+                        } else {
+                            $.messager.alert("提醒", data, "error");
+                        }
+                        $('#tt').datagrid('clearChecked');
+                    });
+                }
+            });
+            $("#SeeMap").css("display", "none");
+            $("#DeditMoneyDIV").css("display", "none");
+            $("#addDiv").css("display", "none");
+            updg();     
+        });
+        var __xx, __yy;
+        //更新DG表
+        function updg(pars)
+        {
+            loadData(pars);
+            //获取鼠标坐标
+           
+            $('body').mousemove(function (e) {
+                e = e || window.event;
+                __xx = e.pageX || e.clientX + document.body.scroolLeft;
+                __yy = e.pageY || e.clientY + document.body.scrollTop;
+            });
+           
+            var pager = $('#tt').datagrid().datagrid('getPager');	// get the pager of datagrid
+            pager.pagination({
+                buttons: [{
+                    text: '清空选中',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        $('#tt').datagrid('clearChecked');
+                    }
+                }, '-', {
+                    text: '标记',
+                    iconCls: 'icon-save',
+                    handler: function () {
+                        $('#mm').menu('show', {
+                            left: __xx,
+                            top: __yy
+                        });
+                    }
+                }, '-', {
+                    text: '查看图片',
+                    iconCls: 'icon-search',
+                    handler: function () {
+                        SeeImage();
+                    }
+                }, '-'
+                ]
+            });
+            $('#tt').resizeDataGrid(0, 0, 200, 500);
+        }
+       
+        //将序列化成json格式后日期(毫秒数)转成日期格式
+        function ChangeDateFormat(cellval) {
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate;
+        }
+        $('#f1_div_t').class.width = thiswidth - 40;
+        //搜索数据
+        function qq(value, name) {
+            // alert(value + ":1" + name)
+            var Tval = "";
+
+            var dssval = document.getElementById("XUANX").getElementsByTagName("select");
+
+            for (var v = 0; v < dssval.length; v++) {
+                var val = $("#str_" + v).combobox('getValue') + ">" + $("#str_" + v).combobox('getText');
+
+                Tval = v == 0 ? val : Tval + "," + val;
+            }
+            var ss = $("#ss").val();                            
+            var pars = {
+                Tval: Tval,
+                Str: value
+            };            
+            updg(pars)   
+        }
+        function loadData(pars) {
+            $('#tt').datagrid({
+                url: '/MyhtmlInfo/GetHref',
+                title: '个人数据',
+                width: $(document.body).width(),
+                height: $(document).height(),
+                fitColumns: true, //列自适应
+                nowrap: true,//则把数据显示在一行里。 
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载权限的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: SazeVla,//页大小，一页多少条数据
+                pageNumber: PageVal,//当前页，默认的
+                pageList: [15, 25, 35],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '编号', width: 20, align: 'center', hidden: 'True' },  
+                    { field: ' FwBiaoJiID', title: '标记ID', width: 20, align: 'center', hidden:'true' },
+                    
+                    {
+                        field: 'FwColors', title: '标记', align: 'center',
+                        formatter: function (value, row, index)
+                        {
+                            var bj = "";
+                            if (value!=null)
+                            {  bj = "<img src='/Content/Images/biaoji/" + value + ".png' height='30'  />"; }
+                            return bj;
+                        }
+                    },
+                    {
+                        field: 'Image_str', title: '图片', align: 'center',
+                        formatter: function (value, row, index) {
+                            var bj = "";
+                            if (value == "有")
+                            { bj = "<img src='/Content/Images/nf/32px.png' height='25'  />"; }
+                            return bj;
+                        }
+                    },
+                    {
+                        field: 'FbTime', title: '发布时间', align: 'center', width: 80,
+                        formatter: function (value, row, index) {
+                            return Fromart_24(value);
+                        }
+
+                    },
+                     { field: 'HLName', title: '信息名称', width: 200,  align: 'left', halign: 'center' },
+                    { field: 'PersonName', title: '联系人', align: 'center' },
+                    { field: 'photo', title: '联系电话', align: 'center' },
+                    {
+                        field: 'Address', title: '地址', width: 100, halign: 'center'
+                    },
+                    { field: 'FwSumMoney', title: '金额', width: 80, align: 'center' },
+                      { field: 'FwMianji', title: '面积', width: 60, align: 'center' },
+                       { field: 'Fwpingmi', title: '平米', align: 'center', hidden: 'True' },
+                         { field: 'FwPingmiMoney', title: '每平金额',  align: 'center' },
+                    { field: 'FwHuXing', title: '户型', width: 60, align: 'center' },
+                    { field: 'FwLoucheng', title: '楼层', width: 30, align: 'center' },
+                    { field: 'FwZhuangxiu', title: '装修', width: 30, align: 'center' },
+                    { field: 'FwChaoxiang', title: '朝向', width: 30, align: 'center' },
+                    { field: 'FwNianxian', title: '产权', width: 30, align: 'center' },
+                     {
+                         field: 'Operator', title: '操作', halign: 'center',
+                         formatter: function (value, row, index) {
+                             var str = "<a href='javascript: ZhuiJia()' ids='" + row.ID +
+                           "'  class='l-btn' style='padding:2px 5px' >房源跟踪</a>";
+                             str =str+ " &nbsp&nbsp<a href='javascript:EidtMoney(0)' ids='" + row.id +
+                       "'  class='l-btn' style='padding:2px 5px' >修改价格</a>";
+                             str = str + " &nbsp&nbsp<a href='javascript:SeeImage()' ids='" + row.id +
+                       "'   class='l-btn' style='padding:2px 5px' >查看图片</a>";
+                             str = str + " &nbsp&nbsp<a href='javascript:SeeMap()' ids='" + row.id +
+                     "'   class='l-btn' style='padding:2px 5px' >地图浏览</a>";
+                             return str;
+                         }
+                     }
+
+                     ]
+                ],
+                toolbar: '#tb',
+                onLoadSuccess: function () {
+                   
+                }
+            });
+        }
+        function EidtMoney(obj) {
+           //obj=0 修改个人数据
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要修改的记录!", "error");
+                return;
+            }
+            if (rows.length > 1) {
+                $.messager.alert("提醒", "仅可查看一条信息！", "error");
+                return;
+            }
+            $("#EditMoneyID").val(rows[0].ID);
+            $("#EditMoneyName").val(rows[0].HLName);
+            $("#EditMoneyS").val(rows[0].FwSumMoney);
+            $("#EditSumMoney").val(rows[0].FwPingmiMoney * rows[0].Fwpingmi);  
+           
+            $("#DeditMoneyDIV").css("display", "block");
+           
+            $("#DeditMoneyDIV").dialog({
+                title: "修改信息",
+                ID: "editdivs",
+                width: 400,
+                height: 300,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [
+                    {
+                        text: '保存',
+                        iconCls: 'icon-ok',
+                        handler: function () {
+                            $("#editMoney").submit();
+                        }
+                    },
+                     {
+                         text: '关闭',
+                         handler: function () {
+                             $('#DeditMoneyDIV').dialog('close');
+                         }
+                     }]
+            });
+        }
+        function afterEdit(data) {
+            if (data == "ok") {
+                $('#DeditMoneyDIV').dialog('close');
+                $('#tt').datagrid('reload');
+                $('#tt').datagrid('clearChecked');
+            } else {
+                $.messager.alert("提醒", "修改数据错误!!", "error");
+            }
+        }
+
+        //追加备注信息
+        function ZhuiJia() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                $.messager.alert("提醒", "请选择要保存的记录!", "error");
+                return;
+            }
+            //获取要修改的备注信息
+            $.post("/Hrefinfo/GetZhuiJiaBak", { "PID": rows[0].ID }, function (data) {
+                $("#ZhuijiaBak").val(data)
+
+                $("#ZjInputID").val(rows[0].ID);
+                $("#addDiv").css("display", "block");
+                $('#addDiv').dialog({
+                    title: "添加权限信息",
+                    width: 400,
+                    height: 300,
+                    collapsible: true,
+                    resizable: true,
+                    modal: true,
+                    buttons: [{
+                        text: '确定',
+                        iconCls: 'icon-ok',
+                        handler: function () {
+
+                            $.post("/Hrefinfo/AddZhuiJia", { "PID": $("#ZjInputID").val(), "Bak": $("#ZhuijiaBak").val() }, function (data) {
+                                if (data.ret == "ok") {
+                                    $.messager.alert("提示", data.msg, "");
+                                    $('#addDiv').dialog('close');
+                                }
+                                else {
+                                    $.messager.alert("提示", data.msg, "");
+                                }
+                            })
+                        }
+                    }, {
+                        text: '取消',
+                        handler: function () {
+                            $('#addDiv').dialog('close');
+                        }
+                    }]
+                });
+            });
+
+        }
+    </script>
+
+</head>
+<body>
+    <div class="f1_div" id="ALLbaody">
+        <table id="tt" style="overflow-x:hidden; overflow-y:hidden; margin:0px; padding:0px; "
+               title="出售二手房信息" iconcls="icon-edit"></table>
+
+        <div id="tb" style="padding:5px;height:auto">
+            <div style="margin-bottom:5px" id="XUANX">
+                <span>搜索项: </span>
+
+                @{
+
+                    for (int i = 0; i < ViewBag.ItemsCount; i++)
+                    {
+                        <select id="str_@i" class="easyui-combobox" name="dept" style="width:80px;">
+                            @{foreach (T_Items Item in ViewBag.Items)
+                                {
+                                    if (Item.Icons == i)
+                                    {
+                                        <option value="@Item.ID">@Item.Str</option>
+                                    }
+                                }
+                            }
+                        </select>
+                                }
+                }
+                <input id="ss"  class="easyui-searchbox" searcher="qq" prompt="输入你要查询的信息" menu="#mm" style="width:0px" />
+                <div id="mm" style="width:120px">
+                    <div name="all" iconCls="icon-ok">房源信息</div>
+                    <div name="all" >区域搜索</div>
+                </div>
+                <a style="width:25px;"></a>
+            </div>
+
+
+        </div>
+        <div id="SeeImageDIV">
+            <img id="Timage" />
+        </div>
+        <div id="SeeMap">
+            <iframe id="SeeMapFrame" scrolling="no" frameborder="0"></iframe>
+        </div>
+
+        <div id="DeditMoneyDIV" >
+         @using (Ajax.BeginForm("EditMoney", "MyhtmlInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new { id = "editMoney" }))
+         {
+            <input type="hidden" id="EditMoneyID" name="ID" readonly="readonly" />
+            <table id="eidtMoneyTable"  class="EditMoneycss">
+                <tr><td>信息名称</td><td><input  type="text" id="EditMoneyName" name="EditMoneyName" readonly="readonly" /></td></tr>
+                <tr><td>原金额</td><td><input type="text" id="EditMoneyS" name="EditMoneyS" readonly="readonly" /></td></tr>
+                <tr><td>修改总额</td><td><input type="text" id="EditSumMoney" name="EditSumMoney"  onkeyup="num(this)"/></td></tr> 
+            </table>
+          }
+        </div>
+    </div>
+    <div id="mm" class="easyui-menu" style="width:60px;">
+        <div  name="3"><img src="~/Content/Images/biaoji/cornflowerblue.png" height="20" /></div>
+        <div name="4"><img src="~/Content/Images/biaoji/darkcyan.png" height="20" class="22" /></div> 
+        <div name="5"><img src="~/Content/Images/biaoji/darkorchid.png" height="20" /></div>  
+        <div name="1"><img src="~/Content/Images/biaoji/orangered.png" height="20" /></div> 
+        <div name="2"><img src="~/Content/Images/biaoji/yellow.png" height="20" /></div>  
+        <div name="6">取消</div>       
+    </div>
+
+    <div id="addDiv">
+        <table style="width:100%; height:100%; padding:5px;">
+            <tr><td>追加备注：</td><td><input type="hidden" id="ZjInputID" /><textarea rows="10" id="ZhuijiaBak" /></td></tr>
+        </table>
+    </div>
+</body>
+</html>

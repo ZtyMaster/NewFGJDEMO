@@ -1,0 +1,400 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@using CZBK.ItcastOA.Model
+@section scripts{
+<link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+<link href="~/Content/themes/icon.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.easyui.min.js"></script>
+<script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+<script src="~/Scripts/datapattern.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/MyAjaxForm.js"></script>
+<script src="~/Scripts/MyNewJS.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+<!--参考signalr  脚本自动生成 -->
+<script src="~/signalr/hubs"></script>
+   
+<script type="text/javascript">
+        //建立Server端的Hub的物件，注意Hub的首字母一定要为小写
+    var chat = $.connection.signalRHub;
+    var loadBol = true;
+        $.fn.extend({
+            resizeDataGrid: function (heightMargin, widthMargin, minHeight, minWidth) {
+
+                var height = $(document).height() - heightMargin;
+                var width = $(document.body).width() - widthMargin;
+
+                height = height < minHeight ? minHeight : height;
+
+                width = width < minWidth ? minWidth : width;
+
+                $(this).datagrid('resize', {
+                    height: height,
+                    width: width
+                });
+            }
+        });
+        $(function () {
+            var $win;
+            var f_width = $(document).width();
+            var f_height = $(document).height();
+            //$("#SeePhoto").width();
+            //$("#SeePhoto").height();
+            $win = $('#SeePhoto').window({
+                title: '由于无法直接获取电话号码！请进行手机扫码获取联系号码.',
+                width: f_width - (f_width / 5),
+                height: f_height - (f_height / 3),
+                top: (f_height / 3)/4,
+                left: (f_width / 5)/2,
+                shadow: true,
+                modal: true,
+                iconCls: 'icon-add',
+                closed: true,
+                minimizable: false,
+                maximizable: false,
+                collapsible: false,
+                margin:5
+            });
+            
+            $("#Tframeurl").width($('#SeePhoto').width()-10)
+            $("#Tframeurl").height($('#SeePhoto').height()-10)
+            $win.window('close');
+            //打开
+            $.connection.hub.start().done(function () {
+                //呼叫Server端的userConnected方法，并传送使用者姓名给Server
+                var Mid = $("#IsMasterID").val()
+                chat.server.userCted(Mid);
+            });
+            chat.client.senMasterMsg = function (message) {
+                $("#OnClic").html(message);
+            }
+
+            $("#SeeMap").css("display", "none");
+            $("#DeditMoneyDIV").css("display", "none");
+            loadData();
+            // 当窗口大小发生变化时，调整DataGrid的大小
+            $(window).resize(function () {
+                $('#tt').resizeDataGrid(60, 10, 200, 500);
+            });
+            $("#Bjlb").click(function () {
+                var pars = { Isee: false };
+                loadData(pars);
+                loadBol = true;
+            })
+            $("#Ybj").click(function () {
+                var pars = { Isee: false };
+                LoadChuZhu(pars);
+                loadBol = false;
+            })
+            $("#CzIsee").click(function () {
+                var pars = {Isee:true};
+                LoadChuZhu(pars);
+            })
+            $("#QzIsee").click(function () {
+                var pars = { Isee: true };
+                loadData(pars);
+            })
+        });
+        function loadData(pars) {
+            $('#tt').datagrid({
+                url: '/Qiuzuinfo/GetHref',
+                title: '求租信息',
+                height: $(document).height() - 2,
+                fitColumns: true, //列自适应
+                nowrap: false,
+                idField: 'QZ',//主键列的列明
+                loadMsg: '正在加载权限的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: 25,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [15, 25, 35],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 10, },
+                    { field: 'ID', title: '编号', hidden: 'True', width: 10, },
+                    { field: 'FBtime', title: '信息发布时间', width:12,
+                        formatter: function (value, row, index) {
+                            return (row.Laiyuan == "tt99" ? Fromart_addHour(value) : Fromart_24(value));
+                        }
+                    },
+                    { field: 'Hname', title: '信息名称', width: 30, },
+                    { field: 'QuYu', title: '申请区域', align: 'center', width: 15, },
+                    { field: 'JuShi', title: '厅事', align: 'center', width: 10, },
+                    { field: 'GuiShuDi', title: '归属地',  align: 'center', width:40},
+                    { field: 'Money', title: '金额', width: 10, align: 'center', },
+                    { field: 'Hperson', title: '人员姓名', width: 10, align: 'center', },
+                    {
+                        field: 'ClickCount', title: '已查', width:10, align: 'center',
+                        formatter: function (value, row, index) {
+                        
+                            return value == 1 ? "<img width='20' src='/Content/themes/icons/tick1.png' />" : "";
+                        }
+                    },
+                      
+                    {
+                        field: 'Operator', title: '操作', width: 15, align: 'center',
+                        formatter: function (value, row, index) {
+                            var str = "<a href='javascript:BTN_set()'   class='l-btn' style='padding:2px 5px' >查看电话</a>";
+                            return str;
+                        }
+                    },
+                     { field: 'IsQZ',hidden:true},
+
+                ]],
+                toolbar: '#tb',
+                onLoadSuccess: function () {
+                }
+            });
+        }
+        function LoadChuZhu(pars) {
+            $('#tt').datagrid({
+                url: '/Qiuzuinfo/GetChuZhudata',
+                title: '出租信息',
+                height: $(document).height() -2,
+                fitColumns: true, //列自适应
+                nowrap: true,
+                idField: 'CZ',//主键列的列明
+                loadMsg: '正在加载权限的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: 25,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [15, 25, 35],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '编号', hidden: 'True' },
+                    { field: 'Fbtime', title: '信息发布时间',width:30,align:'center',
+                    formatter: function (value, row, index) {
+                           return (row.Laiyuan == "tt99" ? Fromart_addHour(value) : Fromart_24(value));
+                        }
+                    },
+                     {
+                         field: 'TextName', title: '信息名称', width: 100,
+                     },
+                    {field: 'PinMi', title: '平米', width: 15, align: 'center',
+                        formatter: function (value, row, index) {
+                            return value + "㎡";
+                        }
+                    },
+                    { field: 'Address', title: '地址', width: 80, align: 'center' },
+                    {
+                        field: 'Money', title: '金额', width: 20,align: 'center', formatter: function (value, row, index) {
+                            return value + "元/月";
+                        }
+                    },
+                    {
+                        field: 'Bak', title: '备注信息', width: 40, formatter: function (val, row, index) {
+
+                            return "<b title='"+val+"'>"+val+"</b>";
+                        }
+                    },
+                    {
+                        field: 'Pername', title: '联系人', width: 16 ,align: 'center',formatter: function (value, row, index) {
+                            var str = value.replace("document.write(unescape(", "");
+                            str = str.replace("));", "");
+                            str = str.replace("\"", "");
+                            str = str.replace("\"", "");
+                            str = unescape(str);
+
+                            return str;
+                        }
+                    },
+                     {
+                         field: 'ClickCount', title: '已查', width: 15, align: 'center',
+                         formatter: function (value, row, index) {
+                             return value == 1 ? "<img width='20' src='/Content/themes/icons/tick1.png' />" : "";
+                         }
+                     },
+                     {
+                         field: 'ph', title: '操作', align: 'center', width: 20,
+                         formatter: function (value, row, index) {
+                             var str = "<a href='javascript:BTN_set()' class='l-btn' style='padding:2px 5px'  >查看电话</a>";
+                             return str;
+                         }
+                     },
+                     {
+                         field: 'Operator', title: '图片', align: 'center', width: 20,
+                         formatter: function (value, row, index) {
+                             var str = "<a href='javascript:SetQZimage()'  class='l-btn' style='padding:2px 5px' >查看图片</a>";
+                             if (row.Images == null)
+                             {
+                                 str = "无图片";
+                             }
+                             return str;
+                         }
+                     },
+                      {
+                          field: 'Addess', title: '地图', align: 'center', width: 20,
+                          formatter: function (value, row, index) {
+                              var str = "<a href='javascript:SeeMap()' ids='" + row.id + "' class='l-btn' style='padding:2px 5px'  >地图浏览</a>";
+
+                              return str;
+                          }
+                      },
+                    { field: 'IsQZ', title: '' ,hidden:true},
+                ]],
+                toolbar: '#tb',
+                onLoadSuccess: function () {
+                }
+            });
+        }
+        //将序列化成json格式后日期(毫秒数)转成日期格式
+        function ChangeDateFormat(cellval) {
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate;
+        }
+        function BTN_set() {
+                var rows = $('#tt').datagrid('getSelections');
+                if (rows.length <=0) {
+                    //alert("请选择要修改的商品！");
+                    $.messager.alert("提醒", "请选择要查看的1条记录!", "error");
+                    return;
+                }
+               
+                $.post("/Qiuzuinfo/SeePhoto", { "ID": rows[0].ID, "Items": rows[0].IsQZ }, function (data) {
+                    if (data.ret == "ok") {
+                       
+                        $("#tt").datagrid("reload");
+                        DiaoSignalRhub(data.MtrId, data.Uclick)
+                        if (rows[0].Photo == null) {
+                           
+                            $("#Tframeurl").attr("src", rows[0].url);
+                           
+                            $("#SeePhoto").window('open');
+                           
+                          //  $.messager.alert("显示电话", rows[0].url);
+                        }
+                        else if (rows[0].Photo.indexOf("http") > -1) {
+                            $.messager.alert("显示电话", "<img src='" + rows[0].Photo + "' />");
+                        }
+                        else if (rows[0].Photo.indexOf("document") > -1) {
+                            var str = rows[0].Photo.replace("document.write(unescape(", "");
+                            str = str.replace("));", "");
+                            str = str.replace("\"", "");
+                            str = str.replace("\"", "");
+                            str = unescape(str);
+                            $.messager.alert("显示电话", str);
+                        }                        
+                        else {
+                            $.messager.alert("显示电话", rows[0].Photo);
+                        }
+
+                     
+                    }
+                    else {
+                        $.messager.alert("显示电话", data.msg);
+                    }
+                });
+        }
+        function DiaoSignalRhub(objID, objcount) {
+            if (objID != undefined)
+            {
+                chat.server.senMasterMsg(objID, objcount);
+            }
+            
+        }
+        function thisbtn(e) {
+            
+            var t = e.id;
+          
+            if ($("#" + t).attr("name") == "all")
+            { qq(); }
+            else
+            { qq($("#" + t).text()); }
+
+        }
+        function qq(value, name) {
+            var pars = {
+                Str: value
+            };
+            if (loadBol)
+            { loadData(pars); }
+            else
+            { LoadChuZhu(pars); }
+            //$("#tt").datagrid("reload");
+        }
+</script>
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>求租信息</title>
+    <style>
+        .btnlink a {
+            padding:2px 6px 2px 6px;margin:2px;
+        }
+        .l-dialog-content{overflow-y:hidden;}
+        body, html, body {
+            margin:0px; padding:0px;
+            margin-left:auto;margin-right:auto;
+        }
+    </style>
+</head>
+<body >
+    <div class="f1_div" id="ALLbaody">
+       
+        <table id="tt" style="overflow-x:hidden; overflow-y:hidden; margin:0px; padding:0px;" title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit"></table>
+
+        <div id="tb" style="padding:5px;height:auto">
+            <div class="easyui-panel btnlink" >
+                <div style="float:left;line-height:150%; font-size:16px;">&nbsp;&nbsp;用户点击量<span style="color:coral" id="OnClic">@ViewBag.OnClic</span>/<span style="color:coral">@ViewBag.AllClick</span></div>
+                <a href="#" class="easyui-menubutton"  data-options="menu:'#QzDowSee'"   >求租信息</a>
+                <a href="#" class="easyui-menubutton" data-options="menu:'#CzDowSee'" >出租信息</a>
+                <input id="Tput" class="easyui-searchbox" searcher="qq" prompt="输入你要查询的信息" menu="#mm" style="width:0px" value="" />
+                <div id="mm" style="width:120px">
+                    <div name="all" id="all" iconCls="icon-ok" onclick="thisbtn(this)">站内搜索</div>
+                    @{
+                        List<T_Quyu> quyu = ViewBag.City;
+                        foreach (T_Quyu ttq in quyu)
+                        {
+                            <div name="@ttq.ID" id="thisbtn_@ttq.ID" onclick="thisbtn(this)" iconCls="icon-ok">@ttq.QY_connet</div>
+                        }
+                    }
+                </div>
+
+                <input type="hidden" id="IsMasterID" value="@ViewBag.LMasterID" />
+            </div>
+         </div>
+        <div id="QzDowSee" >
+            <div data-options="iconCls:'icon-search'"  id="Bjlb">全部信息</div>
+            <div data-options="iconCls:'icon-search'"  id="QzIsee">已查信息</div>
+        </div>
+
+        <div id="CzDowSee">
+            <div data-options="iconCls:'icon-search'"  id="Ybj">全部信息</div>
+            <div data-options="iconCls:'icon-search'" id="CzIsee">已查信息</div>
+        </div>
+
+        <div id="SeePhoto" class="easyui-window"  data-options="iconCls:'icon-save'" >
+            @*<div style="height:40px;margin-left:10px">
+                
+                联系人电话：<input  width="200"/>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"  style="width:100px">保存联系人</a>
+                <b>为方便后期查询可以把查询倒的手机号码保存到系统中</b>
+            </div>*@       
+            <iframe id="Tframeurl" src="" style="border-width: 0px;" frameborder="0"></iframe>              
+        </div>
+    </div>
+        <div>
+            <div id="SeeImageDIV">
+                <img id="Timage" />
+            </div>
+            <div id="SeeMap">
+                <iframe id="SeeMapFrame" scrolling="no" frameborder="0"></iframe>
+            </div>
+
+        </div>
+
+</body>
+
+</html>
+
+

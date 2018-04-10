@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="Content/themes/icon.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <script src="Scripts/jquery.easyui.min.js"></script>
+    <script src="Scripts/easyui-lang-zh_CN.js"></script>
+    <script>
+        $(function () {
+            $.extend($.messager.defaults, {
+                ok: "返回登陆",
+                cancel: "关闭页面"
+            });
+            $.messager.confirm('系统提示', '当前登陆用户已超时，请重新登陆！', function (r) {
+                if (r) {
+                    top.location.href = "/Login/index?reload=0";
+                }
+                else {
+                    this.close();
+                }
+            });
+        })
+        
+    </script>
+    <style>
+        body { background-color:silver
+        }
+
+    </style>
+</head>
+<body>
+    
+</body>
+</html>

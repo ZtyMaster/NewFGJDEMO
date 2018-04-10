@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <object type="CZBK.ItcastOA.BLL.UserInfoService, CZBK.ItcastOA.BLL" singleton="false" name="UserInfoService" >
+  </object>
+
+  <object type="CZBK.ItcastOA.BLL.RoleInfoService, CZBK.ItcastOA.BLL" singleton="false" name="RoleInfoService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.ActionInfoService, CZBK.ItcastOA.BLL" singleton="false" name="ActionInfoService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.DepartmentService, CZBK.ItcastOA.BLL" singleton="false" name="DepartmentService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_FGJHtmlDataService, CZBK.ItcastOA.BLL" singleton="false" name="T_FGJHtmlDataService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_CityService, CZBK.ItcastOA.BLL" singleton="false" name="T_CityService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.UserInfo_CityService, CZBK.ItcastOA.BLL" singleton="false" name="UserInfo_CityService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_SaveHtmlDataService, CZBK.ItcastOA.BLL" singleton="false" name="T_SaveHtmlDataService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_BiaoJiInfoService, CZBK.ItcastOA.BLL" singleton="false" name="T_BiaoJiInfoService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_ItemsService, CZBK.ItcastOA.BLL" singleton="false" name="T_ItemsService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_SeeClickPhotoService, CZBK.ItcastOA.BLL" singleton="false" name="T_SeeClickPhotoService" >
+    
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_UserClickService, CZBK.ItcastOA.BLL" singleton="false" name="T_UserClickService" >
+    
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_UserSaveService, CZBK.ItcastOA.BLL" singleton="false" name="T_UserSaveService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.UserSaveImageService, CZBK.ItcastOA.BLL" singleton="false" name="UserSaveImageService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_BoolItemService, CZBK.ItcastOA.BLL" singleton="false" name="T_BoolItemService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_QiuZhuQiuGouService, CZBK.ItcastOA.BLL" singleton="false" name="T_QiuZhuQiuGouService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_YxPersonService, CZBK.ItcastOA.BLL" singleton="false" name="T_YxPersonService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_ZhuaiJiaBakService, CZBK.ItcastOA.BLL" singleton="false" name="T_ZhuaiJiaBakService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_ChuZhuInfoService, CZBK.ItcastOA.BLL" singleton="false" name="T_ChuZhuInfoService" >
+  </object>
+ <object type="CZBK.ItcastOA.BLL.T_provinceService, CZBK.ItcastOA.BLL" singleton="false" name="T_provinceService" >
+  </object>
+ <object type="CZBK.ItcastOA.BLL.T_UpHerfCityService, CZBK.ItcastOA.BLL" singleton="false" name="T_UpHerfCityService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.SeeQzCzService, CZBK.ItcastOA.BLL" singleton="false" name="SeeQzCzService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.GongGaoService, CZBK.ItcastOA.BLL" singleton="false" name="GongGaoService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.ScrherSAVEService, CZBK.ItcastOA.BLL" singleton="false" name="ScrherSAVEService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.TLoginbakService, CZBK.ItcastOA.BLL" singleton="false" name="TLoginbakService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_QuyuService, CZBK.ItcastOA.BLL" singleton="false" name="T_QuyuService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.T_ScehMiShuService, CZBK.ItcastOA.BLL" singleton="false" name="T_ScehMiShuService" >
+  </object>
+  <object type="CZBK.ItcastOA.BLL.WxUserService, CZBK.ItcastOA.BLL" singleton="false" name="WxUserService" >
+  </object>
+</objects>

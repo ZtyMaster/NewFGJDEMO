@@ -1,0 +1,7 @@
+        [JsonIgnore]
+       
+        public virtual ICollection<R_UserInfo_ActionInfo> R_UserInfo_ActionInfo { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Department> Department { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<RoleInfo> RoleInfo { get; set; }

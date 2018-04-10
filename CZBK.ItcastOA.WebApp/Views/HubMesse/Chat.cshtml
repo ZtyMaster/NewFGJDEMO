@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Chat";
+}
+@section scripts{
+
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!--参考signalr  脚本自动生成 -->
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        var userID = "123";
+        $(function () {
+            //回车查询
+            var $inp = $('input:text');
+            $inp.bind('keydown', function (e) {
+                var key = e.which;
+                if (key == 13) {
+                    $('#send').click();
+                }
+            });
+            userID = $("#UserName").val();
+            //建立Server端的Hub的物件，注意Hub的首字母一定要为小写
+            var chat = $.connection.signalRHub;
+            //打开
+            $.connection.hub.start().done(function () {
+                //呼叫Server端的userConnected方法，并传送使用者姓名给Server
+                alert(userID)
+                chat.server.userConnected(userID);
+            });
+
+            //取得所有上的清单
+            chat.client.getList = function (userList) {
+                var li = "";
+                $.each(userList, function (index, data) {
+                    li += "<li id='" + data.id + "'>" + data.name + "</li>";
+                });
+                $("#list").html(li);
+            }
+            //新增一到上一个人
+            chat.client.addList = function (id, name) {
+                var li = "<li id='" + id + "'>" + name + "</li>";
+                $("#list").append(li);
+            }
+            //移除一一个人员
+            chat.client.removeList = function (id) {
+                $("#" + id).remove();
+            }
+            //推送消息到 全部 在线人员 聊天
+            chat.client.sendAllMessge = function (message) {
+                $("#messageList").append("<li>" + message + "</li>");
+            }
+            //私密聊天
+            chat.client.sendMessage = function (message) {
+                $("#messageList").append("<li>" + message + "</li>");
+            }
+            chat.client.hello = function (message) {
+
+                $("#messageList").append("<li>" + message + "</li");
+            }
+
+            $("#send").click(function () {
+                var to = $("#box").val();
+                //当to为all代表全聊天，否则为私密聊天
+                alert(to)
+                if (to == "all") {
+                    chat.server.sendAllMessage($("#message").val());
+                } else {
+                    chat.server.sendMessage(to, $("#message").val());
+                }
+                $("#message").val('');
+            });
+
+            $("#list li").live("click", function () {
+                var $this = $(this);
+                var id = $this.attr("id");
+                var text = $this.text();
+
+                //防止重复加载语言清单
+                if ($("#box").has("." + id).length > 0)
+                    return false;
+                var option = "<option></option>"
+                $("#box").append(option).find("option:last").val(id).text(text).attr({ "selected": "selected" }).addClass(id);
+            });
+        });
+    </script>
+}
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>求租信息</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    <script src="~/Scripts/MyNewJS.js"></script>
+
+</head>
+<body>
+    <div><input id="UserName" type="text" value="www" /></div>
+    <div><section id="box"></section></div>
+    <div><input type="text" /><a href="#" id="send">aaaa</a></div>
+    <div><ul id="list"></ul></div>
+    <div><ul id="messageList"></ul></div>
+</body>
+</html>
+

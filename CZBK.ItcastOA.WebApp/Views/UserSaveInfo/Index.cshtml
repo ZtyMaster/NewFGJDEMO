@@ -1,0 +1,743 @@
+﻿@{
+    Layout = null;
+}
+@using CZBK.ItcastOA.Model
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>自定义存储</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/MyAjaxForm.js"></script>
+    <script src="~/Scripts/MyNewJS.js"></script>
+    <style>
+        .toolbar {
+            height: 30px;
+            padding: 5px;
+        }
+
+        html, body, .f1_div {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+
+        .f1_div {
+        }
+
+        .f1_div_t {
+            padding: 2px;
+            background: #efefef;
+        }
+
+        span {
+            font-size: 12px;
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        var strval;
+        var PageVal = 1, SazeVla = 15;
+        var ImageMaxCount = "@ViewBag.imagecount"
+        function enable() {
+            $('a.easyui-linkbutton').linkbutton('enable');
+        }
+        function disable() {
+            $('a.easyui-linkbutton').linkbutton('disable');
+        }
+        function changetext() {
+            $('#add').linkbutton({ text: 'new add' });
+        }
+        $.fn.extend({
+            resizeDataGrid: function (heightMargin, widthMargin, minHeight, minWidth) {
+
+                var height = $(document.body).height() - heightMargin;
+                var width = $(document.body).width() - widthMargin;
+                height = height < minHeight ? minHeight : height;
+                width = width < minWidth ? minWidth : width;
+                $(this).datagrid('resize', {
+                    height: height,
+                    width: width
+                });
+            }
+        });
+
+        var thiswidth = 0, thisheight = 0;
+        var ImageC = 0;
+        var fileListName = "";
+        var ListId ="";
+        $(function () {
+            //datagrid数据表格ID
+            var datagridId = 'tt';
+            // 当窗口大小发生变化时，调整DataGrid的大小
+            $(window).resize(function () {
+                $('#tt').resizeDataGrid(0, 0, 200, 500);
+            });
+
+            FloadData()
+
+            $('#cc').combo({
+                required: true,
+                editable: false
+            });
+            $("#AddDataDIV").css("display", "none");
+            $("#SeeImageDIV").css("discplay", "none");
+            $("#ZuijiaDiv").css("discplay", "none");
+            $("#ZuijiaDiv").hide();
+            $("#CSbtn").click(function () {
+                var page = $("#tt").datagrid("getPager");
+                var number = page.data("pagination").options.pageNumber;
+                var size = page.data("pagination").options.pageSize;
+                page.pagination('refresh', {
+                    pageNumber: 4,
+                    pageSize: size
+                });
+
+            });
+            bindActionTypeEnumChange();
+            bindFileUpclick();
+            //新方法删除图片
+            //新定义上传图片方法
+            $("#AddImage").click(function () {
+                var addt = fileListName.trim().split(",");            
+                if (addt.length <= ImageMaxCount) {
+                    for (ia in addt)
+                    {
+                        var del = addt[ia].replace(/\D|^0/g, '')
+                        if (del != "")
+                        {
+                            var tff = $("#fileUp" + del).val();
+                            if (tff.trim().length <= 0) {
+                                $.messager.alert("添加图片提醒", "上传图片必须制定图片路径");
+                                return;
+                            }
+                        }                        
+                    }
+                    $("#LoadIpt").append(" <input type='file' name='fileIconUp" + ImageC + "' id='fileUp" + ImageC + "' onchange='Javascript:validate_img(this);' />")
+                    $("#LoadIpt").append(" <input type='button'   id='fileIconUp" + ImageC + "' value='删除' onclick='DelIma($(this))' />")
+                    $("#fileUp" + ImageC).click();
+                    fileListName = fileListName.length > 0 ? fileListName + ",fileIconUp" + ImageC : "fileIconUp" + ImageC;
+                    ListId = ListId.length > 0 ? ListId + "," + ImageC : ImageC;
+                    ImageC++;
+                    $("#hiddenMenuIcon").val(fileListName);
+                    
+                } else {
+                    $.messager.alert("提示", "最多可上传" + ImageMaxCount + "张！");
+                }
+            })            
+        });
+
+        //添加数据
+        function adddata(obj) {
+            if (obj)
+            {
+                $("#actionIcontr").hide();
+                $("#ImagerTr").hide();
+            }
+            else
+            {
+                $("#ImagerTr").show();
+                qingkong();
+            }
+            $("#AddDataDIV").css("display", "block");
+            $('#AddDataDIV').dialog({
+                title: "添加客户信息",
+                ID: "adddiv",
+                width: 500,
+                height: 550,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        //清除未选图片控件
+                        var addt = fileListName.trim().split(",");
+                        //检查上传不可大于ImageMaxCount系统上限
+                        if (addt.length <= ImageMaxCount) {
+                            var ff = "";
+                            for (ia in addt) {
+                                var del = addt[ia].replace(/\D|^0/g, '')
+                                if (del != "") {
+                                    var tff = $("#fileUp" + del).val();
+                                    if (tff.trim().length <= 0) {
+                                        try {
+                                            $("#fileIconUp" + del).remove()
+                                            $("#fileUp" + del).remove()
+                                        }
+                                        catch (e) {
+                                        }
+                                    }
+                                    else {
+                                        ff = ff.trim().length <= 0 ? "fileIconUp" + ia : ff + "," + "fileIconUp" + ia;
+                                    }
+                                }
+                            }
+                            $("#hiddenMenuIcon").val(ff);
+                        }
+
+                        if ($("#Money").val().trim().length <= 0)
+                        {
+                            $.messager.alert("系统提示", "金额不可为空！");
+                            return;
+                        }
+                        if ($("#Mianji").val().trim().length <= 0)
+                        {
+                            $.messager.alert("系统提示", "面积不可为空！");
+                            return;
+                        }
+                        if ($("#Address").val().trim().length <= 0)
+                        {
+                            $.messager.alert("系统提示", "地址不可为空！");
+                            return;
+                        }
+                        
+                        //开始进行异步上传图片文件
+                        $("#adddata").ajaxSubmit({
+                            success: function (data) {
+                                var serverData = data.split(":");
+
+                                if (serverData[0] == "ok") {
+                                    $('#AddDataDIV').dialog('close');
+                                    $('#tt').datagrid('reload');
+                                }
+                                else {
+                                    $.messager.alert("提示", serverData[1], "errer");
+                                }
+                            },
+                            url: "/UserSaveInfo/AddUser",
+                            type: "Post"
+                        })
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        qingkong();
+                        $('#AddDataDIV').dialog('close');
+                    }
+                }]
+            });
+        }
+        //保存用户数据
+        function saveInfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要保存的记录!", "error");
+                return;
+            }
+            $.messager.confirm("提示", "确定要保存记录?", function (r) {
+                if (r) {
+                    var strId = "";
+                    var pd = 0;
+                    for (var i = 0; i < rows.length; i++) {
+                        if (rows[i].photo.length <= 0) {
+                            pd++;
+                        }
+                        strId = strId + rows[i].ID + ",";//1,2,3,
+                    }
+
+                    if (pd > 0) {
+                        $.messager.alert("提醒", "保存信息中有未查看电话信息，请查看电话后保存", "error");
+                        return;
+                    }
+                    strId = strId.substr(0, strId.length - 1);
+                    $.post("/HrefInfo/SaveHref", { "strId": strId }, function (data) {
+
+                        if (data == "ok") {
+                            $.messager.alert("提醒", "保存成功", "ok");
+                            $('#tt').datagrid('reload');
+
+                            //loadData();
+                        } else {
+                            $.messager.alert("提醒", data, "error");
+                        }
+                    });
+                }
+            });
+        }
+        //将序列化成json格式后日期(毫秒数)转成日期格式
+        function ChangeDateFormat(cellval) {
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate;
+        }
+        //搜索数据
+        function qq(value, name) {
+
+            var Tval = "";
+            var dssval = document.getElementById("XUANX").getElementsByTagName("select");
+            for (var v = 0; v < dssval.length; v++) {
+                var val = $("#str_" + v).combobox('getValue') + ">" + $("#str_" + v).combobox('getText');
+                Tval = v == 0 ? val : Tval + "," + val;
+            }
+            var pars = {
+                Tval: Tval,
+                Str: value,
+                Item: name
+            };
+            FloadData(pars)
+        }
+        function FloadData(pars) {
+            loadData(pars);
+            var pager = $('#tt').datagrid().datagrid('getPager');	// get the pager of datagrid
+            pager.pagination({
+                buttons: [{
+                    text: '清空选中',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        $('#tt').datagrid('clearChecked');
+                    }
+                }, '-', {
+                    text: '添加信息',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        adddata();
+                    }
+                }, '-']
+            });
+            $('#tt').resizeDataGrid(0, 0, 200, 500);
+        }
+        function loadData(pars) {
+            $('#tt').datagrid({
+                url: '/UserSaveInfo/GetHref',
+                title: '个人信息',
+                width: $(document.body).width(),
+                height: $(document).height(),
+                fitColumns: true, //列自适应
+                nowrap: true,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载权限的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: SazeVla,//页大小，一页多少条数据
+                pageNumber: PageVal,//当前页，默认的
+                pageList: [15, 25, 35],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left', width: 50 },
+                    { field: 'ID', title: '编号', width: 20, align: 'center', hidden: true },
+                    {
+                        field: 'AddTime', title: '创建时间', align: 'center', width: 120,
+                        formatter: function (value, row, index) {
+                            return Fromart_24(value);
+                        }
+
+                    },
+                     { field: 'TextName', title: '信息名称', align: 'center', width: 200 },
+                    { field: 'PresonName', title: '联系人', align: 'center' },
+                    { field: 'PresonPhoto', title: '联系电话', align: 'center' },
+                    {
+                        field: 'Address', title: '地址', width: 120,
+                    },
+                    { field: 'Money', title: '价格', align: 'center', width: 80 },
+                   { field: 'Mianji', title: '面积', align: 'center', width: 80 },
+                   { field: 'HuxingStrID', title: '户型', align: 'center', width: 80 },
+                   { field: 'LouCheng', title: '楼层', align: 'center', width: 80 },
+                   { field: 'Chaoxiang', title: '朝向', align: 'center', width: 80 },
+                   {
+                       field: 'ZhuanxiuStrID', title: '装修', align: 'center', width: 80
+                   },
+                   {
+                       field: 'Items', title: '分类', align: 'center', width: 80,
+                       formatter: function (value, row, index) {
+                           return (value == 0 ? "售房" : "租房");
+                       }
+                   },
+                   {
+                       field:'Bak',title:'备注',align:'center',width:120
+                   },
+                   {
+                       field: 'Image', title: '图片', halign: 'center',
+                       formatter: function (value, row, index) {                           
+                           var str =value>0? "<a href='javascript:SeeThisImage()' ids='" + row.id +
+                       "' class='l-btn' style='padding:2px 5px'>擦看图片</a>" : "";                          
+                           return str;
+                       }
+                   },
+                    {
+                        field: 'editdata', title: '修改', halign: 'center',
+                        formatter: function (value, row, index) {
+                            var str =  " &nbsp<a href='javascript:editData()' class='l-btn' style='padding:2px 5px' >修改</a>";
+                            return str;
+                        }
+                    },
+                   {
+                       field: 'Zhuijia', title: '追加', halign: 'center',
+                       formatter: function (value, row, index) {
+                           var str = value >= 6 ? "" :  "&nbsp&nbsp<a href='javascript:ZaddImg()'  class='l-btn' style='padding:2px 5px' >追加图片</a>";
+                           return str;
+                       }
+                   }
+                ]],
+                toolbar: '#tb',
+                onLoadSuccess: function () {
+                }
+            });
+        }
+        function ZaddImg() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要修改的记录!", "error");
+                return;
+            }
+            if (rows.length > 1) {
+                $.messager.alert("提醒", "仅可查看一条信息！", "error");
+                return;
+            }
+            $("#UserSaveID").val(rows[0].ID);
+            $("#ZuijiaDiv").css("display", "block");
+            $('#ZuijiaDiv').dialog({
+                title: "追加图片",
+                ID: "adddivtr",
+                width: 400,
+                height: 200,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [ {
+                    text: '取消',
+                    handler: function () {
+                        $('#ZuijiaDiv').dialog('close');
+                        
+                    }
+                }]
+            });
+        }
+        //修改信息
+        function editData() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要修改的记录!", "error");
+                return;
+            }
+            if (rows.length > 1) {
+                $.messager.alert("提醒", "仅可查看一条信息！", "error");
+                return;
+            }
+            $.post("/UserSaveInfo/EditInfo", { "id": rows[0].ID }, function (sData) {
+                $('#tt').datagrid('clearChecked');
+                $("#ID").val(sData[0].ID);
+                $("#Items").val(sData[0].Items);
+                $("#TextName").val(sData[0].TextName);
+                $("#PresonName").val(sData[0].PresonName);
+                $("#PresonPhoto").val(sData[0].PresonPhoto);
+                $("#Address").val(sData[0].Address);
+                $("#Money").val(sData[0].Money);
+                $("#ZhuanxiuStrID").val(sData[0].HuxingStrID);
+                $("#Mianji").val(sData[0].Mianji);
+                $("#LouCheng").val(sData[0].LouCheng);
+                $("#HuxingStrID").val(sData[0].ZhuanxiuStrID);
+                $("#Chaoxiang").val(sData[0].Chaoxiang);
+                $("#Bak").val(sData[0].Bak);              
+                adddata(true)
+               
+            });
+        }
+        //添加完成以后调用该方法
+        function afterAdd(data) {
+            if (data == "ok") {
+                $('#AddDataDIV').dialog('close');
+                $('#tt').datagrid('reload');
+            } else {
+                var mes = data.split(":");
+                if (mes[0] == "no")
+                { $.messager.alert("提示", mes[1], "error"); }
+                else
+                {
+                    $.messager.alert("提示", "添加失败", "error");
+                }
+
+               
+            }
+        }
+        //给权限类别绑定Change事件
+        function bindActionTypeEnumChange() {
+            $("#ActionTypeEnumChange").change(function () {
+                if ($(this).val() == "1") {
+                    $("#actionIcontr").fadeIn("show");
+                } else {
+                    $("#actionIcontr").fadeOut("show");
+                }
+            });
+        }
+
+        //文件上传
+        function bindFileUpclick() {
+            $("#btnFileUp").click(function () {
+                if ($("#fileUp").val().trim().length <= 0) {
+                    $.messager.alert("提示", "请选择上传文件", "errer");
+                    return;
+                }
+                var length = $("#hiddenMenuIcon").val();
+                var StrLength = length.split(',');
+                if (StrLength >= ImageMaxCount)
+                {
+                    $.messager.alert("提示", "每条数据上传图片上线为" + ImageMaxCount + "张", "errer");
+                    return;
+                }
+                
+            });
+            $("#ZJbtnFileUp").click(function () {
+               
+                if ($("#ZJfileUp").val() == "") {
+                    $.messager.alert("提示", "请选择上传文件", "errer");
+                    return;
+                }
+                //开始进行异步上传图片文件
+                $("#addForm").ajaxSubmit({
+                    success: function (data) {
+                        var serverData = data.split(":");
+                        if (serverData[0] == "yes") {
+                            $("#tt").datagrid("reload");
+                            $("#showImage").append("<img src='" + serverData[1] + "' width='200px' height='200px'/>");
+                            $("#hiddenMenuIcon").val(serverData[1]);//将上传成功的图片地址放在隐藏input中
+                        }
+                        else {
+                            $.messager.alert("提示", serverData[1], "errer");
+                        }
+                    },
+                    url: "/UserSaveInfo/ZJFileUpload",
+                    type: "post"
+                })
+            });
+        }
+        //现在上传图片大小
+        function validate_img(ele) {
+            // 返回 KB，保留小数点后两位
+            //alert((ele.files[0].size/(1024*1024)).toFixed(2));
+          
+            var file = ele.value;
+            if (!/.(gif|jpg|jpeg|png|GIF|JPG|bmp)$/.test(file)) {
+                $.messager.alert("提示", "图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+                $("#fileUp" + ImageC).val("");
+                return false;
+
+            } else {
+
+                //alert((ele.files[0].size).toFixed(2));
+                //返回Byte(B),保留小数点后两位
+                if (((ele.files[0].size).toFixed(2)) >= (0.5 * 1024 * 1024)) {
+                    $.messager.alert("提示", "请上传小于500KB的图片");
+                    $("#fileUp" + ImageC).val("");
+                    return false;
+                }
+            }
+            
+        }
+        function deleteImage(obj)
+        {
+            $.messager.confirm('消息提示', '是否删除所点击的图片', function (r) {
+                if (r) {
+                    var src = obj.attr("src");
+                    $.post("/UserSaveInfo/DeletImage", { "deletefile": src }, function (data) {
+
+                        if (data.split(":")[0] == "yes") {
+
+                            obj.attr("id", "deleteid");
+                            var maStr = $("#hiddenMenuIcon").val();
+                            //移除要删除的元素
+                            $("#deleteid").remove();
+                            //清空数据
+                            $("#hiddenMenuIcon").val("")
+                            var Anyy = maStr.split(',');
+                            var NewAny = new Array();
+                            for (var i = 0; i < Anyy.length; i++) {
+                                if (Anyy[i] != src) {
+                                    $("#hiddenMenuIcon").val($("#hiddenMenuIcon").val().trim().length <= 0 ? Anyy[i] : $("#hiddenMenuIcon").val() + "," + Anyy[i])
+                                }
+                            }
+
+                        } else {
+                            $.messager.alert("提示", serverData[1], "errer");
+                        }
+                         
+                    });
+                }
+            });
+        }
+        function DelIma(obj)
+        {
+            
+            var src = obj.attr("id");
+            var c = src.replace(/\D|^0/g, '');
+            var fln = fileListName.split(",");
+            fileListName = "";
+            for (im in fln)
+            {
+                if (fln[im] == src) {
+                    $("#fileUp" + c).remove();
+                    $("#" + src).remove();
+                } else {
+                    fileListName = fileListName.length > 0 ? fileListName +","+ fln[im] : fln[im];
+                }
+            }           
+            $("#hiddenMenuIcon").val(fileListName);
+          
+        }
+        function qingkong() {
+            $("#ID").val("");
+            $("#Items").val("");
+            $("#TextName").val("");
+            $("#PresonName").val("");
+            $("#PresonPhoto").val("");
+            $("#Address").val("");
+            $("#Money").val("");
+            $("#ZhuanxiuStrID").val("");
+            $("#Mianji").val("");
+            $("#LouCheng").val("");
+            $("#HuxingStrID").val("");
+            $("#Chaoxiang").val("");
+            $("#Bak").val("");
+           
+        }
+    </script>
+
+</head>
+<body>
+    <div class="f1_div" id="ALLbaody">
+        <table id="tt" style="overflow-x:hidden; overflow-y:hidden; margin:0px; padding:0px;"  
+               title="个人保存信息" iconcls="icon-edit"></table>
+        <div id="tb" style="padding:5px;height:auto">
+            <div style="margin-bottom:5px" id="XUANX">
+                <span>搜索项: </span>
+                @{
+
+                    for (int i = 0; i < ViewBag.ItemsCount; i++)
+                    {
+                <select id="str_@i" class="easyui-combobox" name="dept" style="width:100px;">
+                    @{foreach (T_Items Item in ViewBag.Items)
+                                {
+                                    if (Item.Icons == i)
+                                    {
+                            <option value="@Item.ID">@Item.Str</option>
+                                    }
+                                }
+                    }
+                </select>
+                                }
+                }
+                <input id="ss" class="easyui-searchbox" searcher="qq" prompt="输入你要查询的信息" menu="#mm" style="width:0px" />
+                <div id="mm" style="width:120px">
+                    <div name="all" iconCls="icon-ok">所有房源</div>
+                    <div name="0">售房</div>
+                    <div name="1">租房</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="AddDataDIV">
+            @using (Ajax.BeginForm("AddUser", "UserSaveInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAdd" }, new { id = "adddata" }))
+            {
+                <input type="hidden" name="ID" id="ID" />
+                <table>
+                    <tr>
+                        <td>分&nbsp;&nbsp;类</td>
+                        <td>
+                            <select name="Items" id="Items">
+                                <option value="0">售房</option>
+                                <option value="1">租房</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr  ><td>信息名称</td><td><input type="text" name="TextName" id="TextName" /></td></tr>
+                    <tr><td>联系人</td><td><input type="text" name="PresonName" id="PresonName" /></td></tr>
+                    <tr><td>联系电话</td><td><input type="text" name="PresonPhoto" id="PresonPhoto" onkeyup='this.value=this.value.replace(/\D/gi,"")'/></td></tr>
+                    <tr><td>地址</td><td><input type="text" name="Address" id="Address" /></td></tr>
+                    <tr><td>金额</td><td><input type="text" id="Money" name="Money" />万元</td></tr>
+                    <tr><td>面积</td><td><input type="text" id="Mianji" name="Mianji" />㎡</td></tr>
+                    <tr><td>朝向</td><td><input type="text" name="Chaoxiang" id="Chaoxiang" /></td></tr>
+                    <tr><td>楼层</td><td><input type="text" name="LouCheng" id="LouCheng" /></td></tr>
+                    <tr><td>备注</td><td>
+                                       <textarea name="Bak" id="Bak" style="height:60px;"  ></textarea>
+</td></tr>
+                    <tr>
+                        <td>户型</td>
+                        <td>
+                            @{
+                                <select id="HuxingStrID" class="easyui-combobox" name="HuxingStrID" style="width:100px;">
+                                    @{foreach (T_Items Item in ViewBag.Items)
+                                        {
+                                            if (Item.Icons == 2)
+                                            {
+                                    <option value="@Item.ID">@Item.Str</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            }
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>装修</td>
+                        <td>
+                            @{
+                                <select id="ZhuanxiuStrID" class="easyui-combobox" name="ZhuanxiuStrID" style="width:100px;">
+                                    @{foreach (T_Items Item in ViewBag.Items)
+                                    {
+                                        if (Item.Icons == 3)
+                                        {
+                                <option value="@Item.ID">@Item.Str</option>
+                                        }
+                                    }
+                                    }
+                                </select>
+                            }
+                        </td>
+                    </tr>
+
+                    <tr id="ImagerTr">
+                        <td>图片</td>
+                        <td>
+                            <select name="ActionTypeEnum" id="ActionTypeEnumChange">
+                                <option value="0">默认</option>
+                                <option value="1">上传</option>
+                            </select>
+                        </td>
+                    </tr>
+                 
+                    <tr style="display:none;" id="actionIcontr">
+                        <td>选中图片</td>
+                        <td>
+                             <div id="LoadIpt"></div>                    
+                            <input type="button" value="添加图片" id="AddImage" />
+                            <input type="hidden" style="width:100%" name="MenuIcon" id="hiddenMenuIcon" />
+                        </td>
+
+                    </tr>
+                </table>
+                                        }
+        </div>
+
+        <div id="SeeImageDIV">
+            <img id="Timage" style="margin:2px;" />
+        </div>
+        
+    </div>
+    <div id="ZuijiaDiv" >
+        @using (Ajax.BeginForm("AddActionInfo", "ActionInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAdd" }, new { id = "addForm" }))
+        {
+            <input type="hidden" name="UserSaveID" id="UserSaveID" />
+                <input type="file" name="fileIconUp" id="ZJfileUp" onchange='Javascript:validate_img(this);' />
+                <input type="button" value="上传图片" id="ZJbtnFileUp" />
+                <input type="hidden" name="MenuIcon" id="hiddenMenuIcon" />
+                <div id="showImage"></div>
+        }
+    </div>
+
+</body>
+</html>

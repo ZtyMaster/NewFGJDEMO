@@ -1,0 +1,1080 @@
+﻿@{
+    Layout = null;
+}
+@using CZBK.ItcastOA.Model
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户管理</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/datapattern.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/MyNewJS.js"></script>
+    <style>
+        html, body {
+            margin: 0px;
+            padding: 0px;
+        }
+        .btnlink a { width:90%; margin-top:3px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $.fn.extend({
+            resizeDataGrid: function (heightMargin, widthMargin, minHeight, minWidth) {
+                var height = $("#dgdiv").height() - heightMargin;
+                var width = $("#dgdiv").width() - widthMargin;
+
+                height = height < minHeight ? minHeight : height;
+
+                width = width < minWidth ? minWidth : width;
+
+                $(this).datagrid('resize', {
+                    height: height,
+                    width: width
+                });
+            }
+        });
+        $.extend($.fn.validatebox.defaults.rules, {
+            equals: {
+                validator: function (value, param) {
+                    return value == $(param[0]).val();
+                },
+                message: '与密码不相同！'
+            }
+        });
+        $(function () {
+            //datagrid数据表格ID
+            var datagridId = 'tt';
+            
+            // 当窗口大小发生变化时，调整DataGrid的大小
+            $(window).resize(function () {
+
+                $('#' + datagridId).resizeDataGrid(0, 0, 200, 500);
+            });
+            var pars = {
+                Mxitems: true
+            };
+            loadData(pars);
+            $("#addDiv").css("display", "none");
+            $("#editDiv").css("display", "none");
+            $("#editpwd").css("display", "none");
+            $("#addYYYDiv").css("display", "none");            
+            $("#setRoleDiv").css("display", "none");
+            $("#SetUserActionDIV").css("display", "none");
+            $('#Wxband').window('close')
+            $("#WxSchecr").window("close")
+            //搜索
+            $("#btnSearch").click(function () {
+                var pars = {
+                    name: $("#txtUserName").val(),
+                    remark: $("#txtUserRemark").val()
+                };
+                loadData(pars);
+            });
+            $("#Ybj").click(function () {
+                LoadYYY()
+            });
+            $("#loginuser").click(function () {
+                loadloginuser()
+            });
+            //微信账号绑定
+            $("#MinApp").click(function () {
+                MinApp()
+            });
+            $("#Bjlb").click(function () {
+                var pars = {
+                    Mxitems: true
+                };
+                loadData(pars)
+            });
+        });
+        //获取营业员信息
+        function LoadYYY(pars) {
+            $('#tt').datagrid({
+                url: '/UserInfo/GetListYXY',
+                title: '营业员数据表格',
+                height: $("#dgdiv").height()-2,
+                fitColumns: true, //列自适应
+                nowrap: true,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载用户的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: 20,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [5, 10, 20],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                     
+					  { field: 'PersonName', title: '姓名' },
+                      { field: 'Photo', title: '联系电话' },
+                      { field: 'Addess', title: '地址' },
+                      { field: 'Gender', title: '性别' },
+                      { field: 'age', title: '年龄' },
+                      {
+                          field: 'RuzTime', title: '入厂时间', align: 'right',
+                          formatter: function (value, row, index) {
+                              return Fromart_24(value);
+                          }
+                      },
+                     
+                ]],
+                toolbar: [{
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        delyyy()
+                    }
+                }, {
+                    id: 'btnAdd',
+                    text: '添加营业员',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        addyyy();
+                    }
+                }, {
+                    id: 'btnEdit',
+                    text: '编辑',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        edityyy()
+                    }
+                }
+                ]
+            });
+        }
+        //获取历史登陆信息
+        function loadloginuser(pars) {
+            $('#tt').datagrid({
+                url: '/UserInfo/GetLoginUserIp',
+                title: '历史登陆信息',
+                height: $("#dgdiv").height() - 2,
+                fitColumns: true, //列自适应
+                nowrap: true,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载用户的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: 20,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [5, 10, 20],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+
+					  { field: 'UName', title: '登陆账号' },
+                      { field: 'khName', title: '登陆人' },
+                      { field: 'addess', title: '归属地' },
+                      { field: 'LGip', title: '登陆IP' },
+                      {
+                          field: 'intime', title: '登陆时间', align: 'right',
+                          formatter: function (value, row, index) {
+                              return Fromart_24(value);
+                          }
+                      },
+
+                ]],
+                toolbar: []
+               
+            });
+        }
+        //获取微信账号
+        function MinApp(pars) {
+            $('#tt').datagrid({
+                url: '/UserInfo/GetWxAppUser',
+                title: '获取微信账号与绑定',
+                height: $("#dgdiv").height() - 2,
+                fitColumns: true, //列自适应
+                nowrap: true,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载用户的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: 20,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [20, 30, 40],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                      {
+                          field: 'WxImg', title: '头像', align: 'center', formatter: function (v, r, i) {
+                          return "<img src=" + v + " height='50px' width='50px' />";
+                      }
+                      },
+					  { field: 'wxName', title: '微信名称', align: 'center', },
+                      {
+                          field: 'UserInfo', title: '绑定账号', align: 'center'
+                      },
+                      {
+                          field: 'Wxgender', title: '性别', align: 'center', formatter: function (v, r, i) {
+                              return v == "1" ? "男" : "女";
+                          }
+                      },
+                      { field: 'Wxcity', title: '城市', align: 'center' },
+                      {
+                          field: 'AddTime', title: '申请绑定时间', align: 'center',
+                          formatter: function (value, row, index) {
+                              return Fromart_24(value);
+                          }
+                      }, 
+                      {
+                          field: "cz", title: "操作", align: 'center',
+                          formatter: function (value, row, index) {
+                              var str = "&nbsp&nbsp<a href='javascript: badingUr()' class='l-btn' style='padding:2px 6px' >绑定账号</a>";
+                              str = str + "&nbsp&nbsp<a href='javascript: Bangdingid(false)' class='l-btn' style='padding:2px 6px' >解除绑定</a>";
+                              return str;
+                          }
+                      }
+
+                ]],
+                toolbar: [{
+                    id: 'wxybd',
+                    text: '已绑定用户',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        wxshow(true)
+                    }
+                }, {
+                    id: 'wxwbd',
+                    text: '未绑定用户',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        wxshow(false)
+                    }
+                },
+                 {
+                     id: 'wxwbd',
+                     text: '按微信名称搜索',
+                     iconCls: 'icon-remove',
+                     handler: function () {
+                         scWxname()
+                     }
+                 },
+                ]
+            });
+        }
+        //创建营业员
+        function addyyy()
+        {
+            qingkong();
+            $("#addYYYDiv").css("display", "block");
+            $('#addYYYDiv').dialog({
+                title: "添加营业员信息",
+                width: 300,
+                height: 400,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        var p1 = $("#PersonName").val();
+                        var p2 = $("#Photo").val();
+                        if (p1.trim().length <= 0 ) {
+                            $.messager.alert("提示", "营业员项目必填项！", Error);
+                            return;
+                        }
+                        if (p2.trim().length <= 0) {
+                            $.messager.alert("提示", "联系方式必填项！", Error);
+                            return;
+                        }
+                        else {
+                            $("#addYYYForm").submit();//提交表单
+                        }
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $('#addYYYDiv').dialog('close');
+                    }
+                }]
+            });
+        }
+        //删除营业员
+        function delyyy() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要编辑的1条记录!", "error");
+                return;
+            }
+            $.post("/UserInfo/DelListYXY", { "id": rows[0].ID }, function (serverData) {
+                var data = $.parseJSON(serverData);
+                if (data.msg == "ok") {
+                    $('#tt').datagrid('reload');
+                } else {
+                    $.messager.alert("提醒", "展示数据错误!!", "error");
+                }
+            });
+        }
+        //编辑营销员
+        function edityyy() {
+           
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要分配权限的一条记录!", "error");
+                return;
+            }
+            qingkong();
+            $.post("/UserInfo/GetYYYone", { "id": rows[0].ID }, function (serverData) {
+                var data= $.parseJSON(serverData);
+               
+                if (data.msg == "yes") {
+                    $("#edityyyid").val(data.serverData.ID);
+                    $("#PersonName").val(data.serverData.PersonName);
+                    $("#yyyage").val(data.serverData.age);
+                    $("#Addess").val(data.serverData.Addess);
+                    $("#Photo").val(data.serverData.Photo);
+                    $('#RuzTime').datebox('setValue', data.serverData.RuzTime);
+
+                    $('#sexyyy').combobox('setValue', data.serverData.Gender);
+
+                    $("#addYYYDiv").css("display", "block");
+                    $('#addYYYDiv').dialog({
+                        title: "添加营业员信息",
+                        width: 300,
+                        height: 400,
+                        collapsible: true,
+                        resizable: true,
+                        modal: true,
+                        buttons: [{
+                            text: '确定',
+                            iconCls: 'icon-ok',
+                            handler: function () {
+                                var p1 = $("#PersonName").val();
+                                var p2 = $("#Photo").val();
+                                if (p1.trim().length <= 0) {
+                                    $.messager.alert("提示", "营业员项目必填项！", Error);
+                                    return;
+                                }
+                                if (p2.trim().length <= 0) {
+                                    $.messager.alert("提示", "联系方式必填项！", Error);
+                                    return;
+                                }
+                                else {
+                                    $("#addYYYForm").submit();//提交表单
+                                }
+                            }
+                        }, {
+                            text: '取消',
+                            handler: function () {
+                                $('#addYYYDiv').dialog('close');
+                            }
+                        }]
+                    });
+                }
+                else {
+                    $.messager.alert("通知", "获取信息错误！");
+                }
+            });
+        }
+        //清空营业员信息
+        function qingkong()
+        {
+          
+            $("#edityyyid").val("");
+            $("#PersonName").val("");
+            $("#yyyage").val("");
+            $("#Addess").val("");
+            $("#Photo").val("");
+            $('#RuzTime').datebox('setValue', "");
+
+            $('#sexyyy').combobox('setValue', "");
+        }
+        function loadData(pars) {
+            var city;
+            $.post("/UserInfo/GetJson", {}, function (rows) {
+                city = rows.rows;
+            })
+            $('#tt').datagrid({
+                url: '/UserInfo/GetUserInfo',
+                title: '用户数据表格',
+                height: $("#dgdiv").height()-2,
+                fitColumns: true, //列自适应
+                nowrap: true,
+                idField: 'ID',//主键列的列明
+                loadMsg: '正在加载用户的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: 20,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [5, 10, 20],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                    
+					  { field: 'UserName', title: '姓名' },
+                      { field: 'Remark', title: '备注' },
+                      { field: 'UserXiaoHao', title: '小号数量' },
+                      { field: 'Click', title: '点击次数' },
+                      { field: 'ThisMastr', title: '主从权限' },
+                      { field: 'MasterID', title: '主号ID' },
+                      {
+                              field: 'OverTime', title: '使用期限',
+                              formatter: function (value, row, index) {
+                                  return Fromart_24(value);
+                              }
+                      },
+					  {
+					     field: 'RegTime', title: '时间',  align: 'right',
+					     formatter: function (value, row, index) {
+					         return Fromart_24(value);
+					     }
+					  },
+                     {
+                         field: 'CityID', title: '城市归属',
+                         formatter: function (value, row, index) {
+                             var strs;
+                             for (var i = 0; i < city.length;i++)
+                             {
+                                 if (city[i].ID == value)
+                                 {
+                                     strs = city[i].city;
+                                 }
+                             }
+                             return (strs);
+                         }
+                     },
+                      { field: 'GouMayPerson', title: '购买人姓名' },
+                       { field: 'GouMayPhoto', title: '购买人电话' },
+                        { field: 'Yxy', title: '营销员' },
+                     {
+                         field: 'Umoney',title:'金额'
+                     },
+                ]],
+
+                toolbar: [{
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+
+                        deleteInfo();
+                    }
+                }, {
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+
+                        addInfo();
+                    }
+                }, {
+                    id: 'btnEdit',
+                    text: '编辑',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+
+                        eidtInfo();
+                    }
+                },
+                {
+                    id: 'btnEditPwd',
+                    text: '修改密码',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        editpwdInfo();
+                    }
+                }, {
+                    id: 'btnSetUserRole',
+                    text: '为用户分配角色',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        setUserRoleInfo();
+                    }
+                },
+            {
+                id: 'btnSetUserAction',
+                text: '为为特殊用户分配权限',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    SetUserAction();
+                }
+            },{
+                id: 'btnSetUserAction',
+                text: '显示主号',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    var pars = {
+                        Mxitems: true
+                    };
+                    loadData(pars);
+                }
+            },{
+                id: 'btnSetUserAction',
+                text: '显示小号',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    var pars = {
+                        Mxitems: false
+                    };
+                    loadData(pars);
+                }
+            }
+                ],
+            });
+        }
+        //为特殊用户分配权限
+        function SetUserAction() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要分配权限的一条记录!", "error");
+                return;
+            }
+            $("#SetUserActionFrame").height("400");
+            $("#SetUserActionFrame").width("550");
+            $("#SetUserActionFrame").attr("src", "/UserInfo/SetUserAction/?UserId=" + rows[0].ID);
+            $("#SetUserActionDIV").css("display", "block");
+            $('#SetUserActionDIV').dialog({
+                title: "为用户分配权限信息",
+                width: 600,
+                height: 500,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        //$("#editForm").submit();//提交表单
+                        var childWindow = $("#SetUserActionFrame")[0].contentWindow;//获取子窗体的window对象.
+                        childWindow.subForm();
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $('#SetUserActionDIV').dialog('close');
+                    }
+                }]
+            });
+        }
+        //为用户分配角色
+        function setUserRoleInfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要设置角色的1条用户记录!", "error");
+                return;
+            }
+            $("#setRoleFrame").attr("src", "/UserInfo/SetUserRoleInfo/?userId=" + rows[0].ID);
+            $("#setRoleDiv").css("display", "block");
+            $("#setRoleFrame").css("height", "400");
+            $('#setRoleDiv').dialog({
+                title: "为用户设置角色信息",
+                width: 400,
+                height: 400,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        // $("#addForm").submit();//提交表单
+
+                        var childwindow = $("#setRoleFrame")[0].contentWindow;
+
+                        childwindow.subForm();
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $('#setRoleDiv').dialog('close');
+                    }
+                }]
+            });
+
+        }
+        //为用户分配完角色以后调用该方法
+        function setuserroleafter(data) {
+            if (data == "OK") {
+                $("#setRoleFrame").css("height", "0");
+                $('#setRoleDiv').dialog('close');
+            } else {
+            }
+        }
+       
+        //编辑用户信息
+        function eidtInfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要编辑的1条记录!", "error");
+                return;
+            }
+            $.post("/UserInfo/GetUserInfoModel", { "id": rows[0].ID }, function (serverData) {
+                var data = $.parseJSON(serverData);
+                if (data.msg == "ok") {
+                    $("#txtUName").val(data.serverData.UName);
+                    $("#rpwd").val("");
+                    $("#rpwd2").val("");
+                    $("#txtRemark").val(data.serverData.Remark);
+                    $("#txtSort").val(data.serverData.Sort);
+                   
+                    $("#txtDelFlag").val(data.serverData.DelFlag);
+                    $("#txtId").val(data.serverData.ID);
+                    $("#txtOverTime").datetimebox('setValue', data.serverData.OverTime)
+                    $("#txtSubTime").val( data.serverData.SubTime);
+                    $("#txtModifiedOn").val( data.serverData.ModifiedOn);
+
+                    $("#txtUserXiaoHao").val(data.serverData.UserXiaoHao);
+                    $("#txtClick").val(data.serverData.Click);
+                    $("#txtThisMastr").val(data.serverData.ThisMastr);
+                    $("#txtMasterID").val(data.serverData.MasterID);
+                   
+                    $("#txtLogin_now").val(data.serverData.Login_now);
+                    $("#editDiv").css("display", "block");
+                    $('#editDiv').dialog({
+                        title: "编辑用户信息",
+                        width: 450,
+                        height: 500,
+                        collapsible: true,
+                        resizable: true,
+                        modal: true,
+                        buttons: [{
+                            text: '确定',
+                            iconCls: 'icon-ok',
+                            handler: function () {
+                                var p1 = $("#pwd2").val();
+                                var p2 = $("#rpwd2").val();
+                                //if (p1.trim().length <= 0 || p2.trim().length <= 0) {
+                                //    $.messager.alert("提示", "密码不可为空！", Error);
+                                //    return;
+                                //}
+                                //if (p1 != p2) {
+                                //    $.messager.alert("提示", "两次输入的密码不相同", Error);
+                                //    return;
+                                //}
+                                //else {
+                                   
+                                //}
+                                $("#editForm").submit();//提交表单
+                            }
+                        }, {
+                            text: '取消',
+                            handler: function () {
+                                $('#editDiv').dialog('close');
+                            }
+                        }]
+                    });
+                } else {
+                    $.messager.alert("提醒", "展示数据错误!!", "error");
+                }
+            });
+        }
+        //修改密码
+
+        function editpwdInfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (rows.length != 1) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要编辑的1条记录!", "error");
+                return;
+            }
+            $.post("/UserInfo/GetUserInfoModel", { "id": rows[0].ID }, function (serverData) {
+                var data = $.parseJSON(serverData);
+                if (data.msg == "ok") {
+                    $("#editname").val(data.serverData.UName);
+                    $("#editids").val(data.serverData.ID);
+                    $("#editpwd").css("display", "block");
+                    $('#editpwd').dialog({
+                        title: "编辑用户信息",
+                        width: 450,
+                        height: 500,
+                        collapsible: true,
+                        resizable: true,
+                        modal: true,
+                        buttons: [{
+                            text: '确定',
+                            iconCls: 'icon-ok',
+                            handler: function () {
+                                var p1 = $("#pwd2").val();
+                                var p2 = $("#rpwd2").val();
+                                if (p1.trim().length <= 0 || p2.trim().length <= 0) {
+                                    $.messager.alert("提示", "密码不可为空！", Error);
+                                    return;
+                                }
+                                if (p1 != p2) {
+                                    $.messager.alert("提示", "两次输入的密码不相同", Error);
+                                    return;
+                                }
+                                else {
+
+                                }
+                                $("#editpwdForm").submit();//提交表单
+                            }
+                        }, {
+                            text: '取消',
+                            handler: function () {
+                                $('#editpwd').dialog('close');
+                            }
+                        }]
+                    });
+                } else {
+                    $.messager.alert("提醒", "展示数据错误!!", "error");
+                }
+            });
+        }
+        //修改完成以后调用该方法
+        function afterEdit(data) {
+            if (data == "ok") {
+                $('#editDiv').dialog('close');
+                $('#tt').datagrid('reload');
+            } else if (data == "IsCongfu") {
+                $.messager.alert("提示", "该用户名称已存在！", "error")
+            } else if (data == "okedit") {
+                $.messager.alert("提示", "修改成功！", "error")
+                $('#editpwd').dialog('close');
+            }
+            else {
+                $.messager.alert("提示", "添加失败", "error");
+            }
+        }
+        //添加信息
+        function addInfo() {
+            $("#addDiv").css("display", "block");
+            $('#addDiv').dialog({
+                title: "添加用户信息",
+                width: 300,
+                height: 400,
+                collapsible: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        var p1 = $("#pwd").val();
+                        var p2 = $("#rpwd").val();
+                        if (p1.trim().length <= 0 || p2.trim().length <= 0) {
+                            $.messager.alert("提示", "密码不可为空！", Error);
+                            return;
+                        }
+                        if (p1 != p2) {
+                            $.messager.alert("提示", "两次输入的密码不相同", Error);
+                            return;
+                        }
+                        else {
+                            $("#addForm").submit();//提交表单
+                        }
+                    }
+                }, {
+                    text: '取消',
+                    handler: function () {
+                        $('#addDiv').dialog('close');
+                    }
+                }]
+            });
+          }
+        //添加完成以后调用该方法
+        function afterAdd(data) {
+            if (data == "ok") {
+                $("#addForm input").val("");
+                $('#addDiv').dialog('close');
+                $('#tt').datagrid('reload');
+            } else {
+                $.messager.alert("提示", "添加失败", "error");
+            }
+        }
+        function afterAddYYY(data) {
+            if (data == "ok") {               
+                $('#addYYYDiv').dialog('close');
+                $('#tt').datagrid('reload');
+            } else {
+                $.messager.alert("提示", "添加失败", "error");
+            }
+        }
+        //删除用户数据
+        function deleteInfo() {
+            var rows = $('#tt').datagrid('getSelections');
+            if (!rows || rows.length == 0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要删除的记录!", "error");
+                return;
+            }
+            $.messager.confirm("提示", "确定要删除该记录?", function (r) {
+                if (r) {
+                    var strId = "";
+                    for (var i = 0; i < rows.length; i++) {
+                        strId = strId + rows[i].ID + ",";//1,2,3,
+                    }
+                    strId = strId.substr(0, strId.length - 1);
+                    $.post("/UserInfo/DeleteUserInfo", { "strId": strId }, function (data) {
+                        if (data == "ok") {
+                            $('#tt').datagrid('clearSelections');
+                            $('#tt').datagrid('reload');
+                            //loadData();
+                        } else {
+                            $.messager.alert("提醒", "删除的记录失败!", "error");
+                        }
+                    });
+                }
+            });
+        }
+        //将序列化成json格式后日期(毫秒数)转成日期格式
+        function ChangeDateFormat(cellval) {
+
+            var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+            alert(date)
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            return date.getFullYear() + "-" + month + "-" + currentDate;
+        }
+        //打开绑定微信界面
+        function badingUr() {            
+            var rows = $('#tt').datagrid('getSelections');
+           
+            if (rows.length <=0) {
+                //alert("请选择要修改的商品！");
+                $.messager.alert("提醒", "请选择要分配权限的一条记录!", "error");
+                return;
+            }
+            if (rows[0].UserInfo.length > 0) {
+                $.messager.alert("提醒", "改账号已分配绑定！如要重新分配需先进行解除绑定操作！");
+                return;
+            }
+            $("#WxIDipt").val(rows[0].ID);
+            $('#LoadWxUid').combobox('reload', '/UserInfo/GetNotBandWxUser');            
+            $('#Wxband').window('open')           
+           
+        }
+        function Bangdingid(a) {
+            var rows = $('#tt').datagrid('getSelections');
+           
+            var Wid =  $("#WxIDipt").val();
+            if (!a) {
+                if (rows[0].UserInfo.length <= 0) {
+                    $.messager.alert("提醒", "改账号没有要解除绑定的微信账号！");
+                    return;
+                }
+                if (rows.length <= 0) {
+                    //alert("请选择要修改的商品！");
+                    $.messager.alert("提醒", "请选择要分配权限的一条记录!", "error");
+                    return;
+                }
+                Wid = rows[0].ID;
+            }
+            else {
+                var Uid = $("#LoadWxUid").combobox("getValue");
+                if (Uid.length <= 0 ) {
+                    $.messager.alert("提醒", "系统错误，没有选中要给予的ID值，联系管理员！");
+                    return;
+                }
+
+            }           
+            if ( Wid.length <= 0) {
+                $.messager.alert("提醒", "系统错误，没有选中要给予的ID值，联系管理员！");
+                return;
+            }
+            $.messager.confirm('系统提示', '是否确认信息?', function (r) {
+                if (r) {
+                    $.post("/UserInfo/WxuserBandUserinfo", { "Uid": Uid, "Wid": Wid, Jiechu:(a?null:true) }, function (sda) {
+                        
+                        if (sda == "ok") {
+                            $("#tt").datagrid("reload");
+                            $('#Wxband').window('close')
+                        }
+                   })
+                }
+            });
+            
+        }
+        function wxshow(b) {            
+            var pars = { ScB:b};
+            MinApp(pars);
+        }
+        function scWxname() {
+            $("#WxSchecr").window("open")
+        }
+        function onkscher(e) {
+            var str = $("#WxScher").val();
+            var pars = { ScName:str};
+            MinApp(pars);
+        }
+    </script>
+
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'west',split:true,title:'选项'" class="easyui-panel btnlink" style="width:120px; padding:8px">
+        <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',selected:true" id="Bjlb">创建新客户</a>
+        <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" id="Ybj">业务员管理</a>
+        <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" id="MinApp">微信账号绑定</a>
+        <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" id="loginuser">历史登陆信息</a>
+    </div>
+    <div data-options="region:'center',title:'数据报表'" id="dgdiv">        
+        <table id="tt" style="overflow-x:hidden; overflow-y:hidden; margin:0px; padding:0px;" title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit">
+            <thead data-options="frozen:true">
+                <tr>
+                    <th data-options="field:'ck',checkbox: true, align: 'left'"></th>
+                    <th data-options="field:'ID'">编号</th>
+                </tr>
+            </thead>
+        </table>
+        <!---------------微信绑定账号--------------------->
+        <div id="Wxband" class="easyui-window" data-options="title:'微信绑定系统账号',inline:true" style="width:250px;height:150px;padding:10px">
+            <div>请选择要绑定的账号</div>
+            <input  type="hidden" value="" id="WxIDipt" />
+            <input class="easyui-combobox"
+                   name="WxUserId" 
+                   id="LoadWxUid"
+                   data-options="url:'/UserInfo/GetNotBandWxUser',
+                   method:'POST',
+                   valueField:'id',
+                   textField:'text',
+                   panelHeight:'200'">
+            <div style="text-align:right"><button style="margin:15px" onclick="Bangdingid(true)">确认绑定</button></div>
+        </div>
+
+
+        <div id="WxSchecr" class="easyui-window" data-options="title:'微信绑定系统账号',inline:true" style="width:250px;height:150px;padding:10px">
+            <div>请输入要查询的名称</div>
+            <input type="text" style="width:auto" value=""  id="WxScher" />  
+            <div style="text-align:right"><button style="margin:15px" onclick="onkscher()">确认</button></div>          
+        </div>
+    </div>
+
+    <!---------------修改用户信息结束--------------------->
+    <!-------------------设置用户的角色------------------>
+    <div id="setRoleDiv">
+        <iframe id="setRoleFrame"  frameborder="0"   height="0" ></iframe>
+    </div>
+
+    <!-------------------设置用户的角色结束------------------>
+    <div id="SetUserActionDIV">
+        <iframe id="SetUserActionFrame" frameborder="0"  height="0"></iframe>
+    </div>
+  
+    <!---------------添加用户信息--------------------->
+    <div id="addDiv">
+        @using (Ajax.BeginForm("AddUserInfo", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAdd" }, new { id = "addForm" }))
+        {<input type="hidden" name="Sort" class="easyui-validatebox" value="1" data-options="required:true" />
+            <table>
+                <tr><td>用户名</td><td><input type="text" name="UName" class="easyui-validatebox" data-options="required:true" /></td></tr>
+                <tr><td>密码</td><td><input type="password" id="pwd" name="UPwd" value="123456" class="easyui-validatebox" data-options="required:true" /></td></tr>
+                <tr><td>重复密码</td><td><input type="password" id="rpwd" value="123456" class="easyui-validatebox" data-options="required:true" /></td></tr>
+               
+                <tr><td>小号数量</td><td><input type="text" name="UserXiaoHao" class="easyui-validatebox" data-options="required:true" onkeyup='this.value=this.value.replace(/\D/gi,"")' /></td></tr>
+                <tr><td>查询次数</td><td><input type="text" name="Click" class="easyui-validatebox" data-options="required:true" onkeyup='this.value=this.value.replace(/\D/gi,"")' /></td></tr>
+                <tr><td>到期日期</td><td><input type="text" name="OverTime" class="easyui-datebox" required="required" /></td></tr>
+                <tr>
+                    <td>归属区域</td>
+                    <td>
+                        <select name="CityID">
+                            @{
+                                foreach (T_City Item in ViewBag.City)
+                                {
+                                    <option value="@Item.ID">@Item.City</option>
+                                }
+                                
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr><td>购买金额</td><td><input type="text" name="Umoney" class="easyui-validatebox" required="required" onkeyup="num(this)"/></td></tr>
+                <tr><td>营销员</td><td><select name="YxPersonID">
+                          @{
+                              foreach (T_YxPerson Item in ViewBag.YYY)
+                              {
+                                  <option value="@Item.ID">@Item.PersonName</option>
+                              }
+                        
+                          }
+</select></td></tr>
+                <tr><td>购买人</td><td><input type="text" name="khName" class="easyui-validatebox" required="required" /></td></tr>
+                <tr><td>联系方式</td><td><input type="text" name="KhPhoto" class="easyui-validatebox" required="required" /></td></tr>
+               
+                <tr><td>备注</td><td><textarea rows="5" type="text" name="Remark" class="easyui-validatebox" data-options="required:true"></textarea></td></tr>
+            </table>
+                                }
+    </div>
+    <!---------------添加用户信息结束--------------------->
+    <!---------------修改用户信息--------------------->
+    <div id="editDiv">
+        @using (Ajax.BeginForm("EditUserInfo", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new { id = "editForm" }))
+        {
+        <input type="hidden"  name="SubTime"  id="txtSubTime" />
+        <input type="hidden"  name="ModifiedOn" id="txtModifiedOn" />
+        <input type="hidden" name="DelFlag" id="txtDelFlag" />
+        <input type="hidden" name="ThisMastr" id="txtThisMastr" />
+        <input type="hidden" name="MasterID" id="txtMasterID" />
+        <input type="hidden" name="Login_now" id="txtLogin_now" />
+
+        <input type="hidden" name="ID" id="txtId" />
+        <table>
+            <tr><td>用户名</td><td><input type="text" name="UName" id="txtUName" readonly="readonly"  data-options="required:true" /></td></tr>           
+            <tr><td>备注</td><td><input type="text" name="Remark" id="txtRemark"  data-options="required:true" /></td></tr>
+            <tr><td>排序</td><td><input type="text" name="Sort" id="txtSort"  data-options="required:true" /></td></tr>
+            <tr>
+                <td>使用期限</td>
+                <td>
+                    <input type="text" class="easyui-datetimebox" required name="OverTime" id="txtOverTime" />
+
+                </td>
+            </tr>
+            <tr><td>小号数量</td><td><input type="text" name="UserXiaoHao" id="txtUserXiaoHao"  data-options="required:true" onkeyup='this.value=this.value.replace(/\D/gi,"")' /></td></tr>
+            <tr><td>点击次数</td><td><input type="text" name="Click" id="txtClick"  data-options="required:true" onkeyup='this.value=this.value.replace(/\D/gi,"")' /></td></tr>
+            <tr><td>归属区域  </td>
+            <td>
+                <select name="CityID" >
+                    @{
+                        foreach (T_City Item in ViewBag.City)
+                        {
+                                <option value="@Item.ID">@Item.City</option>
+                        }
+
+                    }
+                </select>
+
+            </td>
+            </tr>
+            @*<tr><td>主从权限</td><td>
+                <input type="text" name="ThisMastr" id="txtThisMastr" class="easyui-validatebox" data-options="required:true" />
+                </td></tr>
+            <tr><td>主号ID</td><td><input type="text" name="MasterID" id="txtMasterID" /></td></tr>*@
+        </table>
+        }
+    </div>
+
+    <div id="editpwd">
+        @using (Ajax.BeginForm("EditPwd", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new { id = "editpwdForm" }))
+        {
+            <input type="hidden" name="ID" id="editids" />
+            <table>
+                <tr><td>用户名</td><td><input type="text" name="UName" id="editname" readonly="readonly" /></td></tr>
+                <tr><td>密码</td><td><input type="password" name="UPwd" id="pwd2" value="" class="easyui-validatebox" data-options="required:true" /></td></tr>
+                <tr><td>重复密码</td><td><input type="password" id="rpwd2" value="" class="easyui-validatebox" data-options="required:true" /></td></tr>                
+            </table>
+        }
+    </div>
+
+    <!---------------添加营业员信息--------------------->
+    <div id="addYYYDiv">
+        @using (Ajax.BeginForm("NewAddListYXY", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAddYYY" }, new { id = "addYYYForm" }))
+        {<input type="hidden" name="Sort" class="easyui-validatebox" value="1" data-options="required:true" />
+        <input type="hidden" name="ID" id="edityyyid" class="easyui-validatebox" value="1" data-options="required:true" />
+        <table>
+            <tr><td>姓名</td><td><input type="text" name="PersonName" id="PersonName" class="easyui-validatebox"  /></td></tr>
+            <tr><td>年龄</td><td><input type="text" name="age" id="yyyage" class="easyui-validatebox" onkeyup='this.value=this.value.replace(/\D/gi,"")' /></td></tr>
+            <tr><td>性别</td><td><select class="easyui-combobox" name="Gender" id="sexyyy">
+                                 <option value="0">男</option>
+                                   <option value="1">女</option>
+                                 </select>
+                    </td></tr>
+            <tr><td>住址</td><td><input type="text" name="Addess" id="Addess" class="easyui-validatebox"  /></td></tr>
+            <tr><td>联系电话</td><td><input type="text" name="Photo" id="Photo" class="easyui-validatebox"  /></td></tr> 
+            <tr><td>入厂时间</td><td><input type="text" name="RuzTime" id="RuzTime" class="easyui-datebox"  /></td></tr> 
+        </table>
+                            }
+    </div>
+
+    
+</body>
+</html>
