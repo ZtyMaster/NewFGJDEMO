@@ -1,0 +1,3 @@
+obj\x86\Debug\_StataWorkflow.g.cs
+obj\x86\Debug\Workflow1.g.cs
+obj\x86\Debug\StataWorkflow_Workflow1_BeforeInitializeComponentHelper.cs

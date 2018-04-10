@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="oaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ActionInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubTime" Type="datetime" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+    <Property Name="ModifiedOn" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+    <Property Name="Url" Type="nvarchar" MaxLength="512" Nullable="false" />
+    <Property Name="HttpMethod" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="ActionMethodName" Type="nvarchar" MaxLength="32" />
+    <Property Name="ControllerName" Type="nvarchar" MaxLength="128" />
+    <Property Name="ActionInfoName" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Sort" Type="nvarchar(max)" />
+    <Property Name="ActionTypeEnum" Type="smallint" Nullable="false" />
+    <Property Name="MenuIcon" Type="varchar" MaxLength="512" />
+    <Property Name="IconWidth" Type="int" Nullable="false" />
+    <Property Name="IconHeight" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BumenInfoSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gushu" Type="int" Nullable="false" />
+    <Property Name="Renark" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SubTime" Type="datetime" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepName" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="TreePath" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Level" Type="int" Nullable="false" />
+    <Property Name="IsLeaf" Type="bit" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DepartmentActionInfo">
+    <Key>
+      <PropertyRef Name="ActionInfo_ID" />
+      <PropertyRef Name="Department_ID" />
+    </Key>
+    <Property Name="ActionInfo_ID" Type="int" Nullable="false" />
+    <Property Name="Department_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="R_UserInfo_ActionInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserInfoID" Type="int" Nullable="false" />
+    <Property Name="ActionInfoID" Type="int" Nullable="false" />
+    <Property Name="IsPass" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoleInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+    <Property Name="SubTime" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+    <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="Sort" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="RoleInfoActionInfo">
+    <Key>
+      <PropertyRef Name="ActionInfo_ID" />
+      <PropertyRef Name="RoleInfo_ID" />
+    </Key>
+    <Property Name="ActionInfo_ID" Type="int" Nullable="false" />
+    <Property Name="RoleInfo_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_BiaoJiInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BiaojiItem" Type="int" Nullable="false" />
+    <Property Name="BiaojiStr" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" />
+    <Property Name="Colors" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityItem" Type="int" />
+    <Property Name="City" Type="nvarchar" MaxLength="150" />
+    <Property Name="DelFlag" Type="smallint" />
+    <Property Name="City_str" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="T_FGJHtmlData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HLName" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="HLhref" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonName" Type="nvarchar" MaxLength="150" />
+    <Property Name="Address" Type="nvarchar" MaxLength="150" />
+    <Property Name="photo" Type="nvarchar" MaxLength="150" />
+    <Property Name="FbTime" Type="datetime" Nullable="false" />
+    <Property Name="FwSumMoney" Type="nvarchar" MaxLength="150" />
+    <Property Name="FwHuXing" Type="nvarchar" MaxLength="150" />
+    <Property Name="FwMianji" Type="nvarchar" MaxLength="150" />
+    <Property Name="FwLoucheng" Type="nvarchar" MaxLength="150" />
+    <Property Name="FwZhuangxiu" Type="nvarchar" MaxLength="150" />
+    <Property Name="FwNianxian" Type="nvarchar" MaxLength="150" />
+    <Property Name="FwChaoxiang" Type="nvarchar" MaxLength="150" />
+    <Property Name="bak" Type="nvarchar(max)" />
+    <Property Name="Id_count" Type="int" />
+    <Property Name="Laiyuan" Type="nvarchar" MaxLength="150" />
+    <Property Name="Image_str" Type="nvarchar(max)" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="delflag" Type="smallint" />
+    <Property Name="SumMoneyID" Type="int" />
+    <Property Name="MianjiID" Type="int" />
+    <Property Name="HuXingID" Type="int" />
+  </EntityType>
+  <EntityType Name="T_Items">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StrID" Type="int" />
+    <Property Name="Str" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Str_val" Type="nvarchar" MaxLength="150" />
+    <Property Name="Icons" Type="int" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" />
+    <Property Name="Bakstr" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_Quyu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="T_CityID" Type="int" Nullable="false" />
+    <Property Name="QY_connet" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DelFlag" Type="bit" />
+  </EntityType>
+  <EntityType Name="T_SaveHtmlData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HtmldataID" Type="bigint" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+    <Property Name="SaveTime" Type="datetime" Nullable="false" />
+    <Property Name="BiaoJiId" Type="int" />
+    <Property Name="BiaoJiTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="T_SeeClickPhoto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="T_FgjID" Type="bigint" Nullable="false" />
+    <Property Name="DelFlag" Type="bit" />
+  </EntityType>
+  <EntityType Name="T_UserClick">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserInfoId" Type="int" />
+    <Property Name="ThisClick" Type="int" />
+    <Property Name="LoginClickTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="T_UserSave">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TextName" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="PresonName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="PresonPhoto" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="Money" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="HuxingStrID" Type="int" />
+    <Property Name="Mianji" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="LouCheng" Type="nvarchar" MaxLength="150" />
+    <Property Name="ZhuanxiuStrID" Type="int" />
+    <Property Name="Nianxian" Type="int" />
+    <Property Name="Chaoxiang" Type="nvarchar" MaxLength="50" />
+    <Property Name="delflag" Type="smallint" />
+    <Property Name="SumMoneyID" Type="int" />
+    <Property Name="MianjiID" Type="int" />
+    <Property Name="HuXingID" Type="int" />
+    <Property Name="BiaoJiID" Type="int" />
+    <Property Name="BiaoJiTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UName" Type="nvarchar" MaxLength="32" />
+    <Property Name="UPwd" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="SubTime" Type="datetime" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+    <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+    <Property Name="Sort" Type="nvarchar(max)" />
+    <Property Name="OverTime" Type="datetime" Nullable="false" />
+    <Property Name="UserXiaoHao" Type="int" />
+    <Property Name="Click" Type="int" />
+    <Property Name="ThisMastr" Type="bit" />
+    <Property Name="MasterID" Type="int" />
+    <Property Name="Login_now" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserInfo_City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserInfo_ID" Type="int" Nullable="false" />
+    <Property Name="T_City_ID" Type="int" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" />
+  </EntityType>
+  <EntityType Name="UserInfoDepartment">
+    <Key>
+      <PropertyRef Name="Department_ID" />
+      <PropertyRef Name="UserInfo_ID" />
+    </Key>
+    <Property Name="Department_ID" Type="int" Nullable="false" />
+    <Property Name="UserInfo_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserInfoRoleInfo">
+    <Key>
+      <PropertyRef Name="RoleInfo_ID" />
+      <PropertyRef Name="UserInfo_ID" />
+    </Key>
+    <Property Name="RoleInfo_ID" Type="int" Nullable="false" />
+    <Property Name="UserInfo_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ActionInfoR_UserInfo_ActionInfo">
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
+    <End Role="R_UserInfo_ActionInfo" Type="Self.R_UserInfo_ActionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="R_UserInfo_ActionInfo">
+        <PropertyRef Name="ActionInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DepartmentActionInfo_ActionInfo">
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
+    <End Role="DepartmentActionInfo" Type="Self.DepartmentActionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DepartmentActionInfo">
+        <PropertyRef Name="ActionInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DepartmentActionInfo_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="DepartmentActionInfo" Type="Self.DepartmentActionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DepartmentActionInfo">
+        <PropertyRef Name="Department_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleInfoActionInfo_ActionInfo">
+    <End Role="ActionInfo" Type="Self.ActionInfo" Multiplicity="1" />
+    <End Role="RoleInfoActionInfo" Type="Self.RoleInfoActionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RoleInfoActionInfo">
+        <PropertyRef Name="ActionInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleInfoActionInfo_RoleInfo">
+    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="1" />
+    <End Role="RoleInfoActionInfo" Type="Self.RoleInfoActionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RoleInfoActionInfo">
+        <PropertyRef Name="RoleInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_FGJHtmlData_T_City">
+    <End Role="T_City" Type="Self.T_City" Multiplicity="0..1" />
+    <End Role="T_FGJHtmlData" Type="Self.T_FGJHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_FGJHtmlData">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_Quyu_T_City">
+    <End Role="T_City" Type="Self.T_City" Multiplicity="1" />
+    <End Role="T_Quyu" Type="Self.T_Quyu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_Quyu">
+        <PropertyRef Name="T_CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SaveBiaoJi_BiaoJi">
+    <End Role="T_BiaoJiInfo" Type="Self.T_BiaoJiInfo" Multiplicity="0..1" />
+    <End Role="T_SaveHtmlData" Type="Self.T_SaveHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_BiaoJiInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SaveHtmlData">
+        <PropertyRef Name="BiaoJiId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SaveHtmlData_HtmlID">
+    <End Role="T_FGJHtmlData" Type="Self.T_FGJHtmlData" Multiplicity="1" />
+    <End Role="T_SaveHtmlData" Type="Self.T_SaveHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_FGJHtmlData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SaveHtmlData">
+        <PropertyRef Name="HtmldataID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SaveHtmlData_UserID">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="T_SaveHtmlData" Type="Self.T_SaveHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SaveHtmlData">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SeeClickPhoto_T_FGJHtmlData">
+    <End Role="T_FGJHtmlData" Type="Self.T_FGJHtmlData" Multiplicity="1" />
+    <End Role="T_SeeClickPhoto" Type="Self.T_SeeClickPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_FGJHtmlData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SeeClickPhoto">
+        <PropertyRef Name="T_FgjID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SeeClickPhoto_UserInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="T_SeeClickPhoto" Type="Self.T_SeeClickPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SeeClickPhoto">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_UserClick_UserInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+    <End Role="T_UserClick" Type="Self.T_UserClick" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_UserClick">
+        <PropertyRef Name="UserInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_UserSave_T_UserSave">
+    <End Role="T_BiaoJiInfo" Type="Self.T_BiaoJiInfo" Multiplicity="0..1" />
+    <End Role="T_UserSave" Type="Self.T_UserSave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_BiaoJiInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_UserSave">
+        <PropertyRef Name="BiaoJiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoDepartment_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="UserInfoDepartment" Type="Self.UserInfoDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfoDepartment">
+        <PropertyRef Name="Department_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoDepartment_UserInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="UserInfoDepartment" Type="Self.UserInfoDepartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfoDepartment">
+        <PropertyRef Name="UserInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoR_UserInfo_ActionInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="R_UserInfo_ActionInfo" Type="Self.R_UserInfo_ActionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="R_UserInfo_ActionInfo">
+        <PropertyRef Name="UserInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoRoleInfo_RoleInfo">
+    <End Role="RoleInfo" Type="Self.RoleInfo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserInfoRoleInfo" Type="Self.UserInfoRoleInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfoRoleInfo">
+        <PropertyRef Name="RoleInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoRoleInfo_UserInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserInfoRoleInfo" Type="Self.UserInfoRoleInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfoRoleInfo">
+        <PropertyRef Name="UserInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoT_City_CityID">
+    <End Role="T_City" Type="Self.T_City" Multiplicity="1" />
+    <End Role="UserInfo_City" Type="Self.UserInfo_City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfo_City">
+        <PropertyRef Name="T_City_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoT_City_UserInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="UserInfo_City" Type="Self.UserInfo_City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfo_City">
+        <PropertyRef Name="UserInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="oaModelStoreContainer">
+    <EntitySet Name="ActionInfo" EntityType="Self.ActionInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BumenInfoSet" EntityType="Self.BumenInfoSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DepartmentActionInfo" EntityType="Self.DepartmentActionInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="R_UserInfo_ActionInfo" EntityType="Self.R_UserInfo_ActionInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleInfo" EntityType="Self.RoleInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleInfoActionInfo" EntityType="Self.RoleInfoActionInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_BiaoJiInfo" EntityType="Self.T_BiaoJiInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_City" EntityType="Self.T_City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_FGJHtmlData" EntityType="Self.T_FGJHtmlData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Items" EntityType="Self.T_Items" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Quyu" EntityType="Self.T_Quyu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_SaveHtmlData" EntityType="Self.T_SaveHtmlData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_SeeClickPhoto" EntityType="Self.T_SeeClickPhoto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_UserClick" EntityType="Self.T_UserClick" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_UserSave" EntityType="Self.T_UserSave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo_City" EntityType="Self.UserInfo_City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfoDepartment" EntityType="Self.UserInfoDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfoRoleInfo" EntityType="Self.UserInfoRoleInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ActionInfoR_UserInfo_ActionInfo" Association="Self.FK_ActionInfoR_UserInfo_ActionInfo">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="R_UserInfo_ActionInfo" EntitySet="R_UserInfo_ActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DepartmentActionInfo_ActionInfo" Association="Self.FK_DepartmentActionInfo_ActionInfo">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="DepartmentActionInfo" EntitySet="DepartmentActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DepartmentActionInfo_Department" Association="Self.FK_DepartmentActionInfo_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="DepartmentActionInfo" EntitySet="DepartmentActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleInfoActionInfo_ActionInfo" Association="Self.FK_RoleInfoActionInfo_ActionInfo">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="RoleInfoActionInfo" EntitySet="RoleInfoActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleInfoActionInfo_RoleInfo" Association="Self.FK_RoleInfoActionInfo_RoleInfo">
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
+      <End Role="RoleInfoActionInfo" EntitySet="RoleInfoActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_FGJHtmlData_T_City" Association="Self.FK_T_FGJHtmlData_T_City">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="T_FGJHtmlData" EntitySet="T_FGJHtmlData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_Quyu_T_City" Association="Self.FK_T_Quyu_T_City">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="T_Quyu" EntitySet="T_Quyu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SaveBiaoJi_BiaoJi" Association="Self.FK_T_SaveBiaoJi_BiaoJi">
+      <End Role="T_BiaoJiInfo" EntitySet="T_BiaoJiInfo" />
+      <End Role="T_SaveHtmlData" EntitySet="T_SaveHtmlData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SaveHtmlData_HtmlID" Association="Self.FK_T_SaveHtmlData_HtmlID">
+      <End Role="T_FGJHtmlData" EntitySet="T_FGJHtmlData" />
+      <End Role="T_SaveHtmlData" EntitySet="T_SaveHtmlData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SaveHtmlData_UserID" Association="Self.FK_T_SaveHtmlData_UserID">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_SaveHtmlData" EntitySet="T_SaveHtmlData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SeeClickPhoto_T_FGJHtmlData" Association="Self.FK_T_SeeClickPhoto_T_FGJHtmlData">
+      <End Role="T_FGJHtmlData" EntitySet="T_FGJHtmlData" />
+      <End Role="T_SeeClickPhoto" EntitySet="T_SeeClickPhoto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SeeClickPhoto_UserInfo" Association="Self.FK_T_SeeClickPhoto_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_SeeClickPhoto" EntitySet="T_SeeClickPhoto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_UserClick_UserInfo" Association="Self.FK_T_UserClick_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_UserClick" EntitySet="T_UserClick" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_UserSave_T_UserSave" Association="Self.FK_T_UserSave_T_UserSave">
+      <End Role="T_BiaoJiInfo" EntitySet="T_BiaoJiInfo" />
+      <End Role="T_UserSave" EntitySet="T_UserSave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoDepartment_Department" Association="Self.FK_UserInfoDepartment_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="UserInfoDepartment" EntitySet="UserInfoDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoDepartment_UserInfo" Association="Self.FK_UserInfoDepartment_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="UserInfoDepartment" EntitySet="UserInfoDepartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoR_UserInfo_ActionInfo" Association="Self.FK_UserInfoR_UserInfo_ActionInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="R_UserInfo_ActionInfo" EntitySet="R_UserInfo_ActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoRoleInfo_RoleInfo" Association="Self.FK_UserInfoRoleInfo_RoleInfo">
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
+      <End Role="UserInfoRoleInfo" EntitySet="UserInfoRoleInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoRoleInfo_UserInfo" Association="Self.FK_UserInfoRoleInfo_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="UserInfoRoleInfo" EntitySet="UserInfoRoleInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoT_City_CityID" Association="Self.FK_UserInfoT_City_CityID">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="UserInfo_City" EntitySet="UserInfo_City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoT_City_UserInfo" Association="Self.FK_UserInfoT_City_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="UserInfo_City" EntitySet="UserInfo_City" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

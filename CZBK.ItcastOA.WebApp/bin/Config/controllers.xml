@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.UserInfoController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="UserInfoService" ref="UserInfoService" />
+    <property name="RoleInfoService" ref="RoleInfoService" />
+    <property name="ActionInfoService" ref="ActionInfoService" />
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+    <property name="T_CityService" ref="T_CityService" />
+    <property name="T_YxPersonService" ref="T_YxPersonService" />
+    <property name="TLoginbakService" ref="TLoginbakService" />
+   <property name="WxUserService" ref="WxUserService" />
+  
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.LoginController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="UserInfoService" ref="UserInfoService" />
+    <property name="GongGaoService" ref="GongGaoService" />
+    <property name="WxUserService" ref="WxUserService" />
+  </object>
+
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.RoleInfoController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="ActionInfoService" ref="ActionInfoService" />
+    <property name="RoleInfoService" ref="RoleInfoService" />
+  </object>
+  
+  <object type="CZBK.ItcastOA.WebApp.Controllers.ActionInfoController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="ActionInfoService" ref="ActionInfoService" />
+    <property name="RoleInfoService" ref="RoleInfoService" />
+    <property name="T_BoolItemService" ref="T_BoolItemService" />
+    
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.DepartmentController, CZBK.ItcastOA.WebApp" singleton="false" >    
+    <property name="DepartmentService" ref="DepartmentService" />
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.HomeController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="UserInfoService" ref="UserInfoService" />
+    <property name="T_BoolItemService" ref="T_BoolItemService" />
+    <property name="T_SaveHtmlDataService" ref="T_SaveHtmlDataService" />
+    <property name="GongGaoService" ref="GongGaoService" />
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.HrefInfoController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="T_FGJHtmlDataService" ref="T_FGJHtmlDataService" />
+    <property name="T_CityService" ref="T_CityService" />
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+    <property name="T_SaveHtmlDataService" ref="T_SaveHtmlDataService" />
+    <property name="T_ItemsService" ref="T_ItemsService" />
+    <property name="T_UserClickService" ref="T_UserClickService" />
+    <property name="T_SeeClickPhotoService" ref="T_SeeClickPhotoService" />
+    <property name="UserInfoService" ref="UserInfoService" />
+    <property name="T_BoolItemService" ref="T_BoolItemService" />
+    <property name="T_ZhuaiJiaBakService" ref="T_ZhuaiJiaBakService" />
+    <property name="ScrherSAVEService" ref="ScrherSAVEService" />
+    <property name="T_ScehMiShuService" ref="T_ScehMiShuService" />
+  </object>
+  
+  
+  <object type="CZBK.ItcastOA.WebApp.Controllers.MyhtmlInfoController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="T_FGJHtmlDataService" ref="T_FGJHtmlDataService" />
+    <property name="T_CityService" ref="T_CityService" />
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+    <property name="T_SaveHtmlDataService" ref="T_SaveHtmlDataService" />
+    <property name="T_BiaoJiInfoService" ref="T_BiaoJiInfoService" />
+    <property name="T_ItemsService" ref="T_ItemsService" />
+  </object>
+  <object type="CZBK.ItcastOA.WebApp.Controllers.UserSaveInfoController, CZBK.ItcastOA.WebApp" singleton="false" >   
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+    <property name="T_CityService" ref="T_CityService" />
+    <property name="T_ItemsService" ref="T_ItemsService" />
+    <property name="T_BiaoJiInfoService" ref="T_BiaoJiInfoService" />
+    <property name="T_UserSaveService" ref="T_UserSaveService" />
+    <property name="UserInfoService" ref="UserInfoService" />
+    <property name="UserSaveImageService" ref="UserSaveImageService" />
+    <property name="T_BoolItemService" ref="T_BoolItemService" />
+  </object>
+  <object type="CZBK.ItcastOA.WebApp.Controllers.psaveController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+    <property name="T_CityService" ref="T_CityService" />
+    <property name="T_ItemsService" ref="T_ItemsService" />
+    <property name="T_BiaoJiInfoService" ref="T_BiaoJiInfoService" />
+    <property name="T_UserSaveService" ref="T_UserSaveService" />
+    <property name="UserInfoService" ref="UserInfoService" />
+  </object>
+  <object type="CZBK.ItcastOA.WebApp.Controllers.AllDataController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="T_FGJHtmlDataService" ref="T_FGJHtmlDataService" />
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+    <property name="T_CityService" ref="T_CityService" />
+    <property name="T_ItemsService" ref="T_ItemsService" />
+    <property name="T_BiaoJiInfoService" ref="T_BiaoJiInfoService" />
+    <property name="T_UserSaveService" ref="T_UserSaveService" />
+    <property name="UserInfoService" ref="UserInfoService" />
+    <property name="T_SaveHtmlDataService" ref="T_SaveHtmlDataService" />
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.GonggongController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="T_FGJHtmlDataService" ref="T_FGJHtmlDataService" />
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+    <property name="T_SaveHtmlDataService" ref="T_SaveHtmlDataService" />
+    <property name="T_ItemsService" ref="T_ItemsService" />
+    <property name="T_CityService" ref="T_CityService" />
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.QiuzuinfoController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="T_QiuZhuQiuGouService" ref="T_QiuZhuQiuGouService" />
+    <property name="T_ChuZhuInfoService" ref="T_ChuZhuInfoService" />
+   <property name="UserInfoService" ref="UserInfoService" />
+    <property name="SeeQzCzService" ref="SeeQzCzService" />
+    <property name="T_UserClickService" ref="T_UserClickService" />
+    <property name="T_BoolItemService" ref="T_BoolItemService" />
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.AddHtmlDataController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="T_FGJHtmlDataService" ref="T_FGJHtmlDataService" />
+    <property name="T_ItemsService" ref="T_ItemsService" />
+    <property name="T_CityService" ref="T_CityService" />
+    <property name="T_QiuZhuQiuGouService" ref="T_QiuZhuQiuGouService" />
+    <property name="T_ChuZhuInfoService" ref="T_ChuZhuInfoService" />
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.AddCityHtmlController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="T_provinceService" ref="T_provinceService" />
+    <property name="T_CityService" ref="T_CityService" />
+    <property name="T_UpHerfCityService" ref="T_UpHerfCityService" />
+    <property name="GongGaoService" ref="GongGaoService" />
+    <property name="T_QuyuService" ref="T_QuyuService" />
+  </object>
+
+  <object type="CZBK.ItcastOA.WebApp.Controllers.HomeTipController, CZBK.ItcastOA.WebApp" singleton="false" >
+    <property name="T_ScehMiShuService" ref="T_ScehMiShuService" />
+    <property name="UserInfo_CityService" ref="UserInfo_CityService" />
+    <property name="ScrherSAVEService" ref="ScrherSAVEService" />
+    <property name="T_FGJHtmlDataService" ref="T_FGJHtmlDataService" />
+  </object>
+  <!--intentionally do NOT register the AccountController or the ValuesController with the container; demonstrates that the underlying
+  default controller factory will properly (attempt to!) resolve all controllers not registered with Spring.NET
+  using its default controller resolution behavoir-->
+  <!--<object type="Spring.Mvc4QuickStart.Controllers.AccountController, Spring.Mvc4QuickStart" singleton="false" />-->
+  <!--<object type="Spring.Mvc4QuickStart.Controllers.ValuesController, Spring.Mvc4QuickStart" singleton="false" />-->
+</objects>

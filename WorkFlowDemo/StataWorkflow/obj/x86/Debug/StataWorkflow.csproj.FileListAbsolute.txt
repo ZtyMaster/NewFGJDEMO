@@ -1,0 +1,17 @@
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\bin\Debug\StataWorkflow.exe.config
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\bin\Debug\StataWorkflow.exe
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\bin\Debug\StataWorkflow.pdb
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\Workflow1.g.xaml
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\StataWorkflow_Workflow1_BeforeInitializeComponentHelper.txt
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\_StataWorkflow.g.cs
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\Workflow1.g.cs
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\StataWorkflow_Workflow1_BeforeInitializeComponentHelper.cs
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\StataWorkflow.csproj.XamlGeneratedCodeFileListAbsolute.txt
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\StataWorkflow.csproj.XamlGeneratedXamlFileListAbsolute.txt
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\StataWorkflow.dll
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\StataWorkflow.pdb
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\AC2C1ABA-CCF6-44D4-8127-588FD4D0A860-DeferredValidationErrors.xml
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\InProcessTempFiles\Workflow1.g.cs
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\InProcessTempFiles\Workflow1.g.xaml
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\InProcessTempFiles\_StataWorkflow.g.cs
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\StataWorkflow\obj\x86\Debug\StataWorkflow.exe

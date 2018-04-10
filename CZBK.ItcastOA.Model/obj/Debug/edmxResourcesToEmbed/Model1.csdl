@@ -1,0 +1,1224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OAModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="OAEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="UserInfo" EntityType="OAModel.UserInfo" />
+    <EntitySet Name="ActionInfo" EntityType="OAModel.ActionInfo" />
+    <EntitySet Name="Department" EntityType="OAModel.Department" />
+    <EntitySet Name="R_UserInfo_ActionInfo" EntityType="OAModel.R_UserInfo_ActionInfo" />
+    <EntitySet Name="RoleInfo" EntityType="OAModel.RoleInfo" />
+    <AssociationSet Name="FK_ActionInfoR_UserInfo_ActionInfo" Association="OAModel.FK_ActionInfoR_UserInfo_ActionInfo">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="R_UserInfo_ActionInfo" EntitySet="R_UserInfo_ActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoR_UserInfo_ActionInfo" Association="OAModel.FK_UserInfoR_UserInfo_ActionInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="R_UserInfo_ActionInfo" EntitySet="R_UserInfo_ActionInfo" />
+    </AssociationSet>
+    <AssociationSet Name="DepartmentActionInfo" Association="OAModel.DepartmentActionInfo">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="RoleInfoActionInfo" Association="OAModel.RoleInfoActionInfo">
+      <End Role="ActionInfo" EntitySet="ActionInfo" />
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
+    </AssociationSet>
+    <AssociationSet Name="UserInfoDepartment" Association="OAModel.UserInfoDepartment">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="UserInfoRoleInfo" Association="OAModel.UserInfoRoleInfo">
+      <End Role="RoleInfo" EntitySet="RoleInfo" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <EntitySet Name="BumenInfoSet" EntityType="OAModel.BumenInfoSet" />
+    <EntitySet Name="T_FGJHtmlData" EntityType="OAModel.T_FGJHtmlData" />
+    <EntitySet Name="T_City" EntityType="OAModel.T_City" />
+    <EntitySet Name="T_Quyu" EntityType="OAModel.T_Quyu" />
+    <AssociationSet Name="FK_T_FGJHtmlData_T_City" Association="OAModel.FK_T_FGJHtmlData_T_City">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="T_FGJHtmlData" EntitySet="T_FGJHtmlData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_Quyu_T_City" Association="OAModel.FK_T_Quyu_T_City">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="T_Quyu" EntitySet="T_Quyu" />
+    </AssociationSet>
+    <EntitySet Name="T_SaveHtmlData" EntityType="OAModel.T_SaveHtmlData" />
+    <AssociationSet Name="FK_T_SaveHtmlData_HtmlID" Association="OAModel.FK_T_SaveHtmlData_HtmlID">
+      <End Role="T_FGJHtmlData" EntitySet="T_FGJHtmlData" />
+      <End Role="T_SaveHtmlData" EntitySet="T_SaveHtmlData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SaveHtmlData_UserID" Association="OAModel.FK_T_SaveHtmlData_UserID">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_SaveHtmlData" EntitySet="T_SaveHtmlData" />
+    </AssociationSet>
+    <EntitySet Name="UserInfo_City" EntityType="OAModel.UserInfo_City" />
+    <AssociationSet Name="FK_UserInfoT_City_CityID" Association="OAModel.FK_UserInfoT_City_CityID">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="UserInfo_City" EntitySet="UserInfo_City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfoT_City_UserInfo" Association="OAModel.FK_UserInfoT_City_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="UserInfo_City" EntitySet="UserInfo_City" />
+    </AssociationSet>
+    <EntitySet Name="T_BiaoJiInfo" EntityType="OAModel.T_BiaoJiInfo" />
+    <EntitySet Name="T_Items" EntityType="OAModel.T_Items" />
+    <AssociationSet Name="FK_T_SaveBiaoJi_BiaoJi" Association="OAModel.FK_T_SaveBiaoJi_BiaoJi">
+      <End Role="T_BiaoJiInfo" EntitySet="T_BiaoJiInfo" />
+      <End Role="T_SaveHtmlData" EntitySet="T_SaveHtmlData" />
+    </AssociationSet>
+    <EntitySet Name="T_UserClick" EntityType="OAModel.T_UserClick" />
+    <EntitySet Name="T_SeeClickPhoto" EntityType="OAModel.T_SeeClickPhoto" />
+    <AssociationSet Name="FK_T_SeeClickPhoto_T_FGJHtmlData" Association="OAModel.FK_T_SeeClickPhoto_T_FGJHtmlData">
+      <End Role="T_FGJHtmlData" EntitySet="T_FGJHtmlData" />
+      <End Role="T_SeeClickPhoto" EntitySet="T_SeeClickPhoto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SeeClickPhoto_UserInfo" Association="OAModel.FK_T_SeeClickPhoto_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_SeeClickPhoto" EntitySet="T_SeeClickPhoto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_UserClick_UserInfo" Association="OAModel.FK_T_UserClick_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_UserClick" EntitySet="T_UserClick" />
+    </AssociationSet>
+    <EntitySet Name="T_UserSave" EntityType="OAModel.T_UserSave" />
+    <AssociationSet Name="FK_T_UserSave_T_UserSave" Association="OAModel.FK_T_UserSave_T_UserSave">
+      <End Role="T_BiaoJiInfo" EntitySet="T_BiaoJiInfo" />
+      <End Role="T_UserSave" EntitySet="T_UserSave" />
+    </AssociationSet>
+    <EntitySet Name="T_UserSave_Items" EntityType="OAModel.T_UserSave_Items" />
+    <AssociationSet Name="FK_T_UserSave_T_UserSave1" Association="OAModel.FK_T_UserSave_T_UserSave1">
+      <End Role="T_UserSave_Items" EntitySet="T_UserSave_Items" />
+      <End Role="T_UserSave" EntitySet="T_UserSave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_UserSave_T_UserSave2" Association="OAModel.FK_T_UserSave_T_UserSave2">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_UserSave" EntitySet="T_UserSave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_T_City" Association="OAModel.FK_UserInfo_T_City">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <EntitySet Name="T_BoolItem" EntityType="OAModel.T_BoolItem" />
+    <EntitySet Name="T_province" EntityType="OAModel.T_province" />
+    <AssociationSet Name="FK_T_City_province" Association="OAModel.FK_T_City_province">
+      <End Role="T_province" EntitySet="T_province" />
+      <End Role="T_City" EntitySet="T_City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SaveHtmlData_HtmlID1" Association="OAModel.FK_T_SaveHtmlData_HtmlID1">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_SaveHtmlData" EntitySet="T_SaveHtmlData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SaveMasterID" Association="OAModel.FK_T_SaveMasterID">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_SaveHtmlData" EntitySet="T_SaveHtmlData" />
+    </AssociationSet>
+    <EntitySet Name="T_QiuZhuQiuGou" EntityType="OAModel.T_QiuZhuQiuGou" />
+    <EntitySet Name="UserSaveImages" EntityType="OAModel.UserSaveImage" />
+    <AssociationSet Name="FK_T_QiuZhuQiuGou_T_City" Association="OAModel.FK_T_QiuZhuQiuGou_T_City">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="T_QiuZhuQiuGou" EntitySet="T_QiuZhuQiuGou" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSaveImage_T_UserSave" Association="OAModel.FK_UserSaveImage_T_UserSave">
+      <End Role="T_UserSave" EntitySet="T_UserSave" />
+      <End Role="UserSaveImage" EntitySet="UserSaveImages" />
+    </AssociationSet>
+    <EntitySet Name="T_YxPerson" EntityType="OAModel.T_YxPerson" />
+    <AssociationSet Name="FK_T_YxPerson_UserInfo" Association="OAModel.FK_T_YxPerson_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_YxPerson" EntitySet="T_YxPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_YxPerson" Association="OAModel.FK_UserInfo_YxPerson">
+      <End Role="T_YxPerson" EntitySet="T_YxPerson" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <EntitySet Name="T_ChuZhuInfo" EntityType="OAModel.T_ChuZhuInfo" />
+    <EntitySet Name="T_ZhuaiJiaBak" EntityType="OAModel.T_ZhuaiJiaBak" />
+    <AssociationSet Name="FK_T_CitiID" Association="OAModel.FK_T_CitiID">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="T_ChuZhuInfo" EntitySet="T_ChuZhuInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fgjhID" Association="OAModel.FK_fgjhID">
+      <End Role="T_FGJHtmlData" EntitySet="T_FGJHtmlData" />
+      <End Role="T_ZhuaiJiaBak" EntitySet="T_ZhuaiJiaBak" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_FGJHtmlData_Userinfo" Association="OAModel.FK_T_FGJHtmlData_Userinfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_FGJHtmlData" EntitySet="T_FGJHtmlData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_adduserid" Association="OAModel.FK_adduserid">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_ZhuaiJiaBak" EntitySet="T_ZhuaiJiaBak" />
+    </AssociationSet>
+    <EntitySet Name="T_UpHerfCity" EntityType="OAModel.T_UpHerfCity" />
+    <AssociationSet Name="FK_T_ChuZhuInfo_UserInfo" Association="OAModel.FK_T_ChuZhuInfo_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_ChuZhuInfo" EntitySet="T_ChuZhuInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_UpHerfCity_T_City" Association="OAModel.FK_T_UpHerfCity_T_City">
+      <End Role="T_City" EntitySet="T_City" />
+      <End Role="T_UpHerfCity" EntitySet="T_UpHerfCity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_QiuZhuQiuGou_UserInfo" Association="OAModel.FK_T_QiuZhuQiuGou_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_QiuZhuQiuGou" EntitySet="T_QiuZhuQiuGou" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_UpHerfCity_UserInfo" Association="OAModel.FK_T_UpHerfCity_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_UpHerfCity" EntitySet="T_UpHerfCity" />
+    </AssociationSet>
+    <EntitySet Name="SeeQzCzs" EntityType="OAModel.SeeQzCz" />
+    <AssociationSet Name="FK_ChuzhuID" Association="OAModel.FK_ChuzhuID">
+      <End Role="T_ChuZhuInfo" EntitySet="T_ChuZhuInfo" />
+      <End Role="SeeQzCz" EntitySet="SeeQzCzs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QiuzhuID" Association="OAModel.FK_QiuzhuID">
+      <End Role="T_QiuZhuQiuGou" EntitySet="T_QiuZhuQiuGou" />
+      <End Role="SeeQzCz" EntitySet="SeeQzCzs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo" Association="OAModel.FK_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="SeeQzCz" EntitySet="SeeQzCzs" />
+    </AssociationSet>
+    <EntitySet Name="GongGaos" EntityType="OAModel.GongGao" />
+    <EntitySet Name="TLoginbaks" EntityType="OAModel.TLoginbak" />
+    <AssociationSet Name="FK_TLoginbak_UserInfo" Association="OAModel.FK_TLoginbak_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="TLoginbak" EntitySet="TLoginbaks" />
+    </AssociationSet>
+    <EntitySet Name="ScrherSAVEs" EntityType="OAModel.ScrherSAVE" />
+    <AssociationSet Name="FK_ScrherSAVE_UserInfo" Association="OAModel.FK_ScrherSAVE_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="ScrherSAVE" EntitySet="ScrherSAVEs" />
+    </AssociationSet>
+    <EntitySet Name="T_ScehMiShu" EntityType="OAModel.T_ScehMiShu" />
+    <AssociationSet Name="FK_T_ScehMiShu_UserInfo" Association="OAModel.FK_T_ScehMiShu_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_ScehMiShu" EntitySet="T_ScehMiShu" />
+    </AssociationSet>
+    <EntitySet Name="T_AppOpen" EntityType="OAModel.T_AppOpen" />
+    <AssociationSet Name="FK_T_AppOpen_UserInfo" Association="OAModel.FK_T_AppOpen_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="T_AppOpen" EntitySet="T_AppOpen" />
+    </AssociationSet>
+    <EntitySet Name="WxUsers" EntityType="OAModel.WxUser" />
+    <AssociationSet Name="FK_WxUser_UserInfo" Association="OAModel.FK_WxUser_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="WxUser" EntitySet="WxUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UName" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+    <Property Name="UPwd" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="255" />
+    <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DelFlag" Type="Int16" Nullable="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Remark" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Sort" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="R_UserInfo_ActionInfo" Relationship="OAModel.FK_UserInfoR_UserInfo_ActionInfo" FromRole="UserInfo" ToRole="R_UserInfo_ActionInfo" />
+    <NavigationProperty Name="Department" Relationship="OAModel.UserInfoDepartment" FromRole="UserInfo" ToRole="Department" />
+    <NavigationProperty Name="RoleInfo" Relationship="OAModel.UserInfoRoleInfo" FromRole="UserInfo" ToRole="RoleInfo" />
+    <NavigationProperty Name="T_SaveHtmlData" Relationship="OAModel.FK_T_SaveHtmlData_UserID" FromRole="UserInfo" ToRole="T_SaveHtmlData" />
+    <NavigationProperty Name="UserInfo_City" Relationship="OAModel.FK_UserInfoT_City_UserInfo" FromRole="UserInfo" ToRole="UserInfo_City" />
+    <Property Name="OverTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserXiaoHao" Type="Int32" />
+    <Property Name="Click" Type="Int32" />
+    <Property Name="ThisMastr" Type="Boolean" />
+    <Property Name="MasterID" Type="Int32" />
+    <Property Name="Login_now" Type="String" Unicode="true" FixedLength="false" MaxLength="255" />
+    <NavigationProperty Name="T_SeeClickPhoto" Relationship="OAModel.FK_T_SeeClickPhoto_UserInfo" FromRole="UserInfo" ToRole="T_SeeClickPhoto" />
+    <NavigationProperty Name="T_UserClick" Relationship="OAModel.FK_T_UserClick_UserInfo" FromRole="UserInfo" ToRole="T_UserClick" />
+    <NavigationProperty Name="T_UserSave" Relationship="OAModel.FK_T_UserSave_T_UserSave2" FromRole="UserInfo" ToRole="T_UserSave" />
+    <Property Name="CityID" Type="Int32" />
+    <NavigationProperty Name="T_City" Relationship="OAModel.FK_UserInfo_T_City" FromRole="UserInfo" ToRole="T_City" />
+    <Property Name="Umoney" Type="Decimal" Precision="18" Scale="3" />
+    <NavigationProperty Name="T_SaveHtmlData1" Relationship="OAModel.FK_T_SaveHtmlData_HtmlID1" FromRole="UserInfo" ToRole="T_SaveHtmlData" />
+    <NavigationProperty Name="T_SaveHtmlData11" Relationship="OAModel.FK_T_SaveMasterID" FromRole="UserInfo" ToRole="T_SaveHtmlData" />
+    <Property Name="YxPersonID" Type="Int64" />
+    <Property Name="khName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KhPhoto" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="T_YxPerson" Relationship="OAModel.FK_T_YxPerson_UserInfo" FromRole="UserInfo" ToRole="T_YxPerson" />
+    <NavigationProperty Name="T_YxPerson1" Relationship="OAModel.FK_UserInfo_YxPerson" FromRole="UserInfo" ToRole="T_YxPerson" />
+    <NavigationProperty Name="T_FGJHtmlData" Relationship="OAModel.FK_T_FGJHtmlData_Userinfo" FromRole="UserInfo" ToRole="T_FGJHtmlData" />
+    <NavigationProperty Name="T_ZhuaiJiaBak" Relationship="OAModel.FK_adduserid" FromRole="UserInfo" ToRole="T_ZhuaiJiaBak" />
+    <NavigationProperty Name="T_ChuZhuInfo" Relationship="OAModel.FK_T_ChuZhuInfo_UserInfo" FromRole="UserInfo" ToRole="T_ChuZhuInfo" />
+    <NavigationProperty Name="T_QiuZhuQiuGou" Relationship="OAModel.FK_T_QiuZhuQiuGou_UserInfo" FromRole="UserInfo" ToRole="T_QiuZhuQiuGou" />
+    <NavigationProperty Name="T_UpHerfCity" Relationship="OAModel.FK_T_UpHerfCity_UserInfo" FromRole="UserInfo" ToRole="T_UpHerfCity" />
+    <NavigationProperty Name="SeeQzCzs" Relationship="OAModel.FK_UserInfo" FromRole="UserInfo" ToRole="SeeQzCz" />
+    <NavigationProperty Name="TLoginbaks" Relationship="OAModel.FK_TLoginbak_UserInfo" FromRole="UserInfo" ToRole="TLoginbak" />
+    <NavigationProperty Name="ScrherSAVEs" Relationship="OAModel.FK_ScrherSAVE_UserInfo" FromRole="UserInfo" ToRole="ScrherSAVE" />
+    <NavigationProperty Name="T_ScehMiShu" Relationship="OAModel.FK_T_ScehMiShu_UserInfo" FromRole="UserInfo" ToRole="T_ScehMiShu" />
+    <NavigationProperty Name="T_AppOpen" Relationship="OAModel.FK_T_AppOpen_UserInfo" FromRole="UserInfo" ToRole="T_AppOpen" />
+    <NavigationProperty Name="WxUsers" Relationship="OAModel.FK_WxUser_UserInfo" FromRole="UserInfo" ToRole="WxUser" />
+  </EntityType>
+  <EntityType Name="ActionInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="SubTime" Nullable="false" Precision="3" />
+    <Property Type="Int16" Name="DelFlag" Nullable="false" />
+    <Property Type="String" Name="ModifiedOn" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Remark" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Url" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="HttpMethod" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ActionMethodName" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ControllerName" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ActionInfoName" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Sort" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int16" Name="ActionTypeEnum" Nullable="false" />
+    <Property Type="String" Name="MenuIcon" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="IconWidth" Nullable="false" />
+    <Property Type="Int32" Name="IconHeight" Nullable="false" />
+    <NavigationProperty Name="R_UserInfo_ActionInfo" Relationship="OAModel.FK_ActionInfoR_UserInfo_ActionInfo" FromRole="ActionInfo" ToRole="R_UserInfo_ActionInfo" />
+    <NavigationProperty Name="Department" Relationship="OAModel.DepartmentActionInfo" FromRole="ActionInfo" ToRole="Department" />
+    <NavigationProperty Name="RoleInfo" Relationship="OAModel.RoleInfoActionInfo" FromRole="ActionInfo" ToRole="RoleInfo" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DepName" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ParentId" Nullable="false" />
+    <Property Type="String" Name="TreePath" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Level" Nullable="false" />
+    <Property Type="Boolean" Name="IsLeaf" Nullable="false" />
+    <NavigationProperty Name="ActionInfo" Relationship="OAModel.DepartmentActionInfo" FromRole="Department" ToRole="ActionInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.UserInfoDepartment" FromRole="Department" ToRole="UserInfo" />
+    <Property Name="DelFlag" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="R_UserInfo_ActionInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserInfoID" Nullable="false" />
+    <Property Type="Int32" Name="ActionInfoID" Nullable="false" />
+    <Property Type="Boolean" Name="IsPass" Nullable="false" />
+    <NavigationProperty Name="ActionInfo" Relationship="OAModel.FK_ActionInfoR_UserInfo_ActionInfo" FromRole="R_UserInfo_ActionInfo" ToRole="ActionInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_UserInfoR_UserInfo_ActionInfo" FromRole="R_UserInfo_ActionInfo" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="RoleInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Type="Int16" Name="DelFlag" Nullable="false" />
+    <Property Type="DateTime" Name="SubTime" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Remark" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Sort" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ActionInfo" Relationship="OAModel.RoleInfoActionInfo" FromRole="RoleInfo" ToRole="ActionInfo" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.UserInfoRoleInfo" FromRole="RoleInfo" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_ActionInfoR_UserInfo_ActionInfo">
+    <End Type="OAModel.ActionInfo" Role="ActionInfo" Multiplicity="1" />
+    <End Type="OAModel.R_UserInfo_ActionInfo" Role="R_UserInfo_ActionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="R_UserInfo_ActionInfo">
+        <PropertyRef Name="ActionInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoR_UserInfo_ActionInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.R_UserInfo_ActionInfo" Role="R_UserInfo_ActionInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="R_UserInfo_ActionInfo">
+        <PropertyRef Name="UserInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DepartmentActionInfo">
+    <End Type="OAModel.ActionInfo" Role="ActionInfo" Multiplicity="*" />
+    <End Type="OAModel.Department" Role="Department" Multiplicity="*" />
+  </Association>
+  <Association Name="RoleInfoActionInfo">
+    <End Type="OAModel.ActionInfo" Role="ActionInfo" Multiplicity="*" />
+    <End Type="OAModel.RoleInfo" Role="RoleInfo" Multiplicity="*" />
+  </Association>
+  <Association Name="UserInfoDepartment">
+    <End Type="OAModel.Department" Role="Department" Multiplicity="*" />
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+  </Association>
+  <Association Name="UserInfoRoleInfo">
+    <End Type="OAModel.RoleInfo" Role="RoleInfo" Multiplicity="*" />
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+  </Association>
+  <EntityType Name="BumenInfoSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gushu" Type="Int32" Nullable="false" />
+    <Property Name="Renark" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DelFlag" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_FGJHtmlData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HLName" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="HLhref" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PersonName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="photo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FbTime" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="FwSumMoney" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FwHuXing" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FwMianji" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FwLoucheng" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FwZhuangxiu" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FwNianxian" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FwChaoxiang" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="bak" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Id_count" Type="Int32" />
+    <Property Name="Laiyuan" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Image_str" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CityID" Type="Int32" />
+    <NavigationProperty Name="T_City" Relationship="OAModel.FK_T_FGJHtmlData_T_City" FromRole="T_FGJHtmlData" ToRole="T_City" />
+    <NavigationProperty Name="T_SaveHtmlData" Relationship="OAModel.FK_T_SaveHtmlData_HtmlID" FromRole="T_FGJHtmlData" ToRole="T_SaveHtmlData" />
+    <Property Name="delflag" Type="Int16" />
+    <Property Name="SumMoneyID" Type="Int32" />
+    <Property Name="MianjiID" Type="Int32" />
+    <Property Name="HuXingID" Type="Int32" />
+    <NavigationProperty Name="T_SeeClickPhoto" Relationship="OAModel.FK_T_SeeClickPhoto_T_FGJHtmlData" FromRole="T_FGJHtmlData" ToRole="T_SeeClickPhoto" />
+    <Property Name="Money_int" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="Pingmi_int" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="AddItemsUserID" Type="Int32" />
+    <NavigationProperty Name="T_ZhuaiJiaBak" Relationship="OAModel.FK_fgjhID" FromRole="T_FGJHtmlData" ToRole="T_ZhuaiJiaBak" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_FGJHtmlData_Userinfo" FromRole="T_FGJHtmlData" ToRole="UserInfo" />
+    <Property Name="AddUserTiem" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="T_City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityItem" Type="Int32" />
+    <Property Name="City" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DelFlag" Type="Int16" />
+    <Property Name="City_str" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="T_FGJHtmlData" Relationship="OAModel.FK_T_FGJHtmlData_T_City" FromRole="T_City" ToRole="T_FGJHtmlData" />
+    <NavigationProperty Name="T_Quyu" Relationship="OAModel.FK_T_Quyu_T_City" FromRole="T_City" ToRole="T_Quyu" />
+    <NavigationProperty Name="UserInfo_City" Relationship="OAModel.FK_UserInfoT_City_CityID" FromRole="T_City" ToRole="UserInfo_City" />
+    <NavigationProperty Name="UserInfoes" Relationship="OAModel.FK_UserInfo_T_City" FromRole="T_City" ToRole="UserInfo" />
+    <Property Name="province_id" Type="Int32" />
+    <NavigationProperty Name="T_province" Relationship="OAModel.FK_T_City_province" FromRole="T_City" ToRole="T_province" />
+    <NavigationProperty Name="T_QiuZhuQiuGou" Relationship="OAModel.FK_T_QiuZhuQiuGou_T_City" FromRole="T_City" ToRole="T_QiuZhuQiuGou" />
+    <NavigationProperty Name="T_ChuZhuInfo" Relationship="OAModel.FK_T_CitiID" FromRole="T_City" ToRole="T_ChuZhuInfo" />
+    <NavigationProperty Name="T_UpHerfCity" Relationship="OAModel.FK_T_UpHerfCity_T_City" FromRole="T_City" ToRole="T_UpHerfCity" />
+  </EntityType>
+  <EntityType Name="T_Quyu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="T_CityID" Type="Int32" Nullable="false" />
+    <Property Name="QY_connet" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DelFlag" Type="Boolean" />
+    <NavigationProperty Name="T_City" Relationship="OAModel.FK_T_Quyu_T_City" FromRole="T_Quyu" ToRole="T_City" />
+  </EntityType>
+  <Association Name="FK_T_FGJHtmlData_T_City">
+    <End Type="OAModel.T_City" Role="T_City" Multiplicity="0..1" />
+    <End Type="OAModel.T_FGJHtmlData" Role="T_FGJHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_FGJHtmlData">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_Quyu_T_City">
+    <End Type="OAModel.T_City" Role="T_City" Multiplicity="1" />
+    <End Type="OAModel.T_Quyu" Role="T_Quyu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_Quyu">
+        <PropertyRef Name="T_CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_SaveHtmlData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HtmldataID" Type="Int64" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="DelFlag" Type="Int16" Nullable="false" />
+    <Property Name="SaveTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="T_FGJHtmlData" Relationship="OAModel.FK_T_SaveHtmlData_HtmlID" FromRole="T_SaveHtmlData" ToRole="T_FGJHtmlData" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_SaveHtmlData_UserID" FromRole="T_SaveHtmlData" ToRole="UserInfo" />
+    <Property Name="BiaoJiId" Type="Int32" />
+    <Property Name="BiaoJiTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="T_BiaoJiInfo" Relationship="OAModel.FK_T_SaveBiaoJi_BiaoJi" FromRole="T_SaveHtmlData" ToRole="T_BiaoJiInfo" />
+    <Property Name="GongGong" Type="Int16" />
+    <Property Name="MasterID" Type="Int32" />
+    <NavigationProperty Name="UserInfo1" Relationship="OAModel.FK_T_SaveHtmlData_HtmlID1" FromRole="T_SaveHtmlData" ToRole="UserInfo" />
+    <NavigationProperty Name="UserInfo11" Relationship="OAModel.FK_T_SaveMasterID" FromRole="T_SaveHtmlData" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_T_SaveHtmlData_HtmlID">
+    <End Type="OAModel.T_FGJHtmlData" Role="T_FGJHtmlData" Multiplicity="1" />
+    <End Type="OAModel.T_SaveHtmlData" Role="T_SaveHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_FGJHtmlData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SaveHtmlData">
+        <PropertyRef Name="HtmldataID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SaveHtmlData_UserID">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.T_SaveHtmlData" Role="T_SaveHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SaveHtmlData">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserInfo_City">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserInfo_ID" Type="Int32" Nullable="false" />
+    <Property Name="T_City_ID" Type="Int32" Nullable="false" />
+    <Property Name="DelFlag" Type="Int16" />
+    <NavigationProperty Name="T_City" Relationship="OAModel.FK_UserInfoT_City_CityID" FromRole="UserInfo_City" ToRole="T_City" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_UserInfoT_City_UserInfo" FromRole="UserInfo_City" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_UserInfoT_City_CityID">
+    <End Type="OAModel.T_City" Role="T_City" Multiplicity="1" />
+    <End Type="OAModel.UserInfo_City" Role="UserInfo_City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfo_City">
+        <PropertyRef Name="T_City_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfoT_City_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.UserInfo_City" Role="UserInfo_City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfo_City">
+        <PropertyRef Name="UserInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_BiaoJiInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BiaojiItem" Type="Int32" Nullable="false" />
+    <Property Name="BiaojiStr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DelFlag" Type="Int16" />
+    <NavigationProperty Name="T_SaveHtmlData" Relationship="OAModel.FK_T_SaveBiaoJi_BiaoJi" FromRole="T_BiaoJiInfo" ToRole="T_SaveHtmlData" />
+    <Property Name="Colors" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="T_UserSave" Relationship="OAModel.FK_T_UserSave_T_UserSave" FromRole="T_BiaoJiInfo" ToRole="T_UserSave" />
+    <Property Name="str" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="T_Items">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StrID" Type="Int32" />
+    <Property Name="Str" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Str_val" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Icons" Type="Int32" Nullable="false" />
+    <Property Name="DelFlag" Type="Int16" Nullable="true" />
+    <Property Name="Bakstr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_T_SaveBiaoJi_BiaoJi">
+    <End Type="OAModel.T_BiaoJiInfo" Role="T_BiaoJiInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_SaveHtmlData" Role="T_SaveHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_BiaoJiInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SaveHtmlData">
+        <PropertyRef Name="BiaoJiId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_UserClick">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserInfoId" Type="Int32" />
+    <Property Name="ThisClick" Type="Int32" />
+    <Property Name="LoginClickTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_UserClick_UserInfo" FromRole="T_UserClick" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="T_SeeClickPhoto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="T_FgjID" Type="Int64" Nullable="false" />
+    <Property Name="DelFlag" Type="Boolean" />
+    <NavigationProperty Name="T_FGJHtmlData" Relationship="OAModel.FK_T_SeeClickPhoto_T_FGJHtmlData" FromRole="T_SeeClickPhoto" ToRole="T_FGJHtmlData" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_SeeClickPhoto_UserInfo" FromRole="T_SeeClickPhoto" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_T_SeeClickPhoto_T_FGJHtmlData">
+    <End Type="OAModel.T_FGJHtmlData" Role="T_FGJHtmlData" Multiplicity="1" />
+    <End Type="OAModel.T_SeeClickPhoto" Role="T_SeeClickPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_FGJHtmlData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SeeClickPhoto">
+        <PropertyRef Name="T_FgjID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SeeClickPhoto_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.T_SeeClickPhoto" Role="T_SeeClickPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SeeClickPhoto">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_UserClick_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_UserClick" Role="T_UserClick" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_UserClick">
+        <PropertyRef Name="UserInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_UserSave">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TextName" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="PresonName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="PresonPhoto" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Money" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="HuxingStrID" Type="Int32" />
+    <Property Name="Mianji" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="LouCheng" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ZhuanxiuStrID" Type="Int32" />
+    <Property Name="Nianxian" Type="Int32" />
+    <Property Name="Chaoxiang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="delflag" Type="Int16" />
+    <Property Name="SumMoneyID" Type="Int32" />
+    <Property Name="MianjiID" Type="Int32" />
+    <Property Name="HuXingID" Type="Int32" />
+    <Property Name="BiaoJiID" Type="Int32" />
+    <Property Name="BiaoJiTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="T_BiaoJiInfo" Relationship="OAModel.FK_T_UserSave_T_UserSave" FromRole="T_UserSave" ToRole="T_BiaoJiInfo" />
+    <Property Name="Items" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="T_UserSave_Items" Relationship="OAModel.FK_T_UserSave_T_UserSave1" FromRole="T_UserSave" ToRole="T_UserSave_Items" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_UserSave_T_UserSave2" FromRole="T_UserSave" ToRole="UserInfo" />
+    <Property Name="Bak" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserSaveImages" Relationship="OAModel.FK_UserSaveImage_T_UserSave" FromRole="T_UserSave" ToRole="UserSaveImage" />
+  </EntityType>
+  <Association Name="FK_T_UserSave_T_UserSave">
+    <End Type="OAModel.T_BiaoJiInfo" Role="T_BiaoJiInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_UserSave" Role="T_UserSave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_BiaoJiInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_UserSave">
+        <PropertyRef Name="BiaoJiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_UserSave_Items">
+    <Key>
+      <PropertyRef Name="SaveItem" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SaveItem" Type="Int32" Nullable="false" />
+    <Property Name="ItemStr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="T_UserSave" Relationship="OAModel.FK_T_UserSave_T_UserSave1" FromRole="T_UserSave_Items" ToRole="T_UserSave" />
+  </EntityType>
+  <Association Name="FK_T_UserSave_T_UserSave1">
+    <End Type="OAModel.T_UserSave_Items" Role="T_UserSave_Items" Multiplicity="1" />
+    <End Type="OAModel.T_UserSave" Role="T_UserSave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_UserSave_Items">
+        <PropertyRef Name="SaveItem" />
+      </Principal>
+      <Dependent Role="T_UserSave">
+        <PropertyRef Name="Items" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_UserSave_T_UserSave2">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="OAModel.T_UserSave" Role="T_UserSave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_UserSave">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_T_City">
+    <End Type="OAModel.T_City" Role="T_City" Multiplicity="0..1" />
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_BoolItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="str" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="BOLL_" Type="Boolean" Nullable="false" />
+    <Property Name="int" Type="Int32" />
+    <Property Name="timener" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="T_province">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ppp" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="str" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="T_City" Relationship="OAModel.FK_T_City_province" FromRole="T_province" ToRole="T_City" />
+  </EntityType>
+  <Association Name="FK_T_City_province">
+    <End Type="OAModel.T_province" Role="T_province" Multiplicity="0..1" />
+    <End Type="OAModel.T_City" Role="T_City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_province">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_City">
+        <PropertyRef Name="province_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SaveHtmlData_HtmlID1">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_SaveHtmlData" Role="T_SaveHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SaveHtmlData">
+        <PropertyRef Name="MasterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SaveMasterID">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="OAModel.T_SaveHtmlData" Role="T_SaveHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_SaveHtmlData">
+        <PropertyRef Name="MasterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_QiuZhuQiuGou">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Hname" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="QuYu" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="JuShi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Money" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="RuZhu" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="FBtime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Hperson" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GuiShuDi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CityID" Type="Int32" />
+    <NavigationProperty Name="T_City" Relationship="OAModel.FK_T_QiuZhuQiuGou_T_City" FromRole="T_QiuZhuQiuGou" ToRole="T_City" />
+    <Property Name="QiuZhuQiuGou" Type="Int16" />
+    <Property Name="User_ID" Type="Int32" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_QiuZhuQiuGou_UserInfo" FromRole="T_QiuZhuQiuGou" ToRole="UserInfo" />
+    <Property Name="AddUserTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SeeQzCzs" Relationship="OAModel.FK_QiuzhuID" FromRole="T_QiuZhuQiuGou" ToRole="SeeQzCz" />
+  </EntityType>
+  <EntityType Name="UserSaveImage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserSaveID" Type="Int64" Nullable="false" />
+    <Property Name="Image_str" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="delflg" Type="Int16" />
+    <NavigationProperty Name="T_UserSave" Relationship="OAModel.FK_UserSaveImage_T_UserSave" FromRole="UserSaveImage" ToRole="T_UserSave" />
+  </EntityType>
+  <Association Name="FK_T_QiuZhuQiuGou_T_City">
+    <End Type="OAModel.T_City" Role="T_City" Multiplicity="0..1" />
+    <End Type="OAModel.T_QiuZhuQiuGou" Role="T_QiuZhuQiuGou" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_QiuZhuQiuGou">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSaveImage_T_UserSave">
+    <End Type="OAModel.T_UserSave" Role="T_UserSave" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="OAModel.UserSaveImage" Role="UserSaveImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_UserSave">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserSaveImage">
+        <PropertyRef Name="UserSaveID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_YxPerson">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Addess" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="Gender" Type="Double" />
+    <Property Name="age" Type="Int32" />
+    <Property Name="DEL" Type="Double" />
+    <Property Name="ADDuserID" Type="Int32" />
+    <Property Name="RuzTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_YxPerson_UserInfo" FromRole="T_YxPerson" ToRole="UserInfo" />
+    <NavigationProperty Name="UserInfoes" Relationship="OAModel.FK_UserInfo_YxPerson" FromRole="T_YxPerson" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_T_YxPerson_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_YxPerson" Role="T_YxPerson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_YxPerson">
+        <PropertyRef Name="ADDuserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_YxPerson">
+    <End Type="OAModel.T_YxPerson" Role="T_YxPerson" Multiplicity="0..1" />
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_YxPerson">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="YxPersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_ChuZhuInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChuZhuName" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="ChuZhuHref" Type="String" MaxLength="650" FixedLength="false" Unicode="true" />
+    <Property Name="LianXiPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LianXiPhoto" Type="String" MaxLength="650" FixedLength="false" Unicode="true" />
+    <Property Name="Addess" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="FbTime" Type="DateTime" Precision="3" />
+    <Property Name="XiaoQu" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Money" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PingMi" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Tingshi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CityID" Type="Int32" />
+    <Property Name="Del" Type="Int16" />
+    <Property Name="PingMi_int" Type="Int32" />
+    <Property Name="Money_int" Type="Int32" />
+    <Property Name="LaiYuan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bak" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="T_City" Relationship="OAModel.FK_T_CitiID" FromRole="T_ChuZhuInfo" ToRole="T_City" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_ChuZhuInfo_UserInfo" FromRole="T_ChuZhuInfo" ToRole="UserInfo" />
+    <Property Name="AdduserTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SeeQzCzs" Relationship="OAModel.FK_ChuzhuID" FromRole="T_ChuZhuInfo" ToRole="SeeQzCz" />
+  </EntityType>
+  <EntityType Name="T_ZhuaiJiaBak">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BAK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DEL" Type="Int16" Nullable="false" />
+    <Property Name="FGJHTML_id" Type="Int64" />
+    <Property Name="AddUser" Type="Int32" />
+    <Property Name="ADDtime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="T_FGJHtmlData" Relationship="OAModel.FK_fgjhID" FromRole="T_ZhuaiJiaBak" ToRole="T_FGJHtmlData" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_adduserid" FromRole="T_ZhuaiJiaBak" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_T_CitiID">
+    <End Type="OAModel.T_City" Role="T_City" Multiplicity="0..1" />
+    <End Type="OAModel.T_ChuZhuInfo" Role="T_ChuZhuInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_ChuZhuInfo">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fgjhID">
+    <End Type="OAModel.T_FGJHtmlData" Role="T_FGJHtmlData" Multiplicity="0..1" />
+    <End Type="OAModel.T_ZhuaiJiaBak" Role="T_ZhuaiJiaBak" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_FGJHtmlData">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_ZhuaiJiaBak">
+        <PropertyRef Name="FGJHTML_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_FGJHtmlData_Userinfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_FGJHtmlData" Role="T_FGJHtmlData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_FGJHtmlData">
+        <PropertyRef Name="AddItemsUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_adduserid">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_ZhuaiJiaBak" Role="T_ZhuaiJiaBak" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_ZhuaiJiaBak">
+        <PropertyRef Name="AddUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_UpHerfCity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="City_ID" Type="Int32" />
+    <Property Name="Items" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Href" Type="String" MaxLength="650" FixedLength="false" Unicode="true" />
+    <Property Name="AddUser" Type="Int32" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="Del" Type="Int16" />
+    <Property Name="textbak" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="T_City" Relationship="OAModel.FK_T_UpHerfCity_T_City" FromRole="T_UpHerfCity" ToRole="T_City" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_UpHerfCity_UserInfo" FromRole="T_UpHerfCity" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_T_ChuZhuInfo_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_ChuZhuInfo" Role="T_ChuZhuInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_ChuZhuInfo">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_UpHerfCity_T_City">
+    <End Type="OAModel.T_City" Role="T_City" Multiplicity="0..1" />
+    <End Type="OAModel.T_UpHerfCity" Role="T_UpHerfCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_UpHerfCity">
+        <PropertyRef Name="City_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_QiuZhuQiuGou_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_QiuZhuQiuGou" Role="T_QiuZhuQiuGou" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_QiuZhuQiuGou">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_UpHerfCity_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.T_UpHerfCity" Role="T_UpHerfCity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_UpHerfCity">
+        <PropertyRef Name="AddUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SeeQzCz">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QCItems" Type="Int16" Nullable="false" />
+    <Property Name="ChuZhuID" Type="Int64" />
+    <Property Name="QiuZhuID" Type="Int64" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Del" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="T_ChuZhuInfo" Relationship="OAModel.FK_ChuzhuID" FromRole="SeeQzCz" ToRole="T_ChuZhuInfo" />
+    <NavigationProperty Name="T_QiuZhuQiuGou" Relationship="OAModel.FK_QiuzhuID" FromRole="SeeQzCz" ToRole="T_QiuZhuQiuGou" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_UserInfo" FromRole="SeeQzCz" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_ChuzhuID">
+    <End Type="OAModel.T_ChuZhuInfo" Role="T_ChuZhuInfo" Multiplicity="0..1" />
+    <End Type="OAModel.SeeQzCz" Role="SeeQzCz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_ChuZhuInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SeeQzCz">
+        <PropertyRef Name="ChuZhuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QiuzhuID">
+    <End Type="OAModel.T_QiuZhuQiuGou" Role="T_QiuZhuQiuGou" Multiplicity="0..1" />
+    <End Type="OAModel.SeeQzCz" Role="SeeQzCz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_QiuZhuQiuGou">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SeeQzCz">
+        <PropertyRef Name="QiuZhuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.SeeQzCz" Role="SeeQzCz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SeeQzCz">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GongGao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Items" Type="Int32" />
+    <Property Name="bak" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TLoginbak">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LGUserID" Type="Int32" Nullable="false" />
+    <Property Name="intime" Type="DateTime" Precision="3" />
+    <Property Name="outtime" Type="DateTime" Precision="3" />
+    <Property Name="del" Type="Int16" />
+    <Property Name="LGip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LGbak" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_TLoginbak_UserInfo" FromRole="TLoginbak" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_TLoginbak_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.TLoginbak" Role="TLoginbak" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TLoginbak">
+        <PropertyRef Name="LGUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ScrherSAVE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="addUserID" Type="Int32" Nullable="false" />
+    <Property Name="Strmoney" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Stpmoney" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Srtmm" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Stpmm" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="HxID" Type="Int32" />
+    <Property Name="Quyu" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CName" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="DEL" Type="Int16" />
+    <Property Name="Addtime" Type="DateTime" Precision="3" />
+    <Property Name="Edittime" Type="DateTime" Precision="3" />
+    <Property Name="Zhuangxiu" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Bak" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_ScrherSAVE_UserInfo" FromRole="ScrherSAVE" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_ScrherSAVE_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.ScrherSAVE" Role="ScrherSAVE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ScrherSAVE">
+        <PropertyRef Name="addUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_ScehMiShu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ScehTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ScehCount" Type="Int32" Nullable="false" />
+    <Property Name="del" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_ScehMiShu_UserInfo" FromRole="T_ScehMiShu" ToRole="UserInfo" />
+    <Property Name="ScrherSAVEId" Type="Int64" />
+  </EntityType>
+  <Association Name="FK_T_ScehMiShu_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.T_ScehMiShu" Role="T_ScehMiShu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_ScehMiShu">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="T_AppOpen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="AppBoll" Type="Boolean" Nullable="false" />
+    <Property Name="del" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OverTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AppId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_T_AppOpen_UserInfo" FromRole="T_AppOpen" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_T_AppOpen_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+    <End Type="OAModel.T_AppOpen" Role="T_AppOpen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="T_AppOpen">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="WxUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Wx_id" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Wxidcode" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="wxName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Wxprovince" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Wxcity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WxImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Wxgender" Type="Int16" />
+    <Property Name="UserInfoID" Type="Int32" />
+    <Property Name="Del" Type="Boolean" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserInfo" Relationship="OAModel.FK_WxUser_UserInfo" FromRole="WxUser" ToRole="UserInfo" />
+  </EntityType>
+  <Association Name="FK_WxUser_UserInfo">
+    <End Type="OAModel.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+    <End Type="OAModel.WxUser" Role="WxUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WxUser">
+        <PropertyRef Name="UserInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

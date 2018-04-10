@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OAModelStoreContainer" CdmEntityContainer="OAEntities">
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="OAModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="KhPhoto" ColumnName="KhPhoto" />
+          <ScalarProperty Name="khName" ColumnName="khName" />
+          <ScalarProperty Name="YxPersonID" ColumnName="YxPersonID" />
+          <ScalarProperty Name="Umoney" ColumnName="Umoney" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Login_now" ColumnName="Login_now" />
+          <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+          <ScalarProperty Name="ThisMastr" ColumnName="ThisMastr" />
+          <ScalarProperty Name="Click" ColumnName="Click" />
+          <ScalarProperty Name="UserXiaoHao" ColumnName="UserXiaoHao" />
+          <ScalarProperty Name="OverTime" ColumnName="OverTime" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UName" ColumnName="UName" />
+          <ScalarProperty Name="UPwd" ColumnName="UPwd" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionInfo">
+      <EntityTypeMapping TypeName="OAModel.ActionInfo">
+        <MappingFragment StoreEntitySet="ActionInfo">
+          <ScalarProperty Name="IconHeight" ColumnName="IconHeight" />
+          <ScalarProperty Name="IconWidth" ColumnName="IconWidth" />
+          <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+          <ScalarProperty Name="ActionTypeEnum" ColumnName="ActionTypeEnum" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="ActionInfoName" ColumnName="ActionInfoName" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="ActionMethodName" ColumnName="ActionMethodName" />
+          <ScalarProperty Name="HttpMethod" ColumnName="HttpMethod" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department">
+      <EntityTypeMapping TypeName="OAModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="IsLeaf" ColumnName="IsLeaf" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="TreePath" ColumnName="TreePath" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="DepName" ColumnName="DepName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="R_UserInfo_ActionInfo">
+      <EntityTypeMapping TypeName="OAModel.R_UserInfo_ActionInfo">
+        <MappingFragment StoreEntitySet="R_UserInfo_ActionInfo">
+          <ScalarProperty Name="IsPass" ColumnName="IsPass" />
+          <ScalarProperty Name="ActionInfoID" ColumnName="ActionInfoID" />
+          <ScalarProperty Name="UserInfoID" ColumnName="UserInfoID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleInfo">
+      <EntityTypeMapping TypeName="OAModel.RoleInfo">
+        <MappingFragment StoreEntitySet="RoleInfo">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DepartmentActionInfo" TypeName="OAModel.DepartmentActionInfo" StoreEntitySet="DepartmentActionInfo">
+      <EndProperty Name="Department">
+        <ScalarProperty Name="ID" ColumnName="Department_ID" />
+      </EndProperty>
+      <EndProperty Name="ActionInfo">
+        <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RoleInfoActionInfo" TypeName="OAModel.RoleInfoActionInfo" StoreEntitySet="RoleInfoActionInfo">
+      <EndProperty Name="RoleInfo">
+        <ScalarProperty Name="ID" ColumnName="RoleInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="ActionInfo">
+        <ScalarProperty Name="ID" ColumnName="ActionInfo_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserInfoDepartment" TypeName="OAModel.UserInfoDepartment" StoreEntitySet="UserInfoDepartment">
+      <EndProperty Name="UserInfo">
+        <ScalarProperty Name="ID" ColumnName="UserInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="Department">
+        <ScalarProperty Name="ID" ColumnName="Department_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserInfoRoleInfo" TypeName="OAModel.UserInfoRoleInfo" StoreEntitySet="UserInfoRoleInfo">
+      <EndProperty Name="UserInfo">
+        <ScalarProperty Name="ID" ColumnName="UserInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="RoleInfo">
+        <ScalarProperty Name="ID" ColumnName="RoleInfo_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="BumenInfoSet">
+      <EntityTypeMapping TypeName="OAModel.BumenInfoSet">
+        <MappingFragment StoreEntitySet="BumenInfoSet">
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="Renark" ColumnName="Renark" />
+          <ScalarProperty Name="Gushu" ColumnName="Gushu" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_FGJHtmlData">
+      <EntityTypeMapping TypeName="OAModel.T_FGJHtmlData">
+        <MappingFragment StoreEntitySet="T_FGJHtmlData">
+          <ScalarProperty Name="AddUserTiem" ColumnName="AddUserTiem" />
+          <ScalarProperty Name="AddItemsUserID" ColumnName="AddItemsUserID" />
+          <ScalarProperty Name="Pingmi_int" ColumnName="Pingmi_int" />
+          <ScalarProperty Name="Money_int" ColumnName="Money_int" />
+          <ScalarProperty Name="HuXingID" ColumnName="HuXingID" />
+          <ScalarProperty Name="MianjiID" ColumnName="MianjiID" />
+          <ScalarProperty Name="SumMoneyID" ColumnName="SumMoneyID" />
+          <ScalarProperty Name="delflag" ColumnName="delflag" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Image_str" ColumnName="Image_str" />
+          <ScalarProperty Name="Laiyuan" ColumnName="Laiyuan" />
+          <ScalarProperty Name="Id_count" ColumnName="Id_count" />
+          <ScalarProperty Name="bak" ColumnName="bak" />
+          <ScalarProperty Name="FwChaoxiang" ColumnName="FwChaoxiang" />
+          <ScalarProperty Name="FwNianxian" ColumnName="FwNianxian" />
+          <ScalarProperty Name="FwZhuangxiu" ColumnName="FwZhuangxiu" />
+          <ScalarProperty Name="FwLoucheng" ColumnName="FwLoucheng" />
+          <ScalarProperty Name="FwMianji" ColumnName="FwMianji" />
+          <ScalarProperty Name="FwHuXing" ColumnName="FwHuXing" />
+          <ScalarProperty Name="FwSumMoney" ColumnName="FwSumMoney" />
+          <ScalarProperty Name="FbTime" ColumnName="FbTime" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+          <ScalarProperty Name="HLhref" ColumnName="HLhref" />
+          <ScalarProperty Name="HLName" ColumnName="HLName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_City">
+      <EntityTypeMapping TypeName="OAModel.T_City">
+        <MappingFragment StoreEntitySet="T_City">
+          <ScalarProperty Name="province_id" ColumnName="province_id" />
+          <ScalarProperty Name="City_str" ColumnName="City_str" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="CityItem" ColumnName="CityItem" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Quyu">
+      <EntityTypeMapping TypeName="OAModel.T_Quyu">
+        <MappingFragment StoreEntitySet="T_Quyu">
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="QY_connet" ColumnName="QY_connet" />
+          <ScalarProperty Name="T_CityID" ColumnName="T_CityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_SaveHtmlData">
+      <EntityTypeMapping TypeName="OAModel.T_SaveHtmlData">
+        <MappingFragment StoreEntitySet="T_SaveHtmlData">
+          <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+          <ScalarProperty Name="GongGong" ColumnName="GongGong" />
+          <ScalarProperty Name="BiaoJiTime" ColumnName="BiaoJiTime" />
+          <ScalarProperty Name="BiaoJiId" ColumnName="BiaoJiId" />
+          <ScalarProperty Name="SaveTime" ColumnName="SaveTime" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="HtmldataID" ColumnName="HtmldataID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo_City">
+      <EntityTypeMapping TypeName="OAModel.UserInfo_City">
+        <MappingFragment StoreEntitySet="UserInfo_City">
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="T_City_ID" ColumnName="T_City_ID" />
+          <ScalarProperty Name="UserInfo_ID" ColumnName="UserInfo_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_BiaoJiInfo">
+      <EntityTypeMapping TypeName="OAModel.T_BiaoJiInfo">
+        <MappingFragment StoreEntitySet="T_BiaoJiInfo">
+          <ScalarProperty Name="str" ColumnName="str" />
+          <ScalarProperty Name="Colors" ColumnName="Colors" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="BiaojiStr" ColumnName="BiaojiStr" />
+          <ScalarProperty Name="BiaojiItem" ColumnName="BiaojiItem" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Items">
+      <EntityTypeMapping TypeName="OAModel.T_Items">
+        <MappingFragment StoreEntitySet="T_Items">
+          <ScalarProperty Name="Bakstr" ColumnName="Bakstr" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="Icons" ColumnName="Icons" />
+          <ScalarProperty Name="Str_val" ColumnName="Str_val" />
+          <ScalarProperty Name="Str" ColumnName="Str" />
+          <ScalarProperty Name="StrID" ColumnName="StrID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_UserClick">
+      <EntityTypeMapping TypeName="OAModel.T_UserClick">
+        <MappingFragment StoreEntitySet="T_UserClick">
+          <ScalarProperty Name="LoginClickTime" ColumnName="LoginClickTime" />
+          <ScalarProperty Name="ThisClick" ColumnName="ThisClick" />
+          <ScalarProperty Name="UserInfoId" ColumnName="UserInfoId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_SeeClickPhoto">
+      <EntityTypeMapping TypeName="OAModel.T_SeeClickPhoto">
+        <MappingFragment StoreEntitySet="T_SeeClickPhoto">
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+          <ScalarProperty Name="T_FgjID" ColumnName="T_FgjID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_UserSave">
+      <EntityTypeMapping TypeName="OAModel.T_UserSave">
+        <MappingFragment StoreEntitySet="T_UserSave">
+          <ScalarProperty Name="Bak" ColumnName="Bak" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Items" ColumnName="Items" />
+          <ScalarProperty Name="BiaoJiTime" ColumnName="BiaoJiTime" />
+          <ScalarProperty Name="BiaoJiID" ColumnName="BiaoJiID" />
+          <ScalarProperty Name="HuXingID" ColumnName="HuXingID" />
+          <ScalarProperty Name="MianjiID" ColumnName="MianjiID" />
+          <ScalarProperty Name="SumMoneyID" ColumnName="SumMoneyID" />
+          <ScalarProperty Name="delflag" ColumnName="delflag" />
+          <ScalarProperty Name="Chaoxiang" ColumnName="Chaoxiang" />
+          <ScalarProperty Name="Nianxian" ColumnName="Nianxian" />
+          <ScalarProperty Name="ZhuanxiuStrID" ColumnName="ZhuanxiuStrID" />
+          <ScalarProperty Name="LouCheng" ColumnName="LouCheng" />
+          <ScalarProperty Name="Mianji" ColumnName="Mianji" />
+          <ScalarProperty Name="HuxingStrID" ColumnName="HuxingStrID" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PresonPhoto" ColumnName="PresonPhoto" />
+          <ScalarProperty Name="PresonName" ColumnName="PresonName" />
+          <ScalarProperty Name="TextName" ColumnName="TextName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_UserSave_Items">
+      <EntityTypeMapping TypeName="OAModel.T_UserSave_Items">
+        <MappingFragment StoreEntitySet="T_UserSave_Items">
+          <ScalarProperty Name="ItemStr" ColumnName="ItemStr" />
+          <ScalarProperty Name="SaveItem" ColumnName="SaveItem" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_BoolItem">
+      <EntityTypeMapping TypeName="OAModel.T_BoolItem">
+        <MappingFragment StoreEntitySet="T_BoolItem">
+          <ScalarProperty Name="timener" ColumnName="timener" />
+          <ScalarProperty Name="int" ColumnName="int" />
+          <ScalarProperty Name="BOLL_" ColumnName="BOLL_" />
+          <ScalarProperty Name="str" ColumnName="str" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_province">
+      <EntityTypeMapping TypeName="OAModel.T_province">
+        <MappingFragment StoreEntitySet="T_province">
+          <ScalarProperty Name="str" ColumnName="str" />
+          <ScalarProperty Name="ppp" ColumnName="ppp" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_QiuZhuQiuGou">
+      <EntityTypeMapping TypeName="OAModel.T_QiuZhuQiuGou">
+        <MappingFragment StoreEntitySet="T_QiuZhuQiuGou">
+          <ScalarProperty Name="AddUserTime" ColumnName="AddUserTime" />
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="QiuZhuQiuGou" ColumnName="QiuZhuQiuGou" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="GuiShuDi" ColumnName="GuiShuDi" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Hperson" ColumnName="Hperson" />
+          <ScalarProperty Name="FBtime" ColumnName="FBtime" />
+          <ScalarProperty Name="RuZhu" ColumnName="RuZhu" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="JuShi" ColumnName="JuShi" />
+          <ScalarProperty Name="QuYu" ColumnName="QuYu" />
+          <ScalarProperty Name="Hname" ColumnName="Hname" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSaveImages">
+      <EntityTypeMapping TypeName="OAModel.UserSaveImage">
+        <MappingFragment StoreEntitySet="UserSaveImage">
+          <ScalarProperty Name="delflg" ColumnName="delflg" />
+          <ScalarProperty Name="Image_str" ColumnName="Image_str" />
+          <ScalarProperty Name="UserSaveID" ColumnName="UserSaveID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_YxPerson">
+      <EntityTypeMapping TypeName="OAModel.T_YxPerson">
+        <MappingFragment StoreEntitySet="T_YxPerson">
+          <ScalarProperty Name="RuzTime" ColumnName="RuzTime" />
+          <ScalarProperty Name="ADDuserID" ColumnName="ADDuserID" />
+          <ScalarProperty Name="DEL" ColumnName="DEL" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Addess" ColumnName="Addess" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ChuZhuInfo">
+      <EntityTypeMapping TypeName="OAModel.T_ChuZhuInfo">
+        <MappingFragment StoreEntitySet="T_ChuZhuInfo">
+          <ScalarProperty Name="AdduserTime" ColumnName="AdduserTime" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Bak" ColumnName="Bak" />
+          <ScalarProperty Name="LaiYuan" ColumnName="LaiYuan" />
+          <ScalarProperty Name="Money_int" ColumnName="Money_int" />
+          <ScalarProperty Name="PingMi_int" ColumnName="PingMi_int" />
+          <ScalarProperty Name="Del" ColumnName="Del" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Images" ColumnName="Images" />
+          <ScalarProperty Name="Tingshi" ColumnName="Tingshi" />
+          <ScalarProperty Name="PingMi" ColumnName="PingMi" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="XiaoQu" ColumnName="XiaoQu" />
+          <ScalarProperty Name="FbTime" ColumnName="FbTime" />
+          <ScalarProperty Name="Addess" ColumnName="Addess" />
+          <ScalarProperty Name="LianXiPhoto" ColumnName="LianXiPhoto" />
+          <ScalarProperty Name="LianXiPerson" ColumnName="LianXiPerson" />
+          <ScalarProperty Name="ChuZhuHref" ColumnName="ChuZhuHref" />
+          <ScalarProperty Name="ChuZhuName" ColumnName="ChuZhuName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ZhuaiJiaBak">
+      <EntityTypeMapping TypeName="OAModel.T_ZhuaiJiaBak">
+        <MappingFragment StoreEntitySet="T_ZhuaiJiaBak">
+          <ScalarProperty Name="ADDtime" ColumnName="ADDtime" />
+          <ScalarProperty Name="AddUser" ColumnName="AddUser" />
+          <ScalarProperty Name="FGJHTML_id" ColumnName="FGJHTML_id" />
+          <ScalarProperty Name="DEL" ColumnName="DEL" />
+          <ScalarProperty Name="BAK" ColumnName="BAK" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_UpHerfCity">
+      <EntityTypeMapping TypeName="OAModel.T_UpHerfCity">
+        <MappingFragment StoreEntitySet="T_UpHerfCity">
+          <ScalarProperty Name="textbak" ColumnName="textbak" />
+          <ScalarProperty Name="Del" ColumnName="Del" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="AddUser" ColumnName="AddUser" />
+          <ScalarProperty Name="Href" ColumnName="Href" />
+          <ScalarProperty Name="Items" ColumnName="Items" />
+          <ScalarProperty Name="City_ID" ColumnName="City_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeeQzCzs">
+      <EntityTypeMapping TypeName="OAModel.SeeQzCz">
+        <MappingFragment StoreEntitySet="SeeQzCz">
+          <ScalarProperty Name="Del" ColumnName="Del" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="QiuZhuID" ColumnName="QiuZhuID" />
+          <ScalarProperty Name="ChuZhuID" ColumnName="ChuZhuID" />
+          <ScalarProperty Name="QCItems" ColumnName="QCItems" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GongGaos">
+      <EntityTypeMapping TypeName="OAModel.GongGao">
+        <MappingFragment StoreEntitySet="GongGao">
+          <ScalarProperty Name="bak" ColumnName="bak" />
+          <ScalarProperty Name="Items" ColumnName="Items" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TLoginbaks">
+      <EntityTypeMapping TypeName="OAModel.TLoginbak">
+        <MappingFragment StoreEntitySet="TLoginbak">
+          <ScalarProperty Name="LGbak" ColumnName="LGbak" />
+          <ScalarProperty Name="LGip" ColumnName="LGip" />
+          <ScalarProperty Name="del" ColumnName="del" />
+          <ScalarProperty Name="outtime" ColumnName="outtime" />
+          <ScalarProperty Name="intime" ColumnName="intime" />
+          <ScalarProperty Name="LGUserID" ColumnName="LGUserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScrherSAVEs">
+      <EntityTypeMapping TypeName="OAModel.ScrherSAVE">
+        <MappingFragment StoreEntitySet="ScrherSAVE">
+          <ScalarProperty Name="Bak" ColumnName="Bak" />
+          <ScalarProperty Name="Zhuangxiu" ColumnName="Zhuangxiu" />
+          <ScalarProperty Name="Edittime" ColumnName="Edittime" />
+          <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+          <ScalarProperty Name="DEL" ColumnName="DEL" />
+          <ScalarProperty Name="CName" ColumnName="CName" />
+          <ScalarProperty Name="Quyu" ColumnName="Quyu" />
+          <ScalarProperty Name="HxID" ColumnName="HxID" />
+          <ScalarProperty Name="Stpmm" ColumnName="Stpmm" />
+          <ScalarProperty Name="Srtmm" ColumnName="Srtmm" />
+          <ScalarProperty Name="Stpmoney" ColumnName="Stpmoney" />
+          <ScalarProperty Name="Strmoney" ColumnName="Strmoney" />
+          <ScalarProperty Name="addUserID" ColumnName="addUserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ScehMiShu">
+      <EntityTypeMapping TypeName="OAModel.T_ScehMiShu">
+        <MappingFragment StoreEntitySet="T_ScehMiShu">
+          <ScalarProperty Name="ScrherSAVEId" ColumnName="ScrherSAVEId" />
+          <ScalarProperty Name="del" ColumnName="del" />
+          <ScalarProperty Name="ScehCount" ColumnName="ScehCount" />
+          <ScalarProperty Name="ScehTime" ColumnName="ScehTime" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_AppOpen">
+      <EntityTypeMapping TypeName="OAModel.T_AppOpen">
+        <MappingFragment StoreEntitySet="T_AppOpen">
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="OverTime" ColumnName="OverTime" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="del" ColumnName="del" />
+          <ScalarProperty Name="AppBoll" ColumnName="AppBoll" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WxUsers">
+      <EntityTypeMapping TypeName="OAModel.WxUser">
+        <MappingFragment StoreEntitySet="WxUser">
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Del" ColumnName="Del" />
+          <ScalarProperty Name="UserInfoID" ColumnName="UserInfoID" />
+          <ScalarProperty Name="Wxgender" ColumnName="Wxgender" />
+          <ScalarProperty Name="WxImg" ColumnName="WxImg" />
+          <ScalarProperty Name="Wxcity" ColumnName="Wxcity" />
+          <ScalarProperty Name="Wxprovince" ColumnName="Wxprovince" />
+          <ScalarProperty Name="wxName" ColumnName="wxName" />
+          <ScalarProperty Name="Wxidcode" ColumnName="Wxidcode" />
+          <ScalarProperty Name="Wx_id" ColumnName="Wx_id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

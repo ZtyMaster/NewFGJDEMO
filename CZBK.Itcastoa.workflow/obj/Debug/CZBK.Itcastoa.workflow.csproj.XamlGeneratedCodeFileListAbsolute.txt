@@ -1,0 +1,3 @@
+obj\Debug\_CZBK.Itcastoa.workflow.g.cs
+obj\Debug\FincalActivity.g.cs
+obj\Debug\CZBK.Itcastoa.workflow_FincalActivity_BeforeInitializeComponentHelper.cs

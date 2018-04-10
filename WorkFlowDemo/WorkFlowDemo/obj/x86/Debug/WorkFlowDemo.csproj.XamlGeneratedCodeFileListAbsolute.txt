@@ -1,0 +1,7 @@
+obj\x86\Debug\_WorkFlowDemo.g.cs
+obj\x86\Debug\Workflow1.g.cs
+obj\x86\Debug\QJActivity1.g.cs
+obj\x86\Debug\WorkFlowDemo_Workflow1_BeforeInitializeComponentHelper.cs
+obj\x86\Debug\WorkFlowDemo_QJActivity1_BeforeInitializeComponentHelper.cs
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\WorkFlowDemo\obj\x86\Debug\WorkFlowDemo_Workflow1_CompiledExpressionRoot.cs
+K:\BaiduNetdiskDownload\MVC_OA\代码资料\代码资料\CZBK.ItcastOA\WorkFlowDemo\WorkFlowDemo\obj\x86\Debug\WorkFlowDemo_QJActivity1_CompiledExpressionRoot.cs
