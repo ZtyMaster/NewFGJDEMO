@@ -293,7 +293,7 @@ namespace CZBK.ItcastOA.WebApp.Controllers
             int pageIdex = Request["page"] != null ? int.Parse(Request["page"]) : 1;
             int pageSize = Request["rows"] != null ? int.Parse(Request["rows"]) : 35;
             int totalcount = int.MaxValue;
-            var mydata = GongGaoService.LoadPageEntities(pageIdex, pageSize, out totalcount, x => x.ID > 0, x => x.ID, true);
+            var mydata = GongGaoService.LoadPageEntities(pageIdex, pageSize, out totalcount, x => x.Items!=7, x => x.ID, true);
             var temp = from a in mydata
                        select new
                        {

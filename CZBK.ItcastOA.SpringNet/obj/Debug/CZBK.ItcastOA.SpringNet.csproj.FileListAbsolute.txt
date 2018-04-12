@@ -206,7 +206,6 @@ L:\github\NewFGJDEMO2\CZBK.ItcastOA.SpringNet\bin\Debug\Common.Logging.dll
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.SpringNet\bin\Debug\Spring.Core.dll
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.SpringNet\bin\Debug\Spring.Core.pdb
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.SpringNet\bin\Debug\Spring.Core.xml
-L:\github\NewFGJDEMO2\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.csprojResolveAssemblyReference.cache
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.Form1.resources
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.Properties.Resources.resources
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.csproj.GenerateResource.Cache

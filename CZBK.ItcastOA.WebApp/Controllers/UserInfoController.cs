@@ -24,6 +24,7 @@ namespace CZBK.ItcastOA.WebApp.Controllers
         IBLL.IT_YxPersonService T_YxPersonService { get; set; }
         IBLL.ITLoginbakService TLoginbakService { get; set; }
         IBLL.IWxUserService WxUserService { get; set; }
+        IBLL.IGongGaoService GongGaoService { get; set; }
         short Delflag = (short)DelFlagEnum.Normarl;
         public ActionResult Index()
         {
@@ -565,6 +566,106 @@ namespace CZBK.ItcastOA.WebApp.Controllers
                 return Json(new { rows =  temp, total = totalCount }, JsonRequestBehavior.AllowGet);
             }
             
+        }
+        #endregion
+
+        #region 获取公告
+        public ActionResult getGonggao() {
+            int pageIndex = Request["page"] != null ? int.Parse(Request["page"]) : 1;
+            int pageSize = Request["rows"] != null ? int.Parse(Request["rows"]) : 15;
+            int totalCount = 0;
+            var Gonggaos = GongGaoService.LoadPageEntities(pageIndex, pageSize, out totalCount, x => x.Items ==7 && x.del ==false,x=>x.Addtime, false).DefaultIfEmpty();
+            var ggs = Gonggaos.ToList();
+            if (ggs[0] == null)
+            {
+                return Json(new { rows = "", total = totalCount }, JsonRequestBehavior.AllowGet);
+            }
+            else {
+                var temp = from a in Gonggaos
+                           select new
+                           {
+                               ID =  a.ID,
+                               del = a.del,
+                               bak = a.bak,
+                               text = a.text,
+                               a.Items,
+                               Addtime = a.Addtime
+                           };
+                return Json(new { rows = temp, total = totalCount }, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+        [ValidateInput(false)]
+        //创建公告
+        public ActionResult AddUpGonggao(GongGao gg) {
+            if (gg.ID > 0)
+            {
+                GongGao ggs = GongGaoService.LoadEntities(x => x.ID == gg.ID).FirstOrDefault();
+                ggs.text = gg.text;
+                if (GongGaoService.EditEntity(ggs))
+                {
+                    return Json("ok", JsonRequestBehavior.AllowGet);
+                }
+                else {
+                    return Json("err", JsonRequestBehavior.AllowGet);
+                }
+                
+            }
+            else
+            {
+                gg.del = false;
+                gg.Addtime = MvcApplication.GetT_time();
+                gg.Items = 7;
+                gg.bak = "通知公告";
+
+
+                GongGaoService.AddEntity(gg);
+                return Json("ok", JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+        //修改公告 与信息确认
+        [ValidateInput(false)]
+        public ActionResult editUpGonggao()
+        {
+           
+            Int32 id = Request["strId"] != null ? Convert.ToInt32( Request["strId"]) : 0;
+            bool bl = Request["bl"] != null ? Convert.ToBoolean(Request["bl"]) :false;
+            if (id == 0) {
+                return Json( "noid" , JsonRequestBehavior.AllowGet);
+            }
+            GongGao gg = GongGaoService.LoadEntities(x => x.ID == id).FirstOrDefault();
+            if (bl)
+            {
+                gg.del = bl;
+            }          
+            if (GongGaoService.EditEntity(gg))
+            {
+                return Json("ok", JsonRequestBehavior.AllowGet);
+            }
+            else {
+                return Json("err", JsonRequestBehavior.AllowGet);
+            }          
+        }
+        //删除公告
+        public ActionResult delUpGonggao()
+        {
+            
+            Int32 id = Request["strId"] != null ? Convert.ToInt32(Request["strId"]) : 0;
+            if (id == 0)
+            {
+                return Json(new { ret = "noid" }, JsonRequestBehavior.AllowGet);
+            }
+            GongGao gg = GongGaoService.LoadEntities(x => x.ID == id).FirstOrDefault();            
+            gg.del = true;            
+            if (GongGaoService.EditEntity(gg))
+            {
+                return Json("ok", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json( "err", JsonRequestBehavior.AllowGet);
+            }
         }
         #endregion
     }

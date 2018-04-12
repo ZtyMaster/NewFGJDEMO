@@ -16,6 +16,13 @@
     <script src="~/Scripts/datapattern.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/MyNewJS.js"></script>
+
+    <link rel="stylesheet" href="~/Scripts/kindeditor-4.1.10/themes/default/default.css" />
+    <script src="~/Scripts/kindeditor-4.1.10/kindeditor.js"></script>
+    <script src="~/Scripts/kindeditor-4.1.10/kindeditor-all.js"></script>
+    <script src="~/Scripts/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="~/Scripts/kindeditor-4.1.10/kindeditor-min.js"></script>
+    <script charset="utf-8" src="~/Scripts/kindeditor-4.1.10/lang/zh_CN.js"></script>  
     <style>
         html, body {
             margin: 0px;
@@ -25,7 +32,7 @@
         }
     </style>
     <script type="text/javascript">
-
+        var editor;
         $.fn.extend({
             resizeDataGrid: function (heightMargin, widthMargin, minHeight, minWidth) {
                 var height = $("#dgdiv").height() - heightMargin;
@@ -50,6 +57,15 @@
             }
         });
         $(function () {
+
+            editor = KindEditor.create('textarea[name="text"]', {
+                resizeType: 1, width: "100%", height: "200px", afterChange: function () {
+                    this.sync();
+                }, afterBlur: function () {
+                    this.sync();
+                }
+            });
+
             //datagrid数据表格ID
             var datagridId = 'tt';
             
@@ -69,6 +85,9 @@
             $("#setRoleDiv").css("display", "none");
             $("#SetUserActionDIV").css("display", "none");
             $('#Wxband').window('close')
+            $('#XTgonggao').window('close')
+
+            
             $("#WxSchecr").window("close")
             //搜索
             $("#btnSearch").click(function () {
@@ -88,6 +107,10 @@
             $("#MinApp").click(function () {
                 MinApp()
             });
+            //发布公告
+            $("#SetGonggao").click(function () {
+                SetGonggao()
+            })
             $("#Bjlb").click(function () {
                 var pars = {
                     Mxitems: true
@@ -183,6 +206,57 @@
                 ]],
                 toolbar: []
                
+            });
+        }
+        //获取发布公告
+        function SetGonggao(pars) {
+            $('#tt').datagrid('loadData', { total: 0, rows: [] });
+            $('#tt').datagrid({
+                url: '/UserInfo/getGonggao',
+                title: '公告编辑',
+                height: $("#dgdiv").height() - 2,
+                fitColumns: true, //列自适应
+                nowrap: true,
+                idField: 'ID1',//主键列的列明
+                loadMsg: '正在加载用户的信息...',
+                pagination: true,//是否有分页
+                singleSelect: true,//是否单行选择
+                pageSize: 20,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [20, 30, 40],
+                queryParams: pars,//往后台传递参数
+                columns: [[//c.UserName, c.UserPass, c.Email, c.RegTime
+                 
+                      {
+                          field: 'text', title: '公告信息', align: 'center',
+                      },
+                      {
+                          field: 'Addtime', title: '创建时间', align: 'center',
+                          formatter: function (value, row, index) {
+                              
+                              return  Fromart_24(value);
+                          }
+                      },
+                      {
+                          field: "cz", title: "操作", align: 'center',
+                          formatter: function (value, row, index) {
+                              var str = "&nbsp&nbsp<a href='javascript:OpenXtGonggao(1) ' class='l-btn' style='padding:2px 6px' >修改信息</a>";
+                              str = str + "&nbsp&nbsp<a href='javascript:delfbgonggao("+row.ID+") ' class='l-btn' style='padding:2px 6px' >删除</a>";
+                              return str;
+                          }
+                      }
+
+                ]],
+                toolbar: [{
+                    id: 'wxybd',
+                    text: '新增公告',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        OpenXtGonggao(0);
+                       
+                    }
+                }
+                ]
             });
         }
         //获取微信账号
@@ -779,6 +853,15 @@
             if (data == "ok") {
                 $("#addForm input").val("");
                 $('#addDiv').dialog('close');
+                $('#XTgonggao').window('close')
+                $('#tt').datagrid('reload');
+            } else {
+                $.messager.alert("提示", "添加失败", "error");
+            }
+        }
+        function afterAddshow(data) {
+            if (data == "ok") {
+                $('#XTgonggao').window('close')
                 $('#tt').datagrid('reload');
             } else {
                 $.messager.alert("提示", "添加失败", "error");
@@ -846,6 +929,66 @@
             $('#Wxband').window('open')           
            
         }
+        //新增系统公告
+        function addGongGao() {
+            var mycontent = $("#v_content").val();
+            if (mycontent.length <= 0) {
+                $.messager.alert("", "公告信息不了为空！");
+                return;
+            }
+            
+            $("#addFormGg").submit();
+           
+        }
+        function delfbgonggao(id) {
+            $.messager.confirm("提示", "确定要删除该记录?", function (r) {
+                if (r) {                    
+                    $.post("/UserInfo/delUpGonggao", { "strId": id }, function (data) {
+                        if (data == "ok") {
+                            $('#tt').datagrid('clearSelections');
+                            $('#tt').datagrid('reload');
+                            //loadData();
+                        } else {
+                            $.messager.alert("提醒", "删除的记录失败!", "error");
+                        }
+                    });
+                }
+            });
+        }
+        function fabugonggao(id) {
+            $.messager.confirm("提示", "确定要发布的该记录?", function (r) {
+                if (r) {
+                    $.post("/UserInfo/editUpGonggao", { "strId": id,"bl":true }, function (data) {
+                        if (data == "ok") {
+                            $('#tt').datagrid('clearSelections');
+                            $('#tt').datagrid('reload');
+                            //loadData();
+                        } else if (data == "noid") {
+                            $.messager.alert("提醒", "没有查找到你要的修改的信息!", "error");
+                        } else {
+                            $.messager.alert("提醒", "删除的记录失败!", "error");
+                        }
+                    });
+                }
+            });
+        }
+        //打卡新增公告
+        function OpenXtGonggao(t) {
+            $("#GGid").val("0");
+            KindEditor.html('#v_content', "");
+            if (t=="1") {
+                var rows = $('#tt').datagrid('getSelections');
+                if (!rows || rows.length == 0) {
+                    //alert("请选择要修改的商品！");
+                    $.messager.alert("提醒", "请选择要操作的记录!", "error");
+                    return;
+                }               
+                $("#GGid").val(rows[0].ID);             
+                KindEditor.html('#v_content', rows[0].text);              
+            }
+           
+            $('#XTgonggao').window('open')            
+        }
         function Bangdingid(a) {
             var rows = $('#tt').datagrid('getSelections');
            
@@ -899,6 +1042,7 @@
             var pars = { ScName:str};
             MinApp(pars);
         }
+
     </script>
 
 </head>
@@ -907,6 +1051,7 @@
         <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',selected:true" id="Bjlb">创建新客户</a>
         <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" id="Ybj">业务员管理</a>
         <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" id="MinApp">微信账号绑定</a>
+        <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" id="SetGonggao">发布公告</a>
         <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'" id="loginuser">历史登陆信息</a>
     </div>
     <div data-options="region:'center',title:'数据报表'" id="dgdiv">        
@@ -938,6 +1083,19 @@
             <div>请输入要查询的名称</div>
             <input type="text" style="width:auto" value=""  id="WxScher" />  
             <div style="text-align:right"><button style="margin:15px" onclick="onkscher()">确认</button></div>          
+        </div>
+
+
+        <div id="XTgonggao" class="easyui-window" data-options="title:'创建系统公告',inline:true" style="width:650px;height:350px;padding:10px">
+          @using (Ajax.BeginForm("AddUpGonggao", "UserInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterAddshow" }, new { id = "addFormGg" }))
+          {
+
+                        <textarea rows="3" style="width:400px;" id="v_content" name="text" class="easyui-validatebox" data-options="required:true,validType:'length[1,1000000]'" invalidMessage="最大长度不能超过1000000"></textarea>
+                        <input type="hidden" name="ID"  id="GGid" value="0"  />
+                        <input type="hidden" name="bl" id="GGbl" value="fales" />
+              
+          }
+            <div style="text-align:right"><button style="margin:15px" onclick="addGongGao(true)">确认绑定</button></div>
         </div>
     </div>
 

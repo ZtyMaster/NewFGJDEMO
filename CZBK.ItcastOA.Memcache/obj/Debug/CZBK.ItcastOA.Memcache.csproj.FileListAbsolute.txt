@@ -155,6 +155,5 @@ L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\ICSharpCode.SharpZipLib.d
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\log4net.dll
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\Memcached.ClientLibrary.dll
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\Memcached.ClientLibrary.pdb
-L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.csprojResolveAssemblyReference.cache
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.exe
 L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.pdb

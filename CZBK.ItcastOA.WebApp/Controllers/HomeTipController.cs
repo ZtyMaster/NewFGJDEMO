@@ -15,6 +15,7 @@ namespace CZBK.ItcastOA.WebApp.Controllers
         IBLL.IUserInfo_CityService UserInfo_CityService { get; set; }
         IBLL.IScrherSAVEService ScrherSAVEService { get; set; }
         IBLL.IT_FGJHtmlDataService T_FGJHtmlDataService { get; set; }
+        IBLL.IGongGaoService GongGaoService { get; set; }
         public ActionResult Index()
         {
             var ThisId=T_ScehMiShuService.LoadEntities(x => x.UserId == LoginUser.ID).DefaultIfEmpty();
@@ -33,6 +34,8 @@ namespace CZBK.ItcastOA.WebApp.Controllers
                     }
                 }
             }
+
+           
             
             ViewBag.XmsCount = counts;
             ViewBag.ListC = ListC;
@@ -53,6 +56,33 @@ namespace CZBK.ItcastOA.WebApp.Controllers
 
             T_FGJHtmlDataService.LoadSearchPM(Uxms);
             return Uxms.TotalCount;
+        }
+
+        public ActionResult GetGglist() {
+            var GongG = GongGaoService.LoadEntities(x => x.Items == 7 && x.del == false).DefaultIfEmpty();
+            var temp = from a in GongG
+                       select new {
+                           a.text,
+                           a.Addtime,
+                           a.ID
+                       };
+            temp = temp.OrderByDescending(x => x.Addtime);
+            return Json(new { ret = temp }, JsonRequestBehavior.AllowGet);
+
+        }
+        public ActionResult GundongGG()
+        {
+            var GongG = GongGaoService.LoadEntities(x => x.Items == 8 ).DefaultIfEmpty();
+            var temp = from a in GongG
+                       select new
+                       {
+                           a.text,
+                           a.Addtime,
+                           a.ID
+                       };
+            temp = temp.OrderByDescending(x => x.Addtime);
+            return Json(new { ret = temp }, JsonRequestBehavior.AllowGet);
+
         }
 
     }

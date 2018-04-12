@@ -24,7 +24,7 @@ namespace CZBK.ItcastOA.WebApp.Controllers
             {
                 string sessionId = Request.Cookies["sessionId"].Value;//接收从Cookie中传递过来的Memcache的key
                object obj= Common.MemcacheHelper.Get(sessionId);//根据key从Memcache中获取用户的信息
-               
+
                 if (obj != null)
                 {
                     UserInfo userInfo = Common.SerializerHelper.DeserializeToObject<UserInfo>(obj.ToString());
@@ -100,7 +100,6 @@ namespace CZBK.ItcastOA.WebApp.Controllers
             }
             if (!isExt)
             {
-               // filterContext.HttpContext.Response.Write(Request.Cookies);
                 filterContext.HttpContext.Response.Redirect("/Login/Index");
                 return;
             }

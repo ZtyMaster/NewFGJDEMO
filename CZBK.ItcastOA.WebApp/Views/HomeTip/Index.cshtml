@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
+@using CZBK.ItcastOA.Model
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,18 +25,17 @@
   
 </head>
 <body>
-    <div id="ycc"  style="width:100%;height:100%;">
-        <div id="p" data-options="region:'west'" title="选择项" style="width:100px" >
-            <div class="easyui-panel" style="padding:5px;">
-                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,selected:true">小秘书提示</a>
-                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true">系统更新</a>
-            </div>
-        </div>
-        <div data-options="region:'center'" title="内容">
-            <div style="padding:10px;text-align:left;font-size:18px">
+    
+    <div id="ycc"  style="width:100%;height:100%;">       
+        <div data-options="region:'center'" title="内容" >
+            <div style="padding:10px;text-align:left;font-size:18px;border-bottom:solid 1px #5dd0fc; height:25%">
                 小秘书助手提醒你:<br />
                 在房源搜索中有&nbsp;<b style="color:brown">@ViewBag.XmsCount</b>  条搜索信息有新数据，新数据一共&nbsp;<b style="color:brown">@ViewBag.ListC</b>  条;
             </div>
+            <div id="showDiv" style="overflow:auto;height:70%">
+
+            </div>
+           
             
         </div>
     </div>
@@ -55,14 +54,23 @@
     <!--参考signalr  脚本自动生成 -->
     <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
-        $(function(){
+        $(function () {
             $('#ycc').layout();
-
             setHeight();
+            $.post("/HomeTip/GetGglist", {}, function (data) {
+                var Ths = data.ret;
+                $.each(Ths, function (i, v) {
+
+                    var str1 = "<div style='padding:10px;text-align:left;font-size:14px; border-bottom:solid 1px #5dd0fc'>";
+                    var str2 = "</div>";
+                    $("#showDiv").append(str1+v.text+str2);
+                })
+            })
+
         })
         function setHeight() {
 
-            var height = $(document).height() -2;
+            var height = $(document).height() - 2;
             $("#ycc").attr("style", "width:100%;height:" + height + "px");
             $("#ycc").layout("resize", {
                 width: "100%",
