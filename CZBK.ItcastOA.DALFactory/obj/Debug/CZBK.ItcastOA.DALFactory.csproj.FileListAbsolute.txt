@@ -300,3 +300,20 @@ D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\De
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.csprojResolveAssemblyReference.cache
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.dll
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DALFactory.dll.config
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DALFactory.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DALFactory.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DAL.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.IDAL.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.Model.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\EntityFramework.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\Newtonsoft.Json.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DAL.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.IDAL.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.Model.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\EntityFramework.xml
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\Newtonsoft.Json.xml
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\bin\Debug\zh-Hans\EntityFramework.resources.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.csprojResolveAssemblyReference.cache
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.pdb

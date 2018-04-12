@@ -18,5 +18,7 @@ namespace CZBK.ItcastOA.Model
         public string text { get; set; }
         public Nullable<int> Items { get; set; }
         public string bak { get; set; }
+        public Nullable<System.DateTime> Addtime { get; set; }
+        public Nullable<bool> del { get; set; }
     }
 }

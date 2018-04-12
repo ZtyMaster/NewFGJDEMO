@@ -30,3 +30,6 @@ E:\FGJ\CZBK.ItcastOA\WorkFlowDemo\WorkFlowDemo\obj\x86\Debug\WorkFlowDemo.pdb
 E:\FGJ\NewFGJDEMO\WorkFlowDemo\WorkFlowDemo\bin\Debug\WorkFlowDemo.exe.config
 E:\FGJ\NewFGJDEMO\WorkFlowDemo\WorkFlowDemo\obj\x86\Debug\WorkFlowDemo.exe
 E:\FGJ\NewFGJDEMO\WorkFlowDemo\WorkFlowDemo\obj\x86\Debug\WorkFlowDemo.pdb
+L:\github\NewFGJDEMO2\WorkFlowDemo\WorkFlowDemo\bin\Debug\WorkFlowDemo.exe.config
+L:\github\NewFGJDEMO2\WorkFlowDemo\WorkFlowDemo\obj\x86\Debug\WorkFlowDemo.exe
+L:\github\NewFGJDEMO2\WorkFlowDemo\WorkFlowDemo\obj\x86\Debug\WorkFlowDemo.pdb

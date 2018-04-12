@@ -193,3 +193,14 @@ D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Common\bin\Debug\
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Common\obj\Debug\CZBK.ItcastOA.Common.csprojResolveAssemblyReference.cache
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Common\obj\Debug\CZBK.ItcastOA.Common.dll
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Common\obj\Debug\CZBK.ItcastOA.Common.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\CZBK.ItcastOA.Common.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\CZBK.ItcastOA.Common.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\Commons.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\ICSharpCode.SharpZipLib.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\log4net.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\Memcached.ClientLibrary.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\Newtonsoft.Json.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\Memcached.ClientLibrary.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\bin\Debug\Newtonsoft.Json.xml
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\obj\Debug\CZBK.ItcastOA.Common.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Common\obj\Debug\CZBK.ItcastOA.Common.pdb

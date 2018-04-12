@@ -331,3 +331,40 @@ D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\HouTai\obj\Debug\HouTai.Propert
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\HouTai\obj\Debug\HouTai.csproj.GenerateResource.Cache
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\HouTai\obj\Debug\HouTai.exe
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\HouTai\obj\Debug\HouTai.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\HouTai.exe.config
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\HouTai.exe
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\HouTai.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.BLL.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.Common.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.IBLL.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.Model.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.IDAL.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.DALFactory.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\Memcached.ClientLibrary.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\Newtonsoft.Json.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\EntityFramework.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.DAL.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\log4net.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\ICSharpCode.SharpZipLib.dll
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.BLL.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.Common.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.IBLL.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.Model.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.IDAL.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.DALFactory.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\Memcached.ClientLibrary.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\Newtonsoft.Json.xml
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\EntityFramework.xml
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\CZBK.ItcastOA.DAL.pdb
+L:\github\NewFGJDEMO2\HouTai\bin\Debug\zh-Hans\EntityFramework.resources.dll
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\HouTai.csprojResolveAssemblyReference.cache
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\MainWindow.g.cs
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\App.g.cs
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\HouTai_MarkupCompile.cache
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\HouTai_MarkupCompile.lref
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\MainWindow.baml
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\HouTai.g.resources
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\HouTai.Properties.Resources.resources
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\HouTai.csproj.GenerateResource.Cache
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\HouTai.exe
+L:\github\NewFGJDEMO2\HouTai\obj\Debug\HouTai.pdb

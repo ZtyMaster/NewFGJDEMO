@@ -147,3 +147,14 @@ D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debu
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.csprojResolveAssemblyReference.cache
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.exe
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\CZBK.ItcastOA.Memcache.exe.config
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\CZBK.ItcastOA.Memcache.exe
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\CZBK.ItcastOA.Memcache.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\Commons.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\ICSharpCode.SharpZipLib.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\log4net.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\Memcached.ClientLibrary.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\bin\Debug\Memcached.ClientLibrary.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.csprojResolveAssemblyReference.cache
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.exe
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.pdb

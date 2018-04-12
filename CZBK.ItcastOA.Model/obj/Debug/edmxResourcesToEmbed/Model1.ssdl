@@ -59,6 +59,8 @@
     <Property Name="text" Type="nvarchar(max)" />
     <Property Name="Items" Type="int" />
     <Property Name="bak" Type="nvarchar" MaxLength="250" />
+    <Property Name="Addtime" Type="datetime" />
+    <Property Name="del" Type="bit" />
   </EntityType>
   <EntityType Name="R_UserInfo_ActionInfo">
     <Key>

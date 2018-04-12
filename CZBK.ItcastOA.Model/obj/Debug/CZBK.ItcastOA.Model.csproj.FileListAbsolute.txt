@@ -190,3 +190,13 @@ D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\z
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.csprojResolveAssemblyReference.cache
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.dll
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\bin\Debug\CZBK.ItcastOA.Model.dll.config
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\bin\Debug\CZBK.ItcastOA.Model.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\bin\Debug\CZBK.ItcastOA.Model.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\bin\Debug\EntityFramework.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\bin\Debug\Newtonsoft.Json.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\bin\Debug\EntityFramework.xml
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\bin\Debug\Newtonsoft.Json.xml
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.pdb

@@ -216,3 +216,15 @@ D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.IDAL\bin\Debug\zh
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.IDAL\obj\Debug\CZBK.ItcastOA.IDAL.csprojResolveAssemblyReference.cache
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.IDAL\obj\Debug\CZBK.ItcastOA.IDAL.dll
 D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.IDAL\obj\Debug\CZBK.ItcastOA.IDAL.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\CZBK.ItcastOA.IDAL.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\CZBK.ItcastOA.IDAL.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\CZBK.ItcastOA.Model.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\EntityFramework.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\Newtonsoft.Json.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\CZBK.ItcastOA.Model.pdb
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\EntityFramework.xml
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\Newtonsoft.Json.xml
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\obj\Debug\CZBK.ItcastOA.IDAL.csprojResolveAssemblyReference.cache
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\obj\Debug\CZBK.ItcastOA.IDAL.dll
+L:\github\NewFGJDEMO2\CZBK.ItcastOA.IDAL\obj\Debug\CZBK.ItcastOA.IDAL.pdb

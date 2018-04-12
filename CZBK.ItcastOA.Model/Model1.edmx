@@ -64,6 +64,8 @@
           <Property Name="text" Type="nvarchar(max)" />
           <Property Name="Items" Type="int" />
           <Property Name="bak" Type="nvarchar" MaxLength="250" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="del" Type="bit" />
         </EntityType>
         <EntityType Name="R_UserInfo_ActionInfo">
           <Key>
@@ -2309,6 +2311,8 @@
           <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Items" Type="Int32" />
           <Property Name="bak" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="del" Type="Boolean" />
         </EntityType>
         <EntityType Name="TLoginbak">
           <Key>
@@ -2872,6 +2876,8 @@
           <EntitySetMapping Name="GongGaos">
             <EntityTypeMapping TypeName="OAModel.GongGao">
               <MappingFragment StoreEntitySet="GongGao">
+                <ScalarProperty Name="del" ColumnName="del" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
                 <ScalarProperty Name="bak" ColumnName="bak" />
                 <ScalarProperty Name="Items" ColumnName="Items" />
                 <ScalarProperty Name="text" ColumnName="text" />

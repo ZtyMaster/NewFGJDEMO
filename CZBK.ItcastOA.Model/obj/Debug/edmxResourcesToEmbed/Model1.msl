@@ -422,6 +422,8 @@
     <EntitySetMapping Name="GongGaos">
       <EntityTypeMapping TypeName="OAModel.GongGao">
         <MappingFragment StoreEntitySet="GongGao">
+          <ScalarProperty Name="del" ColumnName="del" />
+          <ScalarProperty Name="Addtime" ColumnName="Addtime" />
           <ScalarProperty Name="bak" ColumnName="bak" />
           <ScalarProperty Name="Items" ColumnName="Items" />
           <ScalarProperty Name="text" ColumnName="text" />
