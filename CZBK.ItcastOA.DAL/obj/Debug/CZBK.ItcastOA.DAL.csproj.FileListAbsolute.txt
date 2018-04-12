@@ -243,3 +243,18 @@ E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.DAL\bin\
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.DAL\obj\Debug\CZBK.ItcastOA.DAL.csprojResolveAssemblyReference.cache
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.DAL\obj\Debug\CZBK.ItcastOA.DAL.dll
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.DAL\obj\Debug\CZBK.ItcastOA.DAL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\CZBK.ItcastOA.DAL.dll.config
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\CZBK.ItcastOA.DAL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\CZBK.ItcastOA.DAL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\CZBK.ItcastOA.IDAL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\CZBK.ItcastOA.Model.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\EntityFramework.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\Newtonsoft.Json.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\CZBK.ItcastOA.IDAL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\CZBK.ItcastOA.Model.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\EntityFramework.xml
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\Newtonsoft.Json.xml
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\obj\Debug\CZBK.ItcastOA.DAL.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\obj\Debug\CZBK.ItcastOA.DAL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DAL\obj\Debug\CZBK.ItcastOA.DAL.pdb

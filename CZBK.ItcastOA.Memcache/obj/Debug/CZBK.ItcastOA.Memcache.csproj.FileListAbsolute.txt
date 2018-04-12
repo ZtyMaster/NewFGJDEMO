@@ -125,3 +125,14 @@ E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.Memcache
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.exe
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.pdb
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debug\CZBK.ItcastOA.Memcache.exe.config
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debug\CZBK.ItcastOA.Memcache.exe
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debug\CZBK.ItcastOA.Memcache.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debug\Commons.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debug\log4net.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debug\Memcached.ClientLibrary.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\bin\Debug\Memcached.ClientLibrary.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.exe
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Memcache\obj\Debug\CZBK.ItcastOA.Memcache.pdb

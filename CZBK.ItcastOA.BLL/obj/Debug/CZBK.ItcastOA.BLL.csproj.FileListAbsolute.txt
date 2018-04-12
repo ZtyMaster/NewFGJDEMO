@@ -315,3 +315,23 @@ E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.BLL\bin\
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.BLL\obj\Debug\CZBK.ItcastOA.BLL.csprojResolveAssemblyReference.cache
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.BLL\obj\Debug\CZBK.ItcastOA.BLL.dll
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.BLL\obj\Debug\CZBK.ItcastOA.BLL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.BLL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.BLL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.DAL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.DALFactory.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.IBLL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.IDAL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.Model.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\EntityFramework.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\Newtonsoft.Json.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.DALFactory.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.DAL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.IBLL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.IDAL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\CZBK.ItcastOA.Model.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\EntityFramework.xml
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\Newtonsoft.Json.xml
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\obj\Debug\CZBK.ItcastOA.BLL.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\obj\Debug\CZBK.ItcastOA.BLL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.BLL\obj\Debug\CZBK.ItcastOA.BLL.pdb

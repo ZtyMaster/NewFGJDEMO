@@ -266,3 +266,20 @@ E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.DALFacto
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.csprojResolveAssemblyReference.cache
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.dll
 E:\360Downloads\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DALFactory.dll.config
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DALFactory.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DALFactory.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DAL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.IDAL.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.Model.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\EntityFramework.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\Newtonsoft.Json.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.DAL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.IDAL.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\CZBK.ItcastOA.Model.pdb
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\EntityFramework.xml
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\Newtonsoft.Json.xml
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.dll
+D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.DALFactory\obj\Debug\CZBK.ItcastOA.DALFactory.pdb

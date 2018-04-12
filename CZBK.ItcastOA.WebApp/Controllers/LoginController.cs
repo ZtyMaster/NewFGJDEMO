@@ -59,7 +59,10 @@ namespace CZBK.ItcastOA.WebApp.Controllers
             //2:判断用户输入的用户名与密码
             string userName = Request["LoginCode"];
             string userPwd = Request["LoginPwd"];
-            userPwd = Model.Enum.AddMD5.GaddMD5(userPwd);
+            if(Request["MoNiLogin"]== null)
+            {
+                userPwd = Model.Enum.AddMD5.GaddMD5(userPwd);
+            } 
            UserInfo userInfo=UserInfoService.LoadEntities(u => u.UName == userName && u.UPwd == userPwd).FirstOrDefault();
            if (userInfo != null)
            {
@@ -94,7 +97,7 @@ namespace CZBK.ItcastOA.WebApp.Controllers
                         Response.Cookies.Add(cookie2);
                     }
 
-                   return Content("ok:登录成功!!");
+                   return Content("ok:登录成功!:"+sessionId);
                }
             }
            else
@@ -186,10 +189,25 @@ namespace CZBK.ItcastOA.WebApp.Controllers
                 }
             }
             return Json(new { Wxidcode = wu, T = ret }, JsonRequestBehavior.AllowGet);
-
-
-
+        }
+        public ActionResult getUsernameAndPwd()
+        {
+            var wxid = Request["wxid"];
+            var temp = WxUserService.LoadEntities(x => x.Wx_id == wxid).FirstOrDefault();
+            if(temp != null)
+            {
+                WXUserInfo wui = new WXUserInfo();
+                wui.Username = temp.UserInfo.UName;
+                wui.Password =  temp.UserInfo.UPwd;
+                return Json(new { ret = "ok", rows = wui }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { ret = "no", msg = "数据库无此微信用户信息！" }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+    }
+    public class WXUserInfo
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }
