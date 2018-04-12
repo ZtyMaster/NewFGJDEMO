@@ -301,6 +301,15 @@ namespace CZBK.ItcastOA.WebApp.Controllers
         public ActionResult SeePhoto()
         {
             long id = long.Parse(Request["strId"]);
+            //获取电话号码
+            var phoneInfo = T_FGJHtmlDataService.LoadEntities(x => x.ID == id).FirstOrDefault();
+            bool phoneState = false;
+            string phoneNum = "";
+            if(phoneInfo != null)
+            {
+                phoneNum = phoneInfo.photo;
+                phoneState = true;
+            }
             //检查用户点击中是否有该用户
             var Uclick = T_UserClickService.LoadEntities(x => x.UserInfoId == LoginUser.ID).FirstOrDefault();
             //检查是否点击过查看电话
@@ -362,7 +371,7 @@ namespace CZBK.ItcastOA.WebApp.Controllers
                         string str = SeeClickPhoto(Uclick, id);
                         if (str != "OK")
                         {
-                            return Content(Common.SerializerHelper.SerializeToString(new { msg = str }));
+                            return Content(Common.SerializerHelper.SerializeToString(new { msg = str ,phoneState = phoneState,phoneNum = phoneNum}));
                         }
 
                     }
@@ -372,7 +381,7 @@ namespace CZBK.ItcastOA.WebApp.Controllers
 
             // return Content("ok," + (Uclick == null ? 1.ToString() : Uclick.ThisClick.ToString()));
             //int retUclick = Uclick == null ? 1 :Convert.ToInt32( Uclick.ThisClick);
-            return Content(Common.SerializerHelper.SerializeToString(new { Uclick = UserInfoService.GetMaxClick(LoginUser.ID), msg = "ok" , MtrId = LoginUser.MasterID }));
+            return Content(Common.SerializerHelper.SerializeToString(new { Uclick = UserInfoService.GetMaxClick(LoginUser.ID), msg = "ok" , MtrId = LoginUser.MasterID, phoneState = phoneState, phoneNum = phoneNum }));
 
         }
         private string GetSelectSmallSave(int? masterID ,long id)

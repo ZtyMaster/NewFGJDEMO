@@ -179,3 +179,14 @@ D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\Newto
 D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
 D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.dll
 D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.pdb
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\CZBK.ItcastOA.Model.dll.config
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\CZBK.ItcastOA.Model.dll
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\CZBK.ItcastOA.Model.pdb
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\EntityFramework.dll
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\Newtonsoft.Json.dll
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\EntityFramework.xml
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\Newtonsoft.Json.xml
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.dll
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.Model\obj\Debug\CZBK.ItcastOA.Model.pdb

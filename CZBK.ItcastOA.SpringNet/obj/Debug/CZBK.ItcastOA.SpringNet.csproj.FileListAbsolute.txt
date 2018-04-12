@@ -184,3 +184,17 @@ D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\C
 D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.exe
 D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.pdb
 D:\Program Files (x86)\dit\FGJWXX\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\bin\Debug\service.xml
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\bin\Debug\CZBK.ItcastOA.SpringNet.exe.config
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\bin\Debug\CZBK.ItcastOA.SpringNet.exe
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\bin\Debug\CZBK.ItcastOA.SpringNet.pdb
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\bin\Debug\Common.Logging.dll
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\bin\Debug\Spring.Core.dll
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\bin\Debug\Spring.Core.pdb
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\bin\Debug\Spring.Core.xml
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.csprojResolveAssemblyReference.cache
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.Form1.resources
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.Properties.Resources.resources
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.csproj.GenerateResource.Cache
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.exe
+D:\Program Files (x86)\dit\NewFGJDEMO\NewFGJDEMO\CZBK.ItcastOA.SpringNet\obj\Debug\CZBK.ItcastOA.SpringNet.pdb
