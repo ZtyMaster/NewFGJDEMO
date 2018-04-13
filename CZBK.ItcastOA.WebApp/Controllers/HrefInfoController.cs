@@ -370,7 +370,7 @@ namespace CZBK.ItcastOA.WebApp.Controllers
                 #endregion
             }
 
-            // return Content("ok," + (Uclick == null ? 1.ToString() : Uclick.ThisClick.ToString()));
+            // return Content("ok," + (Uclick == null ? 1.ToString() : Uclick.ThisClick.ToString()));1
             //int retUclick = Uclick == null ? 1 :Convert.ToInt32( Uclick.ThisClick);
             return Content(Common.SerializerHelper.SerializeToString(new { Uclick = UserInfoService.GetMaxClick(LoginUser.ID), msg = "ok" , MtrId = LoginUser.MasterID }));
 
