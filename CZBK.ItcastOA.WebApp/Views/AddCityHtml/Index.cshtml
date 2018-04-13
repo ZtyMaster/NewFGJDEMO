@@ -691,7 +691,7 @@
                 return;
             }
             $("#GgID").val(rows[0].ID);
-            $("#upItems").combobox("setValue", rows[0].Items)
+            $("#upItems1").combobox("setValue", rows[0].Items)
             $("#Iptext").val(rows[0].text);
             $("#Ipbak").val(rows[0].bak);
             $("#AddGongg").css("display", "block");
@@ -851,7 +851,7 @@
                 <tr>
                     <td>文本分类：</td>
                     <td>
-                        <select id="upItems" class="easyui-combobox" name="Items">
+                        <select id="upItems1" class="easyui-combobox" name="Items">
                             <option value="0">登录通知</option>
                             <option value="1">通知公告</option>
                             <option value="2">联系方式</option>
@@ -859,6 +859,7 @@
                             <option value="4">联系QQ</option>
                             <option value="5">Logo</option>
                             <option value="6">版权</option>
+                            <option value="8">APP滚动信息</option>
                         </select>
                     </td>
                 </tr>
